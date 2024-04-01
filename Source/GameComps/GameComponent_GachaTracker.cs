@@ -13,7 +13,11 @@ public class GameComponent_GachaTracker : GameComponent
     {
         if (Find.TickManager.TicksGame % 1000 == 0)
         {
-            //TODO: check if banner has ended, if so, generate new banner
+            if (Find.TickManager.TicksGame >= activeBanner?.endTicks)
+            {
+                activeBanner ??= GenerateBanner();
+            }
+            //TODO: implement cleanup and handling pity (if needed), etc
         }
     }
 
@@ -23,7 +27,7 @@ public class GameComponent_GachaTracker : GameComponent
         return new Banner(
             worker.GeneratePrize(PrizeCategory.Jackpot),
             GenerateConsolations(worker),
-            Find.TickManager.TicksGame
+            Find.TickManager.TicksGame + 60000 * 3
         );
     }
 
@@ -47,13 +51,13 @@ public class Banner
 {
     public Thing jackpot;
     public List<Thing> prizes;
-    public int startTicksGame;
+    public int endTicks;
 
-    public Banner(Thing jackpot, List<Thing> prizes, int startTicksGame)
+    public Banner(Thing jackpot, List<Thing> prizes, int endTicks)
     {
         this.jackpot = jackpot;
         this.prizes = prizes;
-        this.startTicksGame = startTicksGame;
+        this.endTicks = endTicks;
     }
 }
 

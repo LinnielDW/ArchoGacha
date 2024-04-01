@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+    <ArchoGacha.PrizeGeneratorDef>
+        <defName>WeaponPrize</defName>
+        <prizeWorkerClass>ArchoGacha.PrizeWorkers.QualityWeaponPrizeWorker</prizeWorkerClass>
+        <minJackpotMarketValue>2500</minJackpotMarketValue>
+        <minConsolationMarketValue>1000</minConsolationMarketValue>
+    </ArchoGacha.PrizeGeneratorDef>
+
+</Defs>

@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+    <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props"
+            Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+    <PropertyGroup>
+        <RootNamespace>ArchoGacha</RootNamespace>
+        <AssemblyName>ArchoGacha</AssemblyName>
+        <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+        <CopyLocalLockFileAssemblies>false</CopyLocalLockFileAssemblies>
+        <LangVersion>latest</LangVersion>
+        <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+        <FileAlignment>512</FileAlignment>
+        <Deterministic>true</Deterministic>
+        <OutputType>Library</OutputType>
+        <ModLocation>D:\Program Files (x86)\Steam\steamapps\common\RimWorld\Mods\ArchoGacha</ModLocation>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+        <DebugSymbols>true</DebugSymbols>
+        <DebugType>portable</DebugType>
+        <Optimize>false</Optimize>
+        <OutputPath>../1.5/Assemblies</OutputPath>
+        <DefineConstants>DEBUG;TRACE</DefineConstants>
+        <ErrorReport>prompt</ErrorReport>
+        <WarningLevel>4</WarningLevel>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+        <DebugType>none</DebugType>
+        <Optimize>true</Optimize>
+        <OutputPath>../1.5/Assemblies</OutputPath>
+        <DefineConstants>TRACE</DefineConstants>
+        <ErrorReport>prompt</ErrorReport>
+        <WarningLevel>4</WarningLevel>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <CommonFiles Include="..\Common\**">
+            <Link>Common\%(RecursiveDir)%(Filename)%(Extension)</Link>
+        </CommonFiles>
+        <AboutFiles Include="..\About\**">
+            <Link>About\%(RecursiveDir)%(Filename)%(Extension)</Link>
+        </AboutFiles>
+        <version1_5 Include="..\1.5\**">
+            <Link>1.5\%(RecursiveDir)%(Filename)%(Extension)</Link>
+        </version1_5>
+    </ItemGroup>
+
+
+    <ItemGroup>
+        <PackageReference Include="Krafs.Rimworld.Ref" Version="1.5.4048-beta" />
+    </ItemGroup>
+    <!-- The below condition will check if you've defined a reference called "Assembly-CSharp" and if that reference exists on disk.
+        If that reference does not exist, it will add Krafs Rimworld Ref to the project. If it does exist, Krafs won't be added
+        as a reference. This basically means that Krafs is treated as a fallback if Assembly-CSharp is not found -->
+    <ItemGroup>
+      <Compile Include="ArchoGachaMod.cs" />
+    </ItemGroup>
+
+    
+    <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+    <Target Name="CopyCustomContent" AfterTargets="AfterBuild">
+        <Copy SourceFiles="@(CommonFiles)" DestinationFolder="$(ModLocation)\%(RecursiveDir)" SkipUnchangedFiles="true" />
+        <Copy SourceFiles="@(AboutFiles)" DestinationFolder="$(ModLocation)\About\%(RecursiveDir)"
+              SkipUnchangedFiles="true" />
+        <Copy SourceFiles="@(version1_5)" DestinationFolder="$(ModLocation)\1.5\%(RecursiveDir)"
+              SkipUnchangedFiles="true" />
+        <Copy SourceFiles="..\LoadFolders.xml" DestinationFolder="$(ModLocation)" SkipUnchangedFiles="true" />
+    </Target>
+</Project>

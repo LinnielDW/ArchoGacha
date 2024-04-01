@@ -57,6 +57,10 @@
         as a reference. This basically means that Krafs is treated as a fallback if Assembly-CSharp is not found -->
     <ItemGroup>
       <Compile Include="ArchoGachaMod.cs" />
+      <Compile Include="GameComps\GameComponent_GachaTracker.cs" />
+      <Compile Include="PrizeGeneratorDef.cs" />
+      <Compile Include="PrizeWorker.cs" />
+      <Compile Include="PrizeWorkers\QualityWeaponPrizeWorker.cs" />
     </ItemGroup>
 
     

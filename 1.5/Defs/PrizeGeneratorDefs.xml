@@ -30,6 +30,17 @@
     </ArchoGacha.PrizeGeneratorDef>
 
     <ArchoGacha.PrizeGeneratorDef>
-        <defName>ArchoGacha_Consumables</defName>
+        <defName>ArchoGacha_Consumable</defName>
     </ArchoGacha.PrizeGeneratorDef>
+    
+    <!-- TODO: nice to haves -->
+    <!--<ArchoGacha.PrizeGeneratorDef>
+        <defName>ArchoGacha_PawnKind</defName>
+    </ArchoGacha.PrizeGeneratorDef>
+    <ArchoGacha.PrizeGeneratorDef>
+        <defName>ArchoGacha_Animal</defName>
+    </ArchoGacha.PrizeGeneratorDef>
+    <ArchoGacha.PrizeGeneratorDef>
+        <defName>ArchoGacha_Incident</defName>
+    </ArchoGacha.PrizeGeneratorDef>-->
 </Defs>

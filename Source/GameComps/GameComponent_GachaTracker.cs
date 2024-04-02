@@ -5,6 +5,7 @@ namespace ArchoGacha.GameComps;
 
 public class GameComponent_GachaTracker : GameComponent
 {
+    //TODO: turn this into all banner types at once
     public List<Banner> banners;
     public Banner activeBanner;
     public int pitySilverReserve;
@@ -27,6 +28,7 @@ public class GameComponent_GachaTracker : GameComponent
         return new Banner(
             worker.GeneratePrize(PrizeCategory.Jackpot),
             GenerateConsolations(worker),
+            //TODO: turn this into a setting
             Find.TickManager.TicksGame + 60000 * 3
         );
     }

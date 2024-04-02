@@ -1,10 +1,35 @@
-<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8"?>
+
 <Defs>
     <ArchoGacha.PrizeGeneratorDef>
-        <defName>WeaponPrize</defName>
+        <defName>ArchoGacha_Weapon</defName>
         <prizeWorkerClass>ArchoGacha.PrizeWorkers.QualityWeaponPrizeWorker</prizeWorkerClass>
         <minJackpotMarketValue>2500</minJackpotMarketValue>
         <minConsolationMarketValue>1000</minConsolationMarketValue>
     </ArchoGacha.PrizeGeneratorDef>
 
+    <!-- TODO: Impl -->
+    <ArchoGacha.PrizeGeneratorDef>
+        <defName>ArchoGacha_WeaponMelee</defName>
+    </ArchoGacha.PrizeGeneratorDef>
+
+    <ArchoGacha.PrizeGeneratorDef>
+        <defName>ArchoGacha_WeaponRanged</defName>
+    </ArchoGacha.PrizeGeneratorDef>
+
+    <ArchoGacha.PrizeGeneratorDef>
+        <defName>ArchoGacha_Armor</defName>
+    </ArchoGacha.PrizeGeneratorDef>
+
+    <ArchoGacha.PrizeGeneratorDef>
+        <defName>ArchoGacha_Bionic</defName>
+    </ArchoGacha.PrizeGeneratorDef>
+
+    <ArchoGacha.PrizeGeneratorDef>
+        <defName>ArchoGacha_Art</defName>
+    </ArchoGacha.PrizeGeneratorDef>
+
+    <ArchoGacha.PrizeGeneratorDef>
+        <defName>ArchoGacha_Consumables</defName>
+    </ArchoGacha.PrizeGeneratorDef>
 </Defs>

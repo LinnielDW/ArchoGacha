@@ -13,6 +13,8 @@ public abstract class PrizeWorker
 
         return baseMarketValue * 1.5f + 500 >= def.minConsolationMarketValue;
     }
+
+    public abstract ThingDef SelectPrizeDef(PrizeCategory prizeCategory);
 }
 
 public enum PrizeCategory

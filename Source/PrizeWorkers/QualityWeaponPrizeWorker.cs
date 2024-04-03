@@ -8,14 +8,7 @@ public class QualityWeaponPrizeWorker : PrizeWorker
 {
     public override Thing GeneratePrize(PrizeCategory prizeCategory)
     {
-        var prizeDef = DefDatabase<ThingDef>.AllDefsListForReading
-            .Where(t => t.thingCategories.Contains(ThingCategoryDefOf.Weapons) &&
-                        (
-                            (t.techLevel >= TechLevel.Spacer && t.HasComp<CompQuality>()) ||
-                            (t.MadeFromStuff && GenStuff.AllowedStuffsFor(t).Any(stuff =>
-                                PrizeMarketValue(StatWorker_MarketValue.CalculatedBaseMarketValue(t, stuff),
-                                    prizeCategory)))
-                        )).RandomElement();
+        var prizeDef = SelectPrizeDef(prizeCategory);
 
         ThingDef stuffDef = null;
         if (prizeDef.MadeFromStuff)
@@ -34,5 +27,17 @@ public class QualityWeaponPrizeWorker : PrizeWorker
             ArtGenerationContext.Colony);
 
         return prize;
+    }
+
+    public override ThingDef SelectPrizeDef(PrizeCategory prizeCategory)
+    {
+        return DefDatabase<ThingDef>.AllDefsListForReading
+            .Where(t => t.thingCategories.Contains(ThingCategoryDefOf.Weapons) &&
+                        (
+                            (t.techLevel >= TechLevel.Spacer && t.HasComp<CompQuality>()) ||
+                            (t.MadeFromStuff && GenStuff.AllowedStuffsFor(t).Any(stuff =>
+                                PrizeMarketValue(StatWorker_MarketValue.CalculatedBaseMarketValue(t, stuff),
+                                    prizeCategory)))
+                        )).RandomElement();
     }
 }

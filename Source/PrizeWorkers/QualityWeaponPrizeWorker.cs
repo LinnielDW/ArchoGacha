@@ -22,8 +22,8 @@ public class QualityWeaponPrizeWorker : PrizeWorker
 
     public override ThingStuffPair SelectPrizeDef(PrizeCategory prizeCategory)
     {
-        return PawnWeaponGenerator.allWeaponPairs.Where(x =>
-            PrizeMarketValue(x, prizeCategory) && x.thing.techLevel >= TechLevel.Industrial &&
-            ThingSetMakerUtility.CanGenerate(x.thing)).RandomElement();
+        return PawnWeaponGenerator.allWeaponPairs.Where(stuffPair =>
+            PrizeMarketValue(stuffPair, prizeCategory) && stuffPair.thing.techLevel >= TechLevel.Industrial &&
+            ThingSetMakerUtility.CanGenerate(stuffPair.thing)).RandomElement();
     }
 }

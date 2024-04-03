@@ -25,7 +25,7 @@ public class GameComponent_GachaTracker : GameComponent
         {
             if (activeBanner == null || activeBanner.endTicks <= Find.TickManager.TicksGame)
             {
-                activeBanner ??= GenerateBanner();
+                activeBanner = GenerateBanner();
                 // Log.Message(activeBanner.ToString());
             }
             //TODO: implement cleanup and handling pity (if needed), etc

@@ -8,7 +8,8 @@
         <minConsolationMarketValue>1000</minConsolationMarketValue>
     </ArchoGacha.PrizeGeneratorDef>
 
-    <!-- TODO: Impl -->
+    <!--
+    ~1~ TODO: Impl @1@
     <ArchoGacha.PrizeGeneratorDef>
         <defName>ArchoGacha_WeaponMelee</defName>
     </ArchoGacha.PrizeGeneratorDef>
@@ -32,6 +33,7 @@
     <ArchoGacha.PrizeGeneratorDef>
         <defName>ArchoGacha_Consumable</defName>
     </ArchoGacha.PrizeGeneratorDef>
+    -->
     
     <!-- TODO: nice to haves -->
     <!--<ArchoGacha.PrizeGeneratorDef>

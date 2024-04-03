@@ -1,3 +1,5 @@
+using System;
+using RimWorld;
 using Verse;
 
 namespace ArchoGacha;
@@ -5,16 +7,32 @@ namespace ArchoGacha;
 public abstract class PrizeWorker
 {
     public PrizeGeneratorDef def;
-    public abstract Thing GeneratePrize(PrizeCategory prizeCategory);
 
-    public bool PrizeMarketValue(float baseMarketValue, PrizeCategory prizeCategory)
+    public virtual Thing GeneratePrize(PrizeCategory prizeCategory)
     {
-        if (prizeCategory == PrizeCategory.Jackpot) return baseMarketValue * 2.5f + 1500 >= def.minJackpotMarketValue;
-
-        return baseMarketValue * 1.5f + 500 >= def.minConsolationMarketValue;
+        throw new NotImplementedException();
     }
 
-    public abstract ThingDef SelectPrizeDef(PrizeCategory prizeCategory);
+    public bool PrizeMarketValue(ThingStuffPair stuffPair, PrizeCategory prizeCategory)
+    {
+        var marketValue = stuffPair.Price;
+        if (stuffPair.thing.HasComp<CompQuality>())
+        {
+            //TODO: Move this to a setting
+            marketValue = prizeCategory == PrizeCategory.Jackpot
+                ? marketValue * 2.5f + 1500
+                : marketValue * 1.5f + 500;
+        }
+
+        if (prizeCategory == PrizeCategory.Jackpot) return marketValue >= def.minJackpotMarketValue;
+
+        return marketValue >= def.minConsolationMarketValue;
+    }
+
+    public virtual ThingStuffPair SelectPrizeDef(PrizeCategory prizeCategory)
+    {
+        throw new NotImplementedException();
+    }
 }
 
 public enum PrizeCategory

@@ -15,7 +15,7 @@ public class PrizeGeneratorDef : Def
     {
         get
         {
-            if (workerInt != null) return workerInt;
+            if (workerInt != null && prizeWorkerClass != null) return workerInt;
 
             workerInt = (PrizeWorker)Activator.CreateInstance(prizeWorkerClass);
             workerInt.def = this;

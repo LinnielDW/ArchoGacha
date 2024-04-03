@@ -56,14 +56,23 @@
         If that reference does not exist, it will add Krafs Rimworld Ref to the project. If it does exist, Krafs won't be added
         as a reference. This basically means that Krafs is treated as a fallback if Assembly-CSharp is not found -->
     <ItemGroup>
-      <Compile Include="ArchoGachaMod.cs" />
-      <Compile Include="GameComps\GameComponent_GachaTracker.cs" />
-      <Compile Include="PrizeGeneratorDef.cs" />
-      <Compile Include="PrizeWorker.cs" />
-      <Compile Include="PrizeWorkers\QualityWeaponPrizeWorker.cs" />
+        <Compile Include="ArchoGachaMod.cs" />
+        <Compile Include="GameComps\GameComponent_GachaTracker.cs" />
+        <Compile Include="PrizeGeneratorDef.cs" />
+        <Compile Include="PrizeWorker.cs" />
+        <Compile Include="PrizeWorkers\GachaDebug.cs" />
+        <Compile Include="PrizeWorkers\QualityWeaponPrizeWorker.cs" />
     </ItemGroup>
 
-    
+    <ItemGroup>
+        <PackageReference Include="Krafs.Publicizer" Version="2.2.1">
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+            <PrivateAssets>all</PrivateAssets>
+        </PackageReference>
+        <Publicize Include="Assembly-CSharp:RimWorld.PawnWeaponGenerator.allWeaponPairs" />
+    </ItemGroup>
+
+
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
     <Target Name="CopyCustomContent" AfterTargets="AfterBuild">
         <Copy SourceFiles="@(CommonFiles)" DestinationFolder="$(ModLocation)\%(RecursiveDir)" SkipUnchangedFiles="true" />

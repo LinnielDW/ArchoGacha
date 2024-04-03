@@ -1,12 +1,18 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
-using RimWorld;
 using Verse;
 
 namespace ArchoGacha.GameComps;
 
 public class GameComponent_GachaTracker : GameComponent
 {
+    public GameComponent_GachaTracker()
+    {
+    }
+
+    public GameComponent_GachaTracker(Game game)
+    {
+    }
+
     //TODO: turn this into all banner types at once
     public List<Banner> banners;
     public Banner activeBanner;
@@ -14,11 +20,13 @@ public class GameComponent_GachaTracker : GameComponent
 
     public override void GameComponentTick()
     {
+        base.GameComponentTick();
         if (GenTicks.IsTickInterval(1000))
         {
-            if (Find.TickManager.TicksGame >= activeBanner?.endTicks)
+            if (activeBanner == null || activeBanner.endTicks <= Find.TickManager.TicksGame)
             {
                 activeBanner ??= GenerateBanner();
+                // Log.Message(activeBanner.ToString());
             }
             //TODO: implement cleanup and handling pity (if needed), etc
         }
@@ -62,6 +70,11 @@ public class Banner
         this.jackpot = jackpot;
         this.prizes = prizes;
         this.endTicks = endTicks;
+    }
+
+    public override string ToString()
+    {
+        return $"Banner{{ jackpot={jackpot}, prizes={string.Join(",", prizes)}, endTicks={endTicks} }}";
     }
 }
 

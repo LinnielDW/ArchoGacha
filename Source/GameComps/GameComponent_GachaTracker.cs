@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Verse;
 
 namespace ArchoGacha.GameComps;
@@ -13,33 +15,47 @@ public class GameComponent_GachaTracker : GameComponent
     {
     }
 
-    //TODO: turn this into all banner types at once
-    public List<Banner> banners;
-    public Banner activeBanner;
+    public List<Banner> activeBanners;
     public int pitySilverReserve;
+    public int bannersEndTick;
+
+    public override void ExposeData()
+    {
+        base.ExposeData();
+        Scribe_Collections.Look(ref activeBanners, "activeBanners", LookMode.Deep, Array.Empty<object>());
+        Scribe_Values.Look(ref pitySilverReserve, "pitySilverReserve");
+        Scribe_Values.Look(ref bannersEndTick, "bannersEndTick");
+    }
 
     public override void GameComponentTick()
     {
         base.GameComponentTick();
         if (GenTicks.IsTickInterval(1000))
         {
-            if (activeBanner == null || activeBanner.endTicks <= Find.TickManager.TicksGame)
+            if (activeBanners.NullOrEmpty() || bannersEndTick <= Find.TickManager.TicksGame)
             {
-                activeBanner = GenerateBanner();
+                activeBanners = DefDatabase<PrizeGeneratorDef>.AllDefsListForReading
+                    .Select(GenerateBannerFromDef).ToList();
+
+                //TODO: turn this into a setting
+                bannersEndTick = Find.TickManager.TicksGame + 60000 * 3;
                 // Log.Message(activeBanner.ToString());
             }
             //TODO: implement cleanup and handling pity (if needed), etc
         }
     }
 
-    public Banner GenerateBanner()
+    public Banner GenerateRandomBanner()
     {
-        var worker = DefDatabase<PrizeGeneratorDef>.AllDefsListForReading.RandomElement().Worker;
+        return GenerateBannerFromDef(DefDatabase<PrizeGeneratorDef>.AllDefsListForReading.RandomElement());
+    }
+
+    public Banner GenerateBannerFromDef(PrizeGeneratorDef def)
+    {
+        var worker = def.Worker;
         return new Banner(
             worker.GeneratePrize(PrizeCategory.Jackpot),
-            GenerateConsolations(worker),
-            //TODO: turn this into a setting
-            Find.TickManager.TicksGame + 60000 * 3
+            GenerateConsolations(worker)
         );
     }
 
@@ -63,18 +79,16 @@ public class Banner
 {
     public Thing jackpot;
     public List<Thing> prizes;
-    public int endTicks;
 
-    public Banner(Thing jackpot, List<Thing> prizes, int endTicks)
+    public Banner(Thing jackpot, List<Thing> prizes)
     {
         this.jackpot = jackpot;
         this.prizes = prizes;
-        this.endTicks = endTicks;
     }
 
     public override string ToString()
     {
-        return $"Banner{{ jackpot={jackpot}, prizes={string.Join(",", prizes)}, endTicks={endTicks} }}";
+        return $"Banner{{ jackpot={jackpot}, prizes={string.Join(",", prizes)} }}";
     }
 }
 

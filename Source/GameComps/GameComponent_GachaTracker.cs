@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
+using RimWorld;
 using Verse;
 
 namespace ArchoGacha.GameComps;
@@ -12,7 +14,7 @@ public class GameComponent_GachaTracker : GameComponent
 
     public override void GameComponentTick()
     {
-        if (Find.TickManager.TicksGame % 1000 == 0)
+        if (GenTicks.IsTickInterval(1000))
         {
             if (Find.TickManager.TicksGame >= activeBanner?.endTicks)
             {

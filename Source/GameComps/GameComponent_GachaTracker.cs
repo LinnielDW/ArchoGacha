@@ -37,8 +37,7 @@ public class GameComponent_GachaTracker : GameComponent
                 activeBanners = DefDatabase<PrizeGeneratorDef>.AllDefsListForReading
                     .Select(GenerateBannerFromDef).ToList();
 
-                //TODO: turn this into a setting
-                bannersEndTick = Find.TickManager.TicksGame + 60000 * 3;
+                bannersEndTick = (int)(Find.TickManager.TicksGame + 60000 * ArchoGachaSettings.bannerDurationDays);
                 // Log.Message(activeBanner.ToString());
             }
             //TODO: implement cleanup and handling pity (if needed), etc

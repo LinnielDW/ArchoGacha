@@ -51,6 +51,10 @@
 
     <ItemGroup>
         <PackageReference Include="Krafs.Rimworld.Ref" Version="1.5.4048-beta" />
+        <PackageReference Include="Lib.Harmony" Version="2.3.3">
+            <ExcludeAssets>runtime</ExcludeAssets>
+            <IncludeAssets>compile; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
     </ItemGroup>
     <!-- The below condition will check if you've defined a reference called "Assembly-CSharp" and if that reference exists on disk.
         If that reference does not exist, it will add Krafs Rimworld Ref to the project. If it does exist, Krafs won't be added
@@ -58,10 +62,12 @@
     <ItemGroup>
         <Compile Include="ArchoGachaMod.cs" />
         <Compile Include="GameComps\GameComponent_GachaTracker.cs" />
+        <Compile Include="HarmonyPatches\Building_CommsConsole_GetFloatMenuOptions_Patch.cs" />
         <Compile Include="PrizeGeneratorDef.cs" />
         <Compile Include="PrizeWorker.cs" />
         <Compile Include="PrizeWorkers\GachaDebug.cs" />
         <Compile Include="PrizeWorkers\QualityWeaponPrizeWorker.cs" />
+        <Compile Include="UI\Dialog_BannerMenu.cs" />
     </ItemGroup>
 
     <ItemGroup>
@@ -71,6 +77,12 @@
         </PackageReference>
         <Publicize Include="Assembly-CSharp:RimWorld.PawnWeaponGenerator.allWeaponPairs" />
     </ItemGroup>
+
+    <ItemGroup>
+      <Reference Include="Microsoft.CSharp" />
+      <Reference Include="Microsoft.CSharp" />
+    </ItemGroup>
+
 
 
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

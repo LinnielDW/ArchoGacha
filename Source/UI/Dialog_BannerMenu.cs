@@ -1,9 +1,11 @@
 ﻿using ArchoGacha.GameComps;
+using RimWorld;
 using UnityEngine;
 using Verse;
 
 namespace ArchoGacha.UI;
 
+[StaticConstructorOnStartup]
 public class Dialog_BannerMenu : Window
 {
     private GameComponent_GachaTracker comp;
@@ -53,18 +55,60 @@ public class Dialog_BannerMenu : Window
             {
                 //TODO: finish
                 Rect rect = new Rect(0f, y, scrollRect.width, 28f);
-                // listingStandard.Label(banner.def.ToString());
-                // Widgets.InfoCardButton(rect.width - 24f, y, thing);
-
-                Rect rect5 = new Rect(36f, y, rect.width - 36f, rect.height);
                 
-                string text = banner.jackpot.LabelCap;
-                Widgets.Label(rect5, text.Truncate(rect5.width, null));
+                Widgets.Label(rect, banner.def.LabelCap);
                 y += 28f;
+
+                // string text = banner.jackpot.LabelCap;
+                // Rect rect5 = new Rect(36f, y, rect.width - 36f, rect.height);
+                // Widgets.Label(rect5, text.Truncate(rect5.width, null));
+                
+                // y += 28f;
                 
                 if (banner.jackpot.def.DrawMatSingle != null && banner.jackpot.def.DrawMatSingle.mainTexture != null)
                 {
-                    Widgets.ThingIcon(new Rect(4f, y, 28f, 28f), banner.jackpot, 1f, null, false);
+                    var iconRect = new Rect(4f, y, 28f, 28f);
+                    
+                    // GUI.color = Color.white;
+                    // Widgets.DrawBox(iconRect, 1, null);
+                    Rect rect2 = iconRect.ContractedBy(1f);
+                    
+                    // GUI.DrawTexture(rect2, ColonistBarColonistDrawer.MoodBGTex);
+                    Widgets.DrawBoxSolid(rect2, jackpotSecondaryCol);
+                    GUI.color = jackpotPrimaryCol;
+                    GUI.DrawTexture(rect2, Gradient);
+                    // Widgets.DrawBoxSolidWithOutline(iconRect, jackpotPrimaryCol,jackpotSecondaryCol);
+                    Widgets.DrawHighlightIfMouseover(rect2);
+                    /*if (Mouse.IsOver(iconRect))
+                    {
+                        GUI.color = ITab_Pawn_Gear.HighlightColor;
+                        GUI.DrawTexture(iconRect, TexUI.HighlightTex);
+                    }*/
+                    Widgets.ThingIcon(rect2, banner.jackpot, 1f, null, false);
+                }
+
+                for (var index = 0; index < banner.prizes.Count; index++)
+                {
+                    var prize = banner.prizes[index];
+                    if (prize.def.DrawMatSingle != null &&
+                        prize.def.DrawMatSingle.mainTexture != null)
+                    {
+                        var iconRect = new Rect(4f + (4f + 28f) * (index + 1), y, 28f, 28f);
+                        // GUI.color = Color.white;
+                        // Widgets.DrawBox(iconRect, 1, null);
+                        Rect rect2 = iconRect.ContractedBy(1f);
+                        Widgets.DrawBoxSolid(rect2, prizeSecondaryCol);
+                        GUI.color = prizePrimaryCol;
+                        GUI.DrawTexture(rect2, Gradient);
+                        // Widgets.DrawBoxSolidWithOutline(iconRect, jackpotSecondaryCol,jackpotPrimaryCol);
+                        Widgets.DrawHighlightIfMouseover(rect2);
+                        /*if (Mouse.IsOver(iconRect))
+                        {
+                            GUI.color = ITab_Pawn_Gear.HighlightColor;
+                            GUI.DrawTexture(iconRect, TexUI.HighlightTex);
+                        }*/
+                        Widgets.ThingIcon(rect2, prize, 1f, null, false);
+                    }
                 }
 
                 y += 28f;
@@ -76,4 +120,10 @@ public class Dialog_BannerMenu : Window
 
         listingStandard.End();
     }
+
+    private static readonly Texture2D Gradient = ContentFinder<Texture2D>.Get("UI/Widgets/ArchoGachaGradient", true);
+    private static readonly Color jackpotPrimaryCol = new Color(0.765F, 0.616F, 0.447F);
+    private static readonly Color jackpotSecondaryCol = new Color(0.612F, 0.357F, 0.294F);
+    private static readonly Color prizePrimaryCol = new Color(0.71f, 0.71f, 0.71f);
+    private static readonly Color prizeSecondaryCol = new Color(0.41f, 0.41f, 0.41f);
 }

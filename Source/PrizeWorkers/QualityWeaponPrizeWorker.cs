@@ -1,3 +1,4 @@
+using System.Linq;
 using RimWorld;
 using Verse;
 
@@ -5,6 +6,11 @@ namespace ArchoGacha.PrizeWorkers;
 
 public class QualityWeaponPrizeWorker : PrizeWorker
 {
+    protected virtual ThingCategoryDef FilterCategory =>
+        ThingCategoryDefOf.Weapons;
+
+    protected virtual TechLevel MinTechLevel => TechLevel.Industrial;
+
     public override Thing GeneratePrize(PrizeCategory prizeCategory)
     {
         var prize = SelectPrizeDef(prizeCategory);
@@ -25,15 +31,32 @@ public class QualityWeaponPrizeWorker : PrizeWorker
             filter = new ThingFilter()
         };
 
-        req.filter.SetAllow(ThingCategoryDefOf.Weapons, true);
+        req.filter.SetAllow(FilterCategory, true);
         req.validator = x =>
             x.IsWeapon && !x.destroyOnDrop &&
-            x.techLevel >= TechLevel.Industrial;
+            x.techLevel >= MinTechLevel;
 
         var allowedDefs = ThingSetMakerUtility.GetAllowedThingDefs(req);
         var thingStuffPairs =
             ArchoGachaUtils.CalculateAllowedThingStuffPairs(allowedDefs,
-                prizeCategory);
-        return thingStuffPairs.RandomElement().MakeThing();
+                prizeCategory).ToList();
+
+        if (!thingStuffPairs.NullOrEmpty())
+            return thingStuffPairs.RandomElement().MakeThing();
+        return null;
     }
+}
+
+public class RangedWeaponPrizeWorker : QualityWeaponPrizeWorker
+{
+    protected override ThingCategoryDef FilterCategory =>
+        ArchoGachaDefOf.WeaponsRanged;
+}
+
+public class MeleeWeaponPrizeWorker : QualityWeaponPrizeWorker
+{
+    protected override ThingCategoryDef FilterCategory =>
+        ArchoGachaDefOf.WeaponsMelee;
+
+    protected override TechLevel MinTechLevel => TechLevel.Medieval;
 }

@@ -8,21 +8,23 @@
         <minJackpotMarketValue>2500</minJackpotMarketValue>
         <minConsolationMarketValue>1000</minConsolationMarketValue>
     </ArchoGacha.PrizeGeneratorDef>
+
     <ArchoGacha.PrizeGeneratorDef>
-        <defName>ArchoGacha_Weapon2</defName>
-        <label>Temp Test Banner 1</label>
-        <prizeWorkerClass>ArchoGacha.PrizeWorkers.QualityWeaponPrizeWorker</prizeWorkerClass>
+        <defName>ArchoGacha_WeaponMelee</defName>
+        <label>Melee Weapon Banner</label>
+        <prizeWorkerClass>ArchoGacha.PrizeWorkers.MeleeWeaponPrizeWorker</prizeWorkerClass>
         <minJackpotMarketValue>2500</minJackpotMarketValue>
         <minConsolationMarketValue>1000</minConsolationMarketValue>
     </ArchoGacha.PrizeGeneratorDef>
+
     <ArchoGacha.PrizeGeneratorDef>
-        <defName>ArchoGacha_Weapon3</defName>
-        <label>Temp Test Banner 2</label>
-        <prizeWorkerClass>ArchoGacha.PrizeWorkers.QualityWeaponPrizeWorker</prizeWorkerClass>
+        <defName>ArchoGacha_WeaponRanged</defName>
+        <label>Ranged Banner</label>
+        <prizeWorkerClass>ArchoGacha.PrizeWorkers.RangedWeaponPrizeWorker</prizeWorkerClass>
         <minJackpotMarketValue>2500</minJackpotMarketValue>
         <minConsolationMarketValue>1000</minConsolationMarketValue>
     </ArchoGacha.PrizeGeneratorDef>
-    
+
     <!-- TODO: check numbers -->
     <ArchoGacha.PrizeGeneratorDef>
         <defName>ArchoGacha_Armor</defName>
@@ -35,15 +37,6 @@
     <!--
     ~1~ TODO: Impl @1@
     <ArchoGacha.PrizeGeneratorDef>
-        <defName>ArchoGacha_WeaponMelee</defName>
-    </ArchoGacha.PrizeGeneratorDef>
-
-    <ArchoGacha.PrizeGeneratorDef>
-        <defName>ArchoGacha_WeaponRanged</defName>
-    </ArchoGacha.PrizeGeneratorDef>
-
-
-    <ArchoGacha.PrizeGeneratorDef>
         <defName>ArchoGacha_Bionic</defName>
     </ArchoGacha.PrizeGeneratorDef>
 
@@ -55,7 +48,7 @@
         <defName>ArchoGacha_Consumable</defName>
     </ArchoGacha.PrizeGeneratorDef>
     -->
-    
+
     <!-- TODO: nice to haves -->
     <!--<ArchoGacha.PrizeGeneratorDef>
         <defName>ArchoGacha_PawnKind</defName>

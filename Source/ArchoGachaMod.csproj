@@ -67,6 +67,7 @@
         <Compile Include="GameComps\GameComponent_GachaTracker.cs" />
         <Compile Include="HarmonyPatches\Building_CommsConsole_GetFloatMenuOptions_Patch.cs" />
         <Compile Include="PrizeGeneratorDef.cs" />
+        <Compile Include="PrizeWorkers\ArchoGachaDefOf.cs" />
         <Compile Include="PrizeWorkers\ArmorPrizeWorker.cs" />
         <Compile Include="PrizeWorkers\PrizeWorker.cs" />
         <Compile Include="PrizeWorkers\QualityWeaponPrizeWorker.cs" />

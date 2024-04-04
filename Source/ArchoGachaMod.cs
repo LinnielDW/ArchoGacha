@@ -32,7 +32,7 @@ public class ArchoGachaSettings : ModSettings
     public static float bannerDurationDays = 3f;
 
     public static float minJackpotOffset = 2000f;
-    public static float minConsolationOffset = 100f;
+    public static float minConsolationOffset = 1000f;
 
     public void DoSettingsWindowContents(Rect inRect)
     {
@@ -40,36 +40,27 @@ public class ArchoGachaSettings : ModSettings
 
         listingStandard.Begin(inRect);
         listingStandard.DrawLabelledNumericSetting(ref bannerDurationDays,
-            "ArchoGacha_bannerDurationDays", 1f,
-            999999f);
+            "ArchoGacha_bannerDurationDays", 1f, 999999f);
         listingStandard.DrawLabelledNumericSetting(ref minJackpotOffset,
             "ArchoGacha_minJackpotOffset", 0f, 999999f);
         listingStandard.DrawLabelledNumericSetting(ref minConsolationOffset,
-            "ArchoGacha_minConsolationOffset", 0f,
-            999999f);
+            "ArchoGacha_minConsolationOffset", 0f, 999999f);
         listingStandard.End();
     }
 }
 
 public static class SettingsUtils
 {
-    public static void DrawLabelledNumericSetting<T>(
-        this Listing_Standard settingsList, ref T settingValue,
-        string settingName, T min, T max) where T : struct
+    public static void DrawLabelledNumericSetting(this Listing_Standard settingsList, ref float settingValue, string settingName, float min, float max)
     {
-        var settingValueString = settingValue.ToString();
         var numericSettingRect = settingsList.GetRect(24f);
+        var settingValueStringBuffer = settingValue.ToString();
 
         var leftSide = numericSettingRect.LeftPart(0.8f).Rounded();
-        var rightSide = numericSettingRect.RightPart(0.2f).Rounded();
 
         Widgets.Label(leftSide, settingName.Translate());
-        TooltipHandler.TipRegion(leftSide,
-            (settingName + "Tooltip").Translate());
+        TooltipHandler.TipRegion(leftSide, (settingName + "Tooltip").Translate());
 
-        dynamic dynamicMin = min;
-        dynamic dynamicMax = max;
-        Widgets.TextFieldNumeric<T>(rightSide, ref settingValue,
-            ref settingValueString, dynamicMin, dynamicMax);
+        Widgets.TextFieldNumeric(numericSettingRect.RightPart(0.2f).Rounded(), ref settingValue, ref settingValueStringBuffer, min, max);
     }
 }

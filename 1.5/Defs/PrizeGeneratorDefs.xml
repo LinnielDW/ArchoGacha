@@ -3,6 +3,21 @@
 <Defs>
     <ArchoGacha.PrizeGeneratorDef>
         <defName>ArchoGacha_Weapon</defName>
+        <label>Weapon Banner</label>
+        <prizeWorkerClass>ArchoGacha.PrizeWorkers.QualityWeaponPrizeWorker</prizeWorkerClass>
+        <minJackpotMarketValue>2500</minJackpotMarketValue>
+        <minConsolationMarketValue>1000</minConsolationMarketValue>
+    </ArchoGacha.PrizeGeneratorDef>
+    <ArchoGacha.PrizeGeneratorDef>
+        <defName>ArchoGacha_Weapon2</defName>
+        <label>Temp Test Banner 1</label>
+        <prizeWorkerClass>ArchoGacha.PrizeWorkers.QualityWeaponPrizeWorker</prizeWorkerClass>
+        <minJackpotMarketValue>2500</minJackpotMarketValue>
+        <minConsolationMarketValue>1000</minConsolationMarketValue>
+    </ArchoGacha.PrizeGeneratorDef>
+    <ArchoGacha.PrizeGeneratorDef>
+        <defName>ArchoGacha_Weapon3</defName>
+        <label>Temp Test Banner 2</label>
         <prizeWorkerClass>ArchoGacha.PrizeWorkers.QualityWeaponPrizeWorker</prizeWorkerClass>
         <minJackpotMarketValue>2500</minJackpotMarketValue>
         <minConsolationMarketValue>1000</minConsolationMarketValue>

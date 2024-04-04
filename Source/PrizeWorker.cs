@@ -1,6 +1,7 @@
 using System;
 using RimWorld;
 using Verse;
+using static ArchoGacha.ArchoGachaSettings;
 
 namespace ArchoGacha;
 
@@ -8,20 +9,16 @@ public abstract class PrizeWorker
 {
     public PrizeGeneratorDef def;
 
-    public virtual Thing GeneratePrize(PrizeCategory prizeCategory)
-    {
-        throw new NotImplementedException();
-    }
+    public abstract Thing GeneratePrize(PrizeCategory prizeCategory);
 
     public bool PrizeMarketValue(ThingStuffPair stuffPair, PrizeCategory prizeCategory)
     {
         var marketValue = stuffPair.Price;
         if (stuffPair.thing.HasComp<CompQuality>())
         {
-            //TODO: Move this to a setting
             marketValue = prizeCategory == PrizeCategory.Jackpot
-                ? marketValue * 2.5f + 1500
-                : marketValue * 1.5f + 500;
+                ? marketValue * minJackpotFactor + minJackpotOffset
+                : marketValue * minConsolationFactor + minConsolationOffset;
         }
 
         if (prizeCategory == PrizeCategory.Jackpot) return marketValue >= def.minJackpotMarketValue;
@@ -29,10 +26,7 @@ public abstract class PrizeWorker
         return marketValue >= def.minConsolationMarketValue;
     }
 
-    public virtual ThingStuffPair SelectPrizeDef(PrizeCategory prizeCategory)
-    {
-        throw new NotImplementedException();
-    }
+    public abstract ThingStuffPair SelectPrizeDef(PrizeCategory prizeCategory);
 }
 
 public enum PrizeCategory

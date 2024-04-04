@@ -62,7 +62,7 @@ public static class ArchoGachaUtils
         }
 
         return marketValue > ArchoGachaSettings.minConsolationOffset &&
-               marketValue < ArchoGachaSettings.minJackpotOffset +
-               ArchoGachaSettings.minConsolationOffset * 0.5f;
+               marketValue < ArchoGachaSettings.minJackpotOffset -
+               ArchoGachaSettings.maxConsolationOffset;
     }
 }

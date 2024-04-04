@@ -31,8 +31,9 @@ public class ArchoGachaSettings : ModSettings
 {
     public static float bannerDurationDays = 3f;
 
-    public static float minJackpotOffset = 2000f;
-    public static float minConsolationOffset = 1000f;
+    public static float minJackpotOffset = 1500f;
+    public static float minConsolationOffset = 750f;
+    public static float maxConsolationOffset = 500f;
 
     public void DoSettingsWindowContents(Rect inRect)
     {
@@ -45,6 +46,8 @@ public class ArchoGachaSettings : ModSettings
             "ArchoGacha_minJackpotOffset", 0f, 999999f);
         listingStandard.DrawLabelledNumericSetting(ref minConsolationOffset,
             "ArchoGacha_minConsolationOffset", 0f, 999999f);
+        listingStandard.DrawLabelledNumericSetting(ref maxConsolationOffset,
+            "maxConsolationOffset", 0f, 999999f);
         listingStandard.End();
     }
 }

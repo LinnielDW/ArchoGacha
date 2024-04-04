@@ -8,6 +8,27 @@
         <minJackpotMarketValue>2500</minJackpotMarketValue>
         <minConsolationMarketValue>1000</minConsolationMarketValue>
     </ArchoGacha.PrizeGeneratorDef>
+    <ArchoGacha.PrizeGeneratorDef>
+        <defName>ArchoGacha_Weapon2</defName>
+        <label>Weapon Banner2</label>
+        <prizeWorkerClass>ArchoGacha.PrizeWorkers.QualityWeaponPrizeWorker</prizeWorkerClass>
+        <minJackpotMarketValue>2500</minJackpotMarketValue>
+        <minConsolationMarketValue>1000</minConsolationMarketValue>
+    </ArchoGacha.PrizeGeneratorDef>
+    <ArchoGacha.PrizeGeneratorDef>
+        <defName>ArchoGacha_Weapon3</defName>
+        <label>Weapon Banner3</label>
+        <prizeWorkerClass>ArchoGacha.PrizeWorkers.QualityWeaponPrizeWorker</prizeWorkerClass>
+        <minJackpotMarketValue>2500</minJackpotMarketValue>
+        <minConsolationMarketValue>1000</minConsolationMarketValue>
+    </ArchoGacha.PrizeGeneratorDef>
+    <ArchoGacha.PrizeGeneratorDef>
+        <defName>ArchoGacha_Weapon4</defName>
+        <label>Weapon Banner4</label>
+        <prizeWorkerClass>ArchoGacha.PrizeWorkers.QualityWeaponPrizeWorker</prizeWorkerClass>
+        <minJackpotMarketValue>2500</minJackpotMarketValue>
+        <minConsolationMarketValue>1000</minConsolationMarketValue>
+    </ArchoGacha.PrizeGeneratorDef>
 
     <ArchoGacha.PrizeGeneratorDef>
         <defName>ArchoGacha_WeaponMelee</defName>

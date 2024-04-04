@@ -11,9 +11,8 @@ public class Banner : IExposable
 
     public Banner()
     {
-        
     }
-    
+
     public Banner(Thing jackpot, List<Thing> prizes, PrizeGeneratorDef def)
     {
         this.jackpot = jackpot;
@@ -23,13 +22,14 @@ public class Banner : IExposable
 
     public override string ToString()
     {
-        return $"Banner{{ jackpot={jackpot}, prizes={string.Join(",", prizes)}, def={def} }}";
+        return
+            $"Banner{{ jackpot={jackpot}, prizes={string.Join(",", prizes)}, def={def} }}";
     }
 
     public void ExposeData()
     {
         Scribe_Deep.Look(ref jackpot, true, "jackpot");
-        Scribe_Collections.Look(ref prizes, "prizes", true, LookMode.Deep );
+        Scribe_Collections.Look(ref prizes, "prizes", true, LookMode.Deep);
         Scribe_Defs.Look(ref def, "def");
     }
 }

@@ -9,8 +9,10 @@ public class PrizeGeneratorDef : Def
 
     [Unsaved] private PrizeWorker workerInt;
 
+    //TODO: change price logic to be if(banner min > settingsMin) use settings min 
     public float minJackpotMarketValue;
     public float minConsolationMarketValue;
+
     public PrizeWorker Worker
     {
         get

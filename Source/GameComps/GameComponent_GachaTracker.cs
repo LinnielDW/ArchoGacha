@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Verse;
 
@@ -8,6 +7,7 @@ namespace ArchoGacha.GameComps;
 public class GameComponent_GachaTracker : GameComponent
 {
     public static GameComponent_GachaTracker Instance;
+
     public GameComponent_GachaTracker()
     {
         Instance = this;
@@ -25,7 +25,8 @@ public class GameComponent_GachaTracker : GameComponent
     public override void ExposeData()
     {
         base.ExposeData();
-        Scribe_Collections.Look(ref activeBanners, "activeBanners", true, LookMode.Deep);
+        Scribe_Collections.Look(ref activeBanners, "activeBanners", true,
+            LookMode.Deep);
         Scribe_Values.Look(ref pitySilverReserve, "pitySilverReserve");
         Scribe_Values.Look(ref bannersEndTick, "bannersEndTick");
     }
@@ -35,7 +36,8 @@ public class GameComponent_GachaTracker : GameComponent
         base.GameComponentTick();
         if (GenTicks.IsTickInterval(1000))
         {
-            if (activeBanners.NullOrEmpty() || bannersEndTick <= Find.TickManager.TicksGame)
+            if (activeBanners.NullOrEmpty() ||
+                bannersEndTick <= Find.TickManager.TicksGame)
             {
                 GenerateActiveBanners();
             }
@@ -48,8 +50,9 @@ public class GameComponent_GachaTracker : GameComponent
         activeBanners = DefDatabase<PrizeGeneratorDef>.AllDefsListForReading
             .Select(GenerateBannerFromDef).ToList();
 
-        bannersEndTick = (int)(Find.TickManager.TicksGame + 60000 * ArchoGachaSettings.bannerDurationDays);
-                
+        bannersEndTick = (int)(Find.TickManager.TicksGame +
+                               60000 * ArchoGachaSettings.bannerDurationDays);
+
         foreach (var banner in activeBanners)
         {
             Log.Message(banner.ToString());
@@ -58,7 +61,8 @@ public class GameComponent_GachaTracker : GameComponent
 
     public Banner GenerateRandomBanner()
     {
-        return GenerateBannerFromDef(DefDatabase<PrizeGeneratorDef>.AllDefsListForReading.RandomElement());
+        return GenerateBannerFromDef(DefDatabase<PrizeGeneratorDef>
+            .AllDefsListForReading.RandomElement());
     }
 
     public Banner GenerateBannerFromDef(PrizeGeneratorDef def)

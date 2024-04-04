@@ -11,7 +11,8 @@ namespace ArchoGacha.HarmonyPatches;
 [HarmonyPatch(typeof(Building_CommsConsole), "GetFloatMenuOptions")]
 public static class Building_CommsConsole_GetFloatMenuOptions_Patch
 {
-    public static IEnumerable<FloatMenuOption> Postfix(IEnumerable<FloatMenuOption> __result, Pawn myPawn,
+    public static IEnumerable<FloatMenuOption> Postfix(
+        IEnumerable<FloatMenuOption> __result, Pawn myPawn,
         Building_CommsConsole __instance)
     {
         var floatOption = GachaMenuFloatOption();
@@ -34,7 +35,8 @@ public static class Building_CommsConsole_GetFloatMenuOptions_Patch
                     delegate
                     {
                         Find.WindowStack.Add(
-                            new Dialog_BannerMenu(GameComponent_GachaTracker.Instance));
+                            new Dialog_BannerMenu(GameComponent_GachaTracker
+                                .Instance));
                     });
             return floatMenuOption;
         }

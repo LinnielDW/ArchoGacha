@@ -10,7 +10,8 @@ public class QualityWeaponPrizeWorker : PrizeWorker
         var prize = SelectPrizeDef(prizeCategory);
         if (prize == null)
         {
-            Log.Error($"{nameof(QualityWeaponPrizeWorker)} attempted to generate a prize but could not! Consider tweaking the minimum prize thresholds to a lower value");
+            Log.Error(
+                $"{nameof(QualityWeaponPrizeWorker)} attempted to generate a prize but could not! Consider tweaking the minimum prize thresholds to a lower value");
         }
 
         return prize;
@@ -25,10 +26,14 @@ public class QualityWeaponPrizeWorker : PrizeWorker
         };
 
         req.filter.SetAllow(ThingCategoryDefOf.Weapons, true);
-        req.validator = x => x.IsWeapon && !x.destroyOnDrop && x.techLevel >= TechLevel.Industrial;
-        
+        req.validator = x =>
+            x.IsWeapon && !x.destroyOnDrop &&
+            x.techLevel >= TechLevel.Industrial;
+
         var allowedDefs = ThingSetMakerUtility.GetAllowedThingDefs(req);
-        var thingStuffPairs = ArchoGachaUtils.CalculateAllowedThingStuffPairs(allowedDefs, prizeCategory);
+        var thingStuffPairs =
+            ArchoGachaUtils.CalculateAllowedThingStuffPairs(allowedDefs,
+                prizeCategory);
         return thingStuffPairs.RandomElement().MakeThing();
     }
 }

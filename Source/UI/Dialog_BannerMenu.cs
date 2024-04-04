@@ -35,18 +35,17 @@ public class Dialog_BannerMenu : Window
 
         Text.Font = GameFont.Medium;
         listingStandard.Label("GachaBanners".Translate());
-        // listingStandard.Gap(32f);
 
         if (!comp.activeBanners.NullOrEmpty())
         {
-            Rect viewRect = new Rect(inRect.x, listingStandard.CurHeight, inRect.width,
+            Rect viewRect = new Rect(inRect.x, listingStandard.CurHeight, inRect.width  / 3f,
                 inRect.height - listingStandard.CurHeight);
             Rect scrollRect = new Rect(0f, 0f, viewRect.width - 16f,
-                (Text.LineHeight + listingStandard.verticalSpacing) * comp.activeBanners.Count + 250f );
+                60f * comp.activeBanners.Count );
 
 
             Widgets.BeginScrollView(viewRect, ref scrollPosition, scrollRect, true);
-            listingStandard.ColumnWidth = scrollRect.width - 17f;
+            listingStandard.ColumnWidth = (scrollRect.width - 17f);
             listingStandard.Begin(scrollRect);
 
             var y = 0f;
@@ -54,8 +53,8 @@ public class Dialog_BannerMenu : Window
             foreach (var banner in comp.activeBanners)
             {
                 //TODO: finish
-                Rect rect = new Rect(0f, y, scrollRect.width, 28f);
-                
+                Rect rect = new Rect(0f, y, scrollRect.width, 56f);
+                Widgets.DrawHighlightIfMouseover(rect);
                 Widgets.Label(rect, banner.def.LabelCap);
                 y += 28f;
 
@@ -135,11 +134,6 @@ public class Dialog_BannerMenu : Window
                             TooltipHandler.TipRegion(rect2, text2);
                         }
                         
-                        /*if (Mouse.IsOver(iconRect))
-                        {
-                            GUI.color = ITab_Pawn_Gear.HighlightColor;
-                            GUI.DrawTexture(iconRect, TexUI.HighlightTex);
-                        }*/
                         Widgets.ThingIcon(rect2, prize, 1f, null, false);
                         if (Widgets.ButtonInvisible(rect2, true))
                         {
@@ -148,7 +142,8 @@ public class Dialog_BannerMenu : Window
                     }
                 }
 
-                y += 28f;
+                // y += 28f;
+                y += 32f;
             }
 
             listingStandard.End();

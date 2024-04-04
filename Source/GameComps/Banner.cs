@@ -23,7 +23,7 @@ public class Banner : IExposable
     public override string ToString()
     {
         return
-            $"Banner{{ jackpot={jackpot}, prizes={string.Join(",", prizes)}, def={def} }}";
+            $"{def.LabelCap} {{ jackpot={jackpot}, prizes={string.Join(",", prizes)}, def={def} }}";
     }
 
     public void ExposeData()

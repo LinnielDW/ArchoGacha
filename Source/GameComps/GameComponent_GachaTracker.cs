@@ -37,17 +37,22 @@ public class GameComponent_GachaTracker : GameComponent
         {
             if (activeBanners.NullOrEmpty() || bannersEndTick <= Find.TickManager.TicksGame)
             {
-                activeBanners = DefDatabase<PrizeGeneratorDef>.AllDefsListForReading
-                    .Select(GenerateBannerFromDef).ToList();
-
-                bannersEndTick = (int)(Find.TickManager.TicksGame + 60000 * ArchoGachaSettings.bannerDurationDays);
-                
-                foreach (var banner in activeBanners)
-                {
-                    Log.Message(banner.ToString());
-                }
+                GenerateActiveBanners();
             }
             //TODO: implement cleanup and handling pity (if needed), etc
+        }
+    }
+
+    public void GenerateActiveBanners()
+    {
+        activeBanners = DefDatabase<PrizeGeneratorDef>.AllDefsListForReading
+            .Select(GenerateBannerFromDef).ToList();
+
+        bannersEndTick = (int)(Find.TickManager.TicksGame + 60000 * ArchoGachaSettings.bannerDurationDays);
+                
+        foreach (var banner in activeBanners)
+        {
+            Log.Message(banner.ToString());
         }
     }
 

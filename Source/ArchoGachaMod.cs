@@ -27,24 +27,21 @@ public class ArchoGachaSettings : ModSettings
 {
     public static float bannerDurationDays = 3f;
 
-    public static float minJackpotFactor = 2.5f;
-    public static float minJackpotOffset = 1500f;
-
-    public static float minConsolationFactor = 1.5f;
-    public static float minConsolationOffset = 500f;
+    public static float minJackpotOffset = 2000f;
+    public static float minConsolationOffset = 100f;
 
     public void DoSettingsWindowContents(Rect inRect)
     {
         Listing_Standard listingStandard = new Listing_Standard();
 
         listingStandard.Begin(inRect);
-        listingStandard.DrawLabelledNumericSetting(ref bannerDurationDays, "ArchoGacha_bannerDurationDays", 1f,
+        listingStandard.DrawLabelledNumericSetting(ref bannerDurationDays,
+            "ArchoGacha_bannerDurationDays", 1f,
             999999f);
-        listingStandard.DrawLabelledNumericSetting(ref minJackpotFactor, "ArchoGacha_minJackpotFactor", 0f, 999999f);
-        listingStandard.DrawLabelledNumericSetting(ref minJackpotOffset, "ArchoGacha_minJackpotOffset", 0f, 999999f);
-        listingStandard.DrawLabelledNumericSetting(ref minConsolationFactor, "ArchoGacha_minConsolationFactor", 0f,
-            999999f);
-        listingStandard.DrawLabelledNumericSetting(ref minConsolationOffset, "ArchoGacha_minConsolationOffset", 0f,
+        listingStandard.DrawLabelledNumericSetting(ref minJackpotOffset,
+            "ArchoGacha_minJackpotOffset", 0f, 999999f);
+        listingStandard.DrawLabelledNumericSetting(ref minConsolationOffset,
+            "ArchoGacha_minConsolationOffset", 0f,
             999999f);
         listingStandard.End();
     }
@@ -52,7 +49,8 @@ public class ArchoGachaSettings : ModSettings
 
 public static class SettingsUtils
 {
-    public static void DrawLabelledNumericSetting<T>(this Listing_Standard settingsList, ref T settingValue,
+    public static void DrawLabelledNumericSetting<T>(
+        this Listing_Standard settingsList, ref T settingValue,
         string settingName, T min, T max) where T : struct
     {
         var settingValueString = settingValue.ToString();
@@ -62,10 +60,12 @@ public static class SettingsUtils
         var rightSide = numericSettingRect.RightPart(0.2f).Rounded();
 
         Widgets.Label(leftSide, settingName.Translate());
-        TooltipHandler.TipRegion(leftSide, (settingName + "Tooltip").Translate());
+        TooltipHandler.TipRegion(leftSide,
+            (settingName + "Tooltip").Translate());
 
         dynamic dynamicMin = min;
         dynamic dynamicMax = max;
-        Widgets.TextFieldNumeric<T>(rightSide, ref settingValue, ref settingValueString, dynamicMin, dynamicMax);
+        Widgets.TextFieldNumeric<T>(rightSide, ref settingValue,
+            ref settingValueString, dynamicMin, dynamicMax);
     }
 }

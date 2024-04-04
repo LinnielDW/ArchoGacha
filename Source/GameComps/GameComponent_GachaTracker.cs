@@ -25,7 +25,7 @@ public class GameComponent_GachaTracker : GameComponent
     public override void ExposeData()
     {
         base.ExposeData();
-        Scribe_Collections.Look(ref activeBanners, "activeBanners", LookMode.Deep, Array.Empty<object>());
+        Scribe_Collections.Look(ref activeBanners, "activeBanners", true, LookMode.Deep);
         Scribe_Values.Look(ref pitySilverReserve, "pitySilverReserve");
         Scribe_Values.Look(ref bannersEndTick, "bannersEndTick");
     }
@@ -61,7 +61,8 @@ public class GameComponent_GachaTracker : GameComponent
         var worker = def.Worker;
         return new Banner(
             worker.GeneratePrize(PrizeCategory.Jackpot),
-            GenerateConsolations(worker)
+            GenerateConsolations(worker),
+            def
         );
     }
 
@@ -78,29 +79,6 @@ public class GameComponent_GachaTracker : GameComponent
     public void PullOnBanner(int silverAmount)
     {
         //TODO: impl
-    }
-}
-
-public class Banner : IExposable
-{
-    public Thing jackpot;
-    public List<Thing> prizes;
-
-    public Banner(Thing jackpot, List<Thing> prizes)
-    {
-        this.jackpot = jackpot;
-        this.prizes = prizes;
-    }
-
-    public override string ToString()
-    {
-        return $"Banner{{ jackpot={jackpot}, prizes={string.Join(",", prizes)} }}";
-    }
-
-    public void ExposeData()
-    {
-        Scribe_References.Look(ref this.jackpot, "jackpot", false);
-        Scribe_Collections.Look(ref this.prizes, "prizes",LookMode.Reference);
     }
 }
 

@@ -40,7 +40,7 @@ public class Dialog_BannerMenu : Window
             Rect viewRect = new Rect(inRect.x, listingStandard.CurHeight, inRect.width,
                 inRect.height - listingStandard.CurHeight);
             Rect scrollRect = new Rect(0f, 0f, viewRect.width - 16f,
-                (Text.LineHeight + listingStandard.verticalSpacing) * comp.activeBanners.Count + 250f);
+                (Text.LineHeight + listingStandard.verticalSpacing) * comp.activeBanners.Count + 250f );
 
 
             Widgets.BeginScrollView(viewRect, ref scrollPosition, scrollRect, true);
@@ -52,8 +52,20 @@ public class Dialog_BannerMenu : Window
             foreach (var banner in comp.activeBanners)
             {
                 //TODO: finish
-                // listingStandard.Label(banner.ToString());
-                Widgets.InfoCardButton(scrollRect.width - 24f, y, banner.jackpot);
+                Rect rect = new Rect(0f, y, scrollRect.width, 28f);
+                // listingStandard.Label(banner.def.ToString());
+                // Widgets.InfoCardButton(rect.width - 24f, y, thing);
+
+                Rect rect5 = new Rect(36f, y, rect.width - 36f, rect.height);
+                
+                string text = banner.jackpot.LabelCap;
+                Widgets.Label(rect5, text.Truncate(rect5.width, null));
+                y += 28f;
+                
+                if (banner.jackpot.def.DrawMatSingle != null && banner.jackpot.def.DrawMatSingle.mainTexture != null)
+                {
+                    Widgets.ThingIcon(new Rect(4f, y, 28f, 28f), banner.jackpot, 1f, null, false);
+                }
 
                 y += 28f;
             }

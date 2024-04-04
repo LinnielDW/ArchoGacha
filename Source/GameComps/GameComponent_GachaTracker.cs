@@ -78,7 +78,7 @@ public class GameComponent_GachaTracker : GameComponent
     }
 }
 
-public class Banner
+public class Banner : IExposable
 {
     public Thing jackpot;
     public List<Thing> prizes;
@@ -92,6 +92,12 @@ public class Banner
     public override string ToString()
     {
         return $"Banner{{ jackpot={jackpot}, prizes={string.Join(",", prizes)} }}";
+    }
+
+    public void ExposeData()
+    {
+        Scribe_References.Look(ref this.jackpot, "jackpot", false);
+        Scribe_Collections.Look(ref this.prizes, "prizes",LookMode.Reference);
     }
 }
 

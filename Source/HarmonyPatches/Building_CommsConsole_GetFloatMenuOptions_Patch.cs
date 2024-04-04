@@ -34,7 +34,7 @@ public static class Building_CommsConsole_GetFloatMenuOptions_Patch
                     delegate
                     {
                         Find.WindowStack.Add(
-                            new Dialog_BannerMenu(Current.Game.GetComponent<GameComponent_GachaTracker>()));
+                            new Dialog_BannerMenu(GameComponent_GachaTracker.Instance));
                     });
             return floatMenuOption;
         }

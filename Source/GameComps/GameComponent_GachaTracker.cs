@@ -7,12 +7,15 @@ namespace ArchoGacha.GameComps;
 
 public class GameComponent_GachaTracker : GameComponent
 {
+    public static GameComponent_GachaTracker Instance;
     public GameComponent_GachaTracker()
     {
+        Instance = this;
     }
 
     public GameComponent_GachaTracker(Game game)
     {
+        Instance = this;
     }
 
     public List<Banner> activeBanners;

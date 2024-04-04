@@ -1,4 +1,4 @@
-using System.Linq;
+/*using System.Linq;
 using RimWorld;
 using Verse;
 
@@ -22,8 +22,11 @@ public class ArmorPrizeWorker : PrizeWorker
 
     public override ThingStuffPair SelectPrizeDef(PrizeCategory prizeCategory)
     {
-        return PawnApparelGenerator.allApparelPairs.Where(stuffPair =>
+        var x= PawnApparelGenerator.allApparelPairs.Where(stuffPair =>
             PrizeMarketValue(stuffPair, prizeCategory) && stuffPair.thing.techLevel >= TechLevel.Industrial &&
             ThingSetMakerUtility.CanGenerate(stuffPair.thing)).RandomElement();
+        
+        Log.Message($"ThingStuffPair: {{{x.thing}, {x.stuff} }}. Price: {x.Price}");
+        return x;
     }
-}
+}*/

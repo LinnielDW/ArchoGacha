@@ -8,12 +8,13 @@ public class Dialog_BannerMenu : Window
 {
     private GameComponent_GachaTracker comp;
     private static Vector2 scrollPosition = Vector2.zero;
+
     public Dialog_BannerMenu(GameComponent_GachaTracker comp) : base()
     {
         this.comp = comp;
         this.doCloseButton = true;
     }
-    
+
     public override Vector2 InitialSize
     {
         get
@@ -27,31 +28,40 @@ public class Dialog_BannerMenu : Window
 
     public override void DoWindowContents(Rect inRect)
     {
-        
         Listing_Standard listingStandard = new Listing_Standard();
         listingStandard.Begin(inRect);
-        
+
         Text.Font = GameFont.Medium;
         listingStandard.Label("GachaBanners".Translate());
-        
-        
-        listingStandard.Gap(32f);
-        Rect viewRect = new Rect(inRect.x, listingStandard.CurHeight, inRect.width, inRect.height - listingStandard.CurHeight);
-        Rect scrollRect = new Rect(0f, 0f, viewRect.width - 16f,
-            ((Text.LineHeight + listingStandard.verticalSpacing) * comp.activeBanners.Count)+ 250f);
+        // listingStandard.Gap(32f);
 
-        
-        Widgets.BeginScrollView(viewRect, ref scrollPosition, scrollRect, true);
-        listingStandard.ColumnWidth = scrollRect.width - 17f;
-        listingStandard.Begin(scrollRect);
-        
-        foreach (var banner in comp.activeBanners)
+        if (!comp.activeBanners.NullOrEmpty())
         {
-            listingStandard.Label(banner.ToString());
+            Rect viewRect = new Rect(inRect.x, listingStandard.CurHeight, inRect.width,
+                inRect.height - listingStandard.CurHeight);
+            Rect scrollRect = new Rect(0f, 0f, viewRect.width - 16f,
+                (Text.LineHeight + listingStandard.verticalSpacing) * comp.activeBanners.Count + 250f);
+
+
+            Widgets.BeginScrollView(viewRect, ref scrollPosition, scrollRect, true);
+            listingStandard.ColumnWidth = scrollRect.width - 17f;
+            listingStandard.Begin(scrollRect);
+
+            var y = 0f;
+
+            foreach (var banner in comp.activeBanners)
+            {
+                //TODO: finish
+                // listingStandard.Label(banner.ToString());
+                Widgets.InfoCardButton(scrollRect.width - 24f, y, banner.jackpot);
+
+                y += 28f;
+            }
+
+            listingStandard.End();
+            Widgets.EndScrollView();
         }
 
-        listingStandard.End();
-        Widgets.EndScrollView();
         listingStandard.End();
     }
 }

@@ -22,6 +22,15 @@
         <minJackpotMarketValue>2500</minJackpotMarketValue>
         <minConsolationMarketValue>1000</minConsolationMarketValue>
     </ArchoGacha.PrizeGeneratorDef>
+    
+    <!-- TODO: check numbers -->
+    <ArchoGacha.PrizeGeneratorDef>
+        <defName>ArchoGacha_Armor</defName>
+        <label>Armor Banner</label>
+        <prizeWorkerClass>ArchoGacha.PrizeWorkers.ArmorPrizeWorker</prizeWorkerClass>
+        <minJackpotMarketValue>2500</minJackpotMarketValue>
+        <minConsolationMarketValue>1000</minConsolationMarketValue>
+    </ArchoGacha.PrizeGeneratorDef>
 
     <!--
     ~1~ TODO: Impl @1@
@@ -33,9 +42,6 @@
         <defName>ArchoGacha_WeaponRanged</defName>
     </ArchoGacha.PrizeGeneratorDef>
 
-    <ArchoGacha.PrizeGeneratorDef>
-        <defName>ArchoGacha_Armor</defName>
-    </ArchoGacha.PrizeGeneratorDef>
 
     <ArchoGacha.PrizeGeneratorDef>
         <defName>ArchoGacha_Bionic</defName>

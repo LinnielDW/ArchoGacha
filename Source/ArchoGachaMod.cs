@@ -21,6 +21,10 @@ public class ArchoGachaMod : Mod
         base.DoSettingsWindowContents(inRect);
         settings.DoSettingsWindowContents(inRect);
     }
+    public override string SettingsCategory()
+    {
+        return "ArchoGacha";
+    }
 }
 
 public class ArchoGachaSettings : ModSettings

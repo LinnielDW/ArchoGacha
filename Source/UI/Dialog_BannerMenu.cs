@@ -79,12 +79,32 @@ public class Dialog_BannerMenu : Window
                     GUI.DrawTexture(rect2, Gradient);
                     // Widgets.DrawBoxSolidWithOutline(iconRect, jackpotPrimaryCol,jackpotSecondaryCol);
                     Widgets.DrawHighlightIfMouseover(rect2);
+                    
+                    Text.WordWrap = true;
+                    if (Mouse.IsOver(rect2))
+                    {
+                        string text2 = banner.jackpot.LabelNoParenthesisCap.AsTipTitle() +
+                                       GenLabel.LabelExtras(banner.jackpot, true, true) + "\n\n" +
+                                       banner.jackpot.DescriptionDetailed;
+                        if (banner.jackpot.def.useHitPoints)
+                        {
+                            text2 = string.Concat(new object[]
+                                { text2, "\n", banner.jackpot.HitPoints, " / ", banner.jackpot.MaxHitPoints });
+                        }
+
+                        TooltipHandler.TipRegion(rect2, text2);
+                    }
+
                     /*if (Mouse.IsOver(iconRect))
                     {
                         GUI.color = ITab_Pawn_Gear.HighlightColor;
                         GUI.DrawTexture(iconRect, TexUI.HighlightTex);
                     }*/
                     Widgets.ThingIcon(rect2, banner.jackpot, 1f, null, false);
+                    if (Widgets.ButtonInvisible(rect2, true))
+                    {
+                        Find.WindowStack.Add(new Dialog_InfoCard(banner.jackpot));
+                    }
                 }
 
                 for (var index = 0; index < banner.prizes.Count; index++)
@@ -102,12 +122,29 @@ public class Dialog_BannerMenu : Window
                         GUI.DrawTexture(rect2, Gradient);
                         // Widgets.DrawBoxSolidWithOutline(iconRect, jackpotSecondaryCol,jackpotPrimaryCol);
                         Widgets.DrawHighlightIfMouseover(rect2);
+                        if (Mouse.IsOver(rect2))
+                        {
+                            string text2 = prize.LabelNoParenthesisCap.AsTipTitle() +
+                                           GenLabel.LabelExtras(prize, true, true) + "\n\n" +
+                                           prize.DescriptionDetailed;
+                            if (prize.def.useHitPoints)
+                            {
+                                text2 = string.Concat(text2, "\n", prize.HitPoints, " / ", prize.MaxHitPoints);
+                            }
+
+                            TooltipHandler.TipRegion(rect2, text2);
+                        }
+                        
                         /*if (Mouse.IsOver(iconRect))
                         {
                             GUI.color = ITab_Pawn_Gear.HighlightColor;
                             GUI.DrawTexture(iconRect, TexUI.HighlightTex);
                         }*/
                         Widgets.ThingIcon(rect2, prize, 1f, null, false);
+                        if (Widgets.ButtonInvisible(rect2, true))
+                        {
+                            Find.WindowStack.Add(new Dialog_InfoCard(prize));
+                        }
                     }
                 }
 

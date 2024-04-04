@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using ArchoGacha.Settings;
 using Verse;
 
 namespace ArchoGacha.GameComps;
@@ -70,19 +71,19 @@ public class GameComponent_GachaTracker : GameComponent
         var worker = def.Worker;
         return new Banner(
             worker.GeneratePrize(PrizeCategory.Jackpot),
-            GenerateConsolations(worker),
+            GenerateConsolations(worker).ToList(),
             def
         );
     }
 
-    private static List<Thing> GenerateConsolations(PrizeWorker worker)
+    private static IEnumerable<Thing> GenerateConsolations(PrizeWorker worker)
     {
-        return new List<Thing>
+        //TODO: consider moving this to setting?
+        for (int i = 0; i < 3; i++)
         {
-            worker.GeneratePrize(PrizeCategory.Consolation),
-            worker.GeneratePrize(PrizeCategory.Consolation),
-            worker.GeneratePrize(PrizeCategory.Consolation)
-        };
+            var prize = worker.GeneratePrize(PrizeCategory.Consolation);
+            if (prize != null) yield return prize;
+        }
     }
 
     public void PullOnBanner(int silverAmount)

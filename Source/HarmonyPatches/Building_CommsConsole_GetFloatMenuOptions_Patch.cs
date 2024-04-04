@@ -39,6 +39,6 @@ public static class Building_CommsConsole_GetFloatMenuOptions_Patch
             return floatMenuOption;
         }
 
-        return null;
+        // return null;
     }
 }

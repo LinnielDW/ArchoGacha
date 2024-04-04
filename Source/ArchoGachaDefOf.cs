@@ -1,7 +1,7 @@
 using RimWorld;
 using Verse;
 
-namespace ArchoGacha.PrizeWorkers;
+namespace ArchoGacha;
 
 [DefOf]
 public static class ArchoGachaDefOf

@@ -60,6 +60,7 @@
         If that reference does not exist, it will add Krafs Rimworld Ref to the project. If it does exist, Krafs won't be added
         as a reference. This basically means that Krafs is treated as a fallback if Assembly-CSharp is not found -->
     <ItemGroup>
+        <Compile Include="ArchoGachaDefOf.cs" />
         <Compile Include="ArchoGachaMod.cs" />
         <Compile Include="ArchoGachaUtils.cs" />
         <Compile Include="GachaDebug.cs" />
@@ -67,10 +68,11 @@
         <Compile Include="GameComps\GameComponent_GachaTracker.cs" />
         <Compile Include="HarmonyPatches\Building_CommsConsole_GetFloatMenuOptions_Patch.cs" />
         <Compile Include="PrizeGeneratorDef.cs" />
-        <Compile Include="PrizeWorkers\ArchoGachaDefOf.cs" />
         <Compile Include="PrizeWorkers\ArmorPrizeWorker.cs" />
         <Compile Include="PrizeWorkers\PrizeWorker.cs" />
         <Compile Include="PrizeWorkers\QualityWeaponPrizeWorker.cs" />
+        <Compile Include="Settings\ArchoGachaSettings.cs" />
+        <Compile Include="Settings\SettingsUtils.cs" />
         <Compile Include="UI\Dialog_BannerMenu.cs" />
     </ItemGroup>
 

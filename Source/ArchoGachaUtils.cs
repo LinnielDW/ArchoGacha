@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using ArchoGacha.Settings;
 using RimWorld;
 using Verse;
 
@@ -62,7 +63,7 @@ public static class ArchoGachaUtils
         }
 
         return marketValue > ArchoGachaSettings.minConsolationOffset &&
-               marketValue < ArchoGachaSettings.minJackpotOffset -
+               marketValue < ArchoGachaSettings.minJackpotOffset +
                ArchoGachaSettings.maxConsolationOffset;
     }
 }

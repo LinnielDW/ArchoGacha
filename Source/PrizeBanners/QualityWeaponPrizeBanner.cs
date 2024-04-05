@@ -1,15 +1,16 @@
+using System.Collections.Generic;
 using System.Linq;
+using ArchoGacha.GameComps;
+using ArchoGacha.Utils;
 using RimWorld;
 using Verse;
 
-namespace ArchoGacha.PrizeWorkers;
+namespace ArchoGacha.PrizeBanners;
 
-public class ArmorPrizeWorker : PrizeWorker
+public class QualityWeaponPrizeBanner : PrizeBanner
 {
-    protected override ThingCategoryDef FilterCategory =>
-        ThingCategoryDefOf.ApparelArmor;
-
-    public override Thing SelectPrizeDef(PrizeCategory prizeCategory)
+    public override Thing SelectPrizeDef(PrizeCategory prizeCategory,
+        float valueMaxOverride = 0f)
     {
         var req = new ThingSetMakerParams
         {
@@ -21,9 +22,9 @@ public class ArmorPrizeWorker : PrizeWorker
         req.validator = ReqValidator;
 
         var allowedDefs = ThingSetMakerUtility.GetAllowedThingDefs(req);
-        var thingStuffPairs =
+        List<ThingStuffPairWithQuality> thingStuffPairs =
             ArchoGachaUtils.CalculateAllowedThingStuffPairs(allowedDefs,
-                prizeCategory).ToList();
+                prizeCategory, valueMaxOverride).ToList();
 
         return !thingStuffPairs.NullOrEmpty()
             ? thingStuffPairs.RandomElement().MakeThing()
@@ -32,7 +33,15 @@ public class ArmorPrizeWorker : PrizeWorker
 
     public override bool ReqValidator(ThingDef thingDef)
     {
-        return thingDef.IsApparel && !thingDef.destroyOnDrop &&
+        return !thingDef.destroyOnDrop &&
                thingDef.techLevel >= MinTechLevel;
     }
+}
+
+public class RangedWeaponPrizeBanner : QualityWeaponPrizeBanner
+{
+}
+
+public class MeleeWeaponPrizeBanner : QualityWeaponPrizeBanner
+{
 }

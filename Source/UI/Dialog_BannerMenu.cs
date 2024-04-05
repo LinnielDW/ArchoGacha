@@ -8,10 +8,10 @@ namespace ArchoGacha.UI;
 [StaticConstructorOnStartup]
 public class Dialog_BannerMenu : Window
 {
-    private GameComponent_GachaTracker comp;
+    private MapComponentGachaTracker comp;
     private static Vector2 scrollPosition = Vector2.zero;
 
-    public Dialog_BannerMenu(GameComponent_GachaTracker comp) : base()
+    public Dialog_BannerMenu(MapComponentGachaTracker comp) : base()
     {
         this.comp = comp;
         this.doCloseButton = true;

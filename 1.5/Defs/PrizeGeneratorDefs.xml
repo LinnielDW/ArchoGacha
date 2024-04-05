@@ -1,59 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <Defs>
-    <ArchoGacha.PrizeGeneratorDef>
+    <ArchoGacha.PrizeBannerDef>
         <defName>ArchoGacha_Weapon</defName>
-        <label>Weapon Banner</label>
-        <prizeWorkerClass>ArchoGacha.PrizeWorkers.QualityWeaponPrizeWorker</prizeWorkerClass>
+        <label>Weapon PrizeBanner</label>
+        <!-- TODO: add descriptions -->
+        <description>Weapons PrizeBanner</description>
+        <prizeBannerClass>ArchoGacha.PrizeBanners.QualityWeaponPrizeBanner</prizeBannerClass>
+        <spawnCountRange>1~2</spawnCountRange>
+        <thingCategoryDef>Weapons</thingCategoryDef>
+        <minTechLevel>Industrial</minTechLevel>
         <minJackpotMarketValue>2500</minJackpotMarketValue>
         <minConsolationMarketValue>1000</minConsolationMarketValue>
-    </ArchoGacha.PrizeGeneratorDef>
-    <ArchoGacha.PrizeGeneratorDef>
-        <defName>ArchoGacha_Weapon2</defName>
-        <label>Weapon Banner2</label>
-        <prizeWorkerClass>ArchoGacha.PrizeWorkers.QualityWeaponPrizeWorker</prizeWorkerClass>
-        <minJackpotMarketValue>2500</minJackpotMarketValue>
-        <minConsolationMarketValue>1000</minConsolationMarketValue>
-    </ArchoGacha.PrizeGeneratorDef>
-    <ArchoGacha.PrizeGeneratorDef>
-        <defName>ArchoGacha_Weapon3</defName>
-        <label>Weapon Banner3</label>
-        <prizeWorkerClass>ArchoGacha.PrizeWorkers.QualityWeaponPrizeWorker</prizeWorkerClass>
-        <minJackpotMarketValue>2500</minJackpotMarketValue>
-        <minConsolationMarketValue>1000</minConsolationMarketValue>
-    </ArchoGacha.PrizeGeneratorDef>
-    <ArchoGacha.PrizeGeneratorDef>
-        <defName>ArchoGacha_Weapon4</defName>
-        <label>Weapon Banner4</label>
-        <prizeWorkerClass>ArchoGacha.PrizeWorkers.QualityWeaponPrizeWorker</prizeWorkerClass>
-        <minJackpotMarketValue>2500</minJackpotMarketValue>
-        <minConsolationMarketValue>1000</minConsolationMarketValue>
-    </ArchoGacha.PrizeGeneratorDef>
-
-    <ArchoGacha.PrizeGeneratorDef>
+    </ArchoGacha.PrizeBannerDef>
+    <ArchoGacha.PrizeBannerDef>
         <defName>ArchoGacha_WeaponMelee</defName>
-        <label>Melee Weapon Banner</label>
-        <prizeWorkerClass>ArchoGacha.PrizeWorkers.MeleeWeaponPrizeWorker</prizeWorkerClass>
+        <label>Melee Weapon PrizeBanner</label>
+        <prizeBannerClass>ArchoGacha.PrizeBanners.MeleeWeaponPrizeBanner</prizeBannerClass>
+        <spawnCountRange>0~1</spawnCountRange>
+        <thingCategoryDef>Weapons</thingCategoryDef>
+        <minTechLevel>Medieval</minTechLevel>
         <minJackpotMarketValue>2500</minJackpotMarketValue>
         <minConsolationMarketValue>1000</minConsolationMarketValue>
-    </ArchoGacha.PrizeGeneratorDef>
-
-    <ArchoGacha.PrizeGeneratorDef>
+    </ArchoGacha.PrizeBannerDef>
+    <ArchoGacha.PrizeBannerDef>
         <defName>ArchoGacha_WeaponRanged</defName>
-        <label>Ranged Banner</label>
-        <prizeWorkerClass>ArchoGacha.PrizeWorkers.RangedWeaponPrizeWorker</prizeWorkerClass>
+        <label>Ranged PrizeBanner</label>
+        <prizeBannerClass>ArchoGacha.PrizeBanners.RangedWeaponPrizeBanner</prizeBannerClass>
+        <spawnCountRange>0~1</spawnCountRange>
+        <thingCategoryDef>Weapons</thingCategoryDef>
+        <minTechLevel>Industrial</minTechLevel>
         <minJackpotMarketValue>2500</minJackpotMarketValue>
         <minConsolationMarketValue>1000</minConsolationMarketValue>
-    </ArchoGacha.PrizeGeneratorDef>
+    </ArchoGacha.PrizeBannerDef>
 
     <!-- TODO: check numbers -->
-    <ArchoGacha.PrizeGeneratorDef>
+    <ArchoGacha.PrizeBannerDef>
         <defName>ArchoGacha_Armor</defName>
-        <label>Armor Banner</label>
-        <prizeWorkerClass>ArchoGacha.PrizeWorkers.ArmorPrizeWorker</prizeWorkerClass>
+        <label>Armor PrizeBanner</label>
+        <prizeBannerClass>ArchoGacha.PrizeBanners.ArmorPrizeBanner</prizeBannerClass>
+        <spawnCountRange>1~1</spawnCountRange>
+        <thingCategoryDef>Apparel</thingCategoryDef>
+        <minTechLevel>Medieval</minTechLevel>
         <minJackpotMarketValue>2500</minJackpotMarketValue>
         <minConsolationMarketValue>1000</minConsolationMarketValue>
-    </ArchoGacha.PrizeGeneratorDef>
+    </ArchoGacha.PrizeBannerDef>
 
     <!--
     ~1~ TODO: Impl @1@

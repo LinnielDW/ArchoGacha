@@ -4,7 +4,7 @@ using ArchoGacha.Settings;
 using RimWorld;
 using Verse;
 
-namespace ArchoGacha.PrizeWorkers;
+namespace ArchoGacha.Utils;
 
 public static class ArchoGachaUtils
 {
@@ -16,7 +16,7 @@ public static class ArchoGachaUtils
 
     public static IEnumerable<ThingStuffPairWithQuality>
         CalculateAllowedThingStuffPairs(IEnumerable<ThingDef> allowed,
-            PrizeCategory prizeCategory)
+            PrizeCategory prizeCategory, float valueMaxOverride = 0f)
     {
         var qualityGenerator = QualityFromPrizeCat(prizeCategory);
         foreach (var thingDef in allowed)
@@ -30,7 +30,8 @@ public static class ArchoGachaUtils
                     var stuffPair =
                         new ThingStuffPairWithQuality(thingDef, stuff, quality);
 
-                    if (IsValidStuffPair(prizeCategory, stuffPair))
+                    if (IsValidStuffPair(prizeCategory, stuffPair,
+                            valueMaxOverride))
                     {
                         yield return stuffPair;
                     }
@@ -54,7 +55,7 @@ public static class ArchoGachaUtils
     }
 
     private static bool IsValidStuffPair(PrizeCategory prizeCategory,
-        ThingStuffPairWithQuality stuffPair)
+        ThingStuffPairWithQuality stuffPair, float valueMaxOverride = 0f)
     {
         var marketValue = stuffPair.GetStatValue(StatDefOf.MarketValue);
         if (prizeCategory == PrizeCategory.Jackpot)
@@ -62,8 +63,10 @@ public static class ArchoGachaUtils
             return marketValue > ArchoGachaSettings.minJackpotOffset;
         }
 
-        return marketValue > ArchoGachaSettings.minConsolationOffset &&
-               marketValue < ArchoGachaSettings.minJackpotOffset +
-               ArchoGachaSettings.maxConsolationOffset;
+        return (valueMaxOverride == 0f &&
+                marketValue >= ArchoGachaSettings.minConsolationOffset) ||
+               (valueMaxOverride != 0f && marketValue <= valueMaxOverride
+                   // +ArchoGachaSettings.maxConsolationOffset
+               );
     }
 }

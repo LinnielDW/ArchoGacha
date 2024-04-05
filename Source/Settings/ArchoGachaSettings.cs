@@ -9,7 +9,10 @@ public class ArchoGachaSettings : ModSettings
 
     public static float minJackpotOffset = 1500f;
     public static float minConsolationOffset = 750f;
-    public static float maxConsolationOffset = 0f;
+    public static float maxConsolationOffset = 500f;
+
+
+    public static float jackpotChance = 0.005f;
 
     public void DoSettingsWindowContents(Rect inRect)
     {

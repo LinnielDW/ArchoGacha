@@ -2,16 +2,16 @@ using ArchoGacha.GameComps;
 using LudeonTK;
 using Verse;
 
-namespace ArchoGacha.PrizeWorkers;
+namespace ArchoGacha.Debug;
 
 public static class GachaDebug
 {
-    [DebugAction("ArchoGacha", name = "Debug Output Random Banner",
+    [DebugAction("ArchoGacha", name = "Debug Output Random PrizeBanner",
         allowedGameStates = AllowedGameStates.Playing,
         displayPriority = 9999)]
     private static void GenerateABanner()
     {
-        var banner = GameComponent_GachaTracker.Instance.GenerateRandomBanner();
+        var banner = Find.CurrentMap.GetComponent<MapComponentGachaTracker>().GenerateRandomBanner();
         Log.Message(banner.ToString());
     }
 
@@ -20,7 +20,7 @@ public static class GachaDebug
         displayPriority = 9999)]
     private static void GenerateActiveBanners()
     {
-        GameComponent_GachaTracker.Instance.GenerateActiveBanners();
+        Find.CurrentMap.GetComponent<MapComponentGachaTracker>().GenerateActiveBanners();
         // Log.Message(banner.ToString());
     }
 }

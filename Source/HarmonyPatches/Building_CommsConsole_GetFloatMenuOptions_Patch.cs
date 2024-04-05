@@ -15,7 +15,7 @@ public static class Building_CommsConsole_GetFloatMenuOptions_Patch
         IEnumerable<FloatMenuOption> __result, Pawn myPawn,
         Building_CommsConsole __instance)
     {
-        var floatOption = GachaMenuFloatOption();
+        var floatOption = GachaMenuFloatOption(__instance);
         if (floatOption != null)
         {
             var opts = __result.ToList();
@@ -26,7 +26,7 @@ public static class Building_CommsConsole_GetFloatMenuOptions_Patch
         return __result;
     }
 
-    public static FloatMenuOption GachaMenuFloatOption()
+    public static FloatMenuOption GachaMenuFloatOption(Building_CommsConsole __instance)
     {
         // if (condition)
         {
@@ -35,8 +35,7 @@ public static class Building_CommsConsole_GetFloatMenuOptions_Patch
                     delegate
                     {
                         Find.WindowStack.Add(
-                            new Dialog_BannerMenu(GameComponent_GachaTracker
-                                .Instance));
+                            new Dialog_BannerMenu(__instance.Map.GetComponent<MapComponentGachaTracker>()));
                     });
             return floatMenuOption;
         }

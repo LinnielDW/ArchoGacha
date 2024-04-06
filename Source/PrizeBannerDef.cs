@@ -9,7 +9,7 @@ public class PrizeBannerDef : Def
 {
     public Type prizeBannerClass = typeof(PrizeBanner);
     public IntRange spawnCountRange = IntRange.one;
-    public IntRange consolationCountRange = new(3, 4);
+    public IntRange consolationCountRange = new(2, 3);
     public ThingCategoryDef thingCategoryDef = ThingCategoryDefOf.Items;
     public TechLevel minTechLevel = TechLevel.Undefined;
 

@@ -37,11 +37,3 @@ public class QualityWeaponPrizeBanner : PrizeBanner
                thingDef.techLevel >= MinTechLevel;
     }
 }
-
-public class RangedWeaponPrizeBanner : QualityWeaponPrizeBanner
-{
-}
-
-public class MeleeWeaponPrizeBanner : QualityWeaponPrizeBanner
-{
-}

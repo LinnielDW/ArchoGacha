@@ -64,7 +64,7 @@
         <Compile Include="ArchoGachaMod.cs" />
         <Compile Include="Debug\GachaDebug.cs" />
         <Compile Include="GameComps\PrizeBanner.cs" />
-        <Compile Include="GameComps\MapComponent_GachaTracker.cs" />
+        <Compile Include="GameComps\MapComponentGachaTracker.cs" />
         <Compile Include="HarmonyPatches\Building_CommsConsole_GetFloatMenuOptions_Patch.cs" />
         <Compile Include="PrizeBannerDef.cs" />
         <Compile Include="PrizeBanners\ArmorPrizeBanner.cs" />

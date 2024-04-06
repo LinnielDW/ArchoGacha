@@ -15,8 +15,9 @@ public class PrizeBannerDef : Def
     public List<ThingCategoryDef> excludedCategoryDefs = new();
     public TechLevel minTechLevel = TechLevel.Undefined;
 
-    //TODO: change price logic to be if(banner min > settingsMin) use settings min 
     public float minJackpotMarketValue;
-    public float minConsolationMarketValue;
+    
+    //the minimum value something can spawn when the settings.useGlobalConsolationOffset set to true
+    public float minConsolationMarketValue = 100f;
     
 }

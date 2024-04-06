@@ -12,7 +12,7 @@
         </excludedCategoryDefs>
         <minTechLevel>Industrial</minTechLevel>
         <minJackpotMarketValue>2500</minJackpotMarketValue>
-        <minConsolationMarketValue>1000</minConsolationMarketValue>
+<!--        <minConsolationMarketValue>1000</minConsolationMarketValue>-->
     </ArchoGacha.PrizeBannerDef>
     <ArchoGacha.PrizeBannerDef>
         <defName>ArchoGacha_WeaponMelee</defName>
@@ -22,7 +22,7 @@
         <thingCategoryDef>WeaponsMelee</thingCategoryDef>
         <minTechLevel>Medieval</minTechLevel>
         <minJackpotMarketValue>2500</minJackpotMarketValue>
-        <minConsolationMarketValue>1000</minConsolationMarketValue>
+<!--        <minConsolationMarketValue>1000</minConsolationMarketValue>-->
     </ArchoGacha.PrizeBannerDef>
     <ArchoGacha.PrizeBannerDef>
         <defName>ArchoGacha_Weapon</defName>
@@ -35,7 +35,8 @@
         <thingCategoryDef>Weapons</thingCategoryDef>
         <minTechLevel>Industrial</minTechLevel>
         <minJackpotMarketValue>2500</minJackpotMarketValue>
-        <minConsolationMarketValue>1000</minConsolationMarketValue>
+<!--        the minimum value something can spawn when the settings.useGlobalConsolationOffset set to true-->
+<!--        <minConsolationMarketValue>1000</minConsolationMarketValue>-->
     </ArchoGacha.PrizeBannerDef>
 
     <!-- TODO: check numbers -->
@@ -47,7 +48,7 @@
         <thingCategoryDef>ApparelArmor</thingCategoryDef>
         <minTechLevel>Medieval</minTechLevel>
         <minJackpotMarketValue>2500</minJackpotMarketValue>
-        <minConsolationMarketValue>1000</minConsolationMarketValue>
+<!--        <minConsolationMarketValue>1000</minConsolationMarketValue>-->
     </ArchoGacha.PrizeBannerDef>
 
     <!--

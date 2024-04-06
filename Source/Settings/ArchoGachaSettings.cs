@@ -9,7 +9,7 @@ public class ArchoGachaSettings : ModSettings
 
     public float minJackpotOffset = 1500f;
     public bool useGlobalConsolationOffset;
-    public float minConsolationOffset = 750f;
+    public float minConsolationOffset = 250f;
     // public static float maxConsolationOffset = 500f;
 
 
@@ -39,7 +39,7 @@ public class ArchoGachaSettings : ModSettings
         Scribe_Values.Look(ref bannerDurationDays, "ArchoGacha_Label_bannerDurationDays", 3f);
         Scribe_Values.Look(ref minJackpotOffset, "ArchoGacha_Label_minJackpotOffset", 1500f);
         Scribe_Values.Look(ref useGlobalConsolationOffset, "ArchoGacha_Label_useGlobalConsolationOffset");
-        Scribe_Values.Look(ref minConsolationOffset, "ArchoGacha_Label_minConsolationOffset", 750f);
+        Scribe_Values.Look(ref minConsolationOffset, "ArchoGacha_Label_minConsolationOffset", 250f);
         base.ExposeData();
     }
 }

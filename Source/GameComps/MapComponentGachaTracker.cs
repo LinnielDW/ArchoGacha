@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using ArchoGacha.Settings;
 using ArchoGacha.Utils;
 using RimWorld;
 using Verse;
+using static ArchoGacha.ArchoGachaMod;
 
 namespace ArchoGacha.GameComps;
 
@@ -49,7 +49,7 @@ public class MapComponentGachaTracker : MapComponent
         }
 
         bannersEndTick = (int)(Find.TickManager.TicksGame +
-                               60000 * ArchoGachaSettings.bannerDurationDays);
+                               60000 * settings.bannerDurationDays);
 
         /*foreach (var banner in activeBanners)
         {
@@ -94,7 +94,7 @@ public class MapComponentGachaTracker : MapComponent
     {
         //TODO: impl
         var amount = (int)(prizeBanner.jackpot.MarketValue *
-                           ArchoGachaSettings.jackpotChance);
+                           settings.jackpotChance);
         if (TradeUtility.ColonyHasEnoughSilver(map, amount))
         {
             TradeUtility.LaunchSilver(map, amount);

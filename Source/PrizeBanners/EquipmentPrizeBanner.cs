@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using System.Linq;
 using ArchoGacha.GameComps;
 using ArchoGacha.Utils;
@@ -21,7 +20,7 @@ public class EquipmentPrizeBanner : PrizeBanner
 
         var allowedDefs = ThingSetMakerUtility.GetAllowedThingDefs(req);
         var thingStuffPairs =
-            ArchoGachaUtils.CalculateAllowedThingStuffPairs(allowedDefs,
+            ArchoGachaUtils.CalculateAllowedThingStuffPairs(def, allowedDefs,
                 prizeCategory, valueMaxOverride).ToList();
 
         return !thingStuffPairs.NullOrEmpty()

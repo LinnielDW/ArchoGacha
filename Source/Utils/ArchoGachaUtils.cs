@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using ArchoGacha.Settings;
 using RimWorld;
 using Verse;
+using static ArchoGacha.ArchoGachaMod;
 
 namespace ArchoGacha.Utils;
 
@@ -14,8 +14,9 @@ public static class ArchoGachaUtils
                 ? QualityGenerator.Super
                 : QualityGenerator.Reward;
 
+    //TODO: consider moving this to EquipmentPrizeBanner
     public static IEnumerable<ThingStuffPairWithQuality>
-        CalculateAllowedThingStuffPairs(IEnumerable<ThingDef> allowed,
+        CalculateAllowedThingStuffPairs(PrizeBannerDef bannerDef,IEnumerable<ThingDef> allowed,
             PrizeCategory prizeCategory, float valueMaxOverride = 0f)
     {
         var qualityGenerator = QualityFromPrizeCat(prizeCategory);
@@ -30,7 +31,7 @@ public static class ArchoGachaUtils
                     var stuffPair =
                         new ThingStuffPairWithQuality(thingDef, stuff, quality);
 
-                    if (IsValidStuffPair(prizeCategory, stuffPair,
+                    if (IsValidStuffPair(bannerDef, prizeCategory, stuffPair,
                             valueMaxOverride))
                     {
                         yield return stuffPair;
@@ -54,19 +55,18 @@ public static class ArchoGachaUtils
             : QualityCategory.Normal;
     }
 
-    private static bool IsValidStuffPair(PrizeCategory prizeCategory,
+    private static bool IsValidStuffPair(PrizeBannerDef bannerDef, PrizeCategory prizeCategory,
         ThingStuffPairWithQuality stuffPair, float valueMaxOverride = 0f)
     {
         var marketValue = stuffPair.GetStatValue(StatDefOf.MarketValue);
         if (prizeCategory == PrizeCategory.Jackpot)
         {
-            return marketValue > ArchoGachaSettings.minJackpotOffset;
+            return marketValue >= Math.Max(settings.minJackpotOffset, bannerDef.minJackpotMarketValue);
         }
 
-        return (valueMaxOverride == 0f &&
-                marketValue >= ArchoGachaSettings.minConsolationOffset) ||
-               (valueMaxOverride != 0f && marketValue <= valueMaxOverride
-                   // +ArchoGachaSettings.maxConsolationOffset
-               );
+        return (settings.useGlobalConsolationOffset && 
+                marketValue >= Math.Max(settings.minConsolationOffset, bannerDef.minConsolationMarketValue) && 
+                marketValue <= settings.minJackpotOffset) || 
+               (valueMaxOverride != 0f && marketValue <= valueMaxOverride);
     }
 }

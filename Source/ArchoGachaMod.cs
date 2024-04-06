@@ -24,6 +24,6 @@ public class ArchoGachaMod : Mod
     }
     public override string SettingsCategory()
     {
-        return "ArchoGacha";
+        return "ArchoGachaCategory".Translate();
     }
 }

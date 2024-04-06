@@ -6,7 +6,7 @@ using RimWorld;
 using Verse;
 using static ArchoGacha.ArchoGachaMod;
 
-namespace ArchoGacha.GameComps;
+namespace ArchoGacha.MapComponents;
 
 public class MapComponentGachaTracker : MapComponent
 {

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using ArchoGacha.GameComps;
+using ArchoGacha.MapComponents;
 using ArchoGacha.UI;
 using HarmonyLib;
 using RimWorld;

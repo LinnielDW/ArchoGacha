@@ -1,7 +1,7 @@
 using RimWorld;
 using Verse;
 
-namespace ArchoGacha;
+namespace ArchoGacha.Defs;
 
 [DefOf]
 public static class ArchoGachaDefOf

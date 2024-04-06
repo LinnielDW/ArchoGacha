@@ -1,4 +1,4 @@
-﻿using ArchoGacha.GameComps;
+﻿using ArchoGacha.MapComponents;
 using RimWorld;
 using UnityEngine;
 using Verse;

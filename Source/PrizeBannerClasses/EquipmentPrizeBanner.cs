@@ -1,10 +1,9 @@
 using System.Linq;
-using ArchoGacha.GameComps;
 using ArchoGacha.Utils;
 using RimWorld;
 using Verse;
 
-namespace ArchoGacha.PrizeBanners;
+namespace ArchoGacha.PrizeBannerClasses;
 
 public class EquipmentPrizeBanner : PrizeBanner
 {
@@ -14,7 +13,7 @@ public class EquipmentPrizeBanner : PrizeBanner
         var req = new ThingSetMakerParams
         {
             countRange = IntRange.one,
-            filter = PrizeFilterInt,
+            filter = PrizeFilter,
             validator = ReqValidator
         };
 

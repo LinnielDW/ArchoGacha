@@ -4,7 +4,7 @@ using ArchoGacha.Utils;
 using RimWorld;
 using Verse;
 
-namespace ArchoGacha.GameComps;
+namespace ArchoGacha;
 
 public class PrizeBanner : IExposable
 {
@@ -41,7 +41,7 @@ public class PrizeBanner : IExposable
         Scribe_Collections.Look(ref prizes, "prizes", true, LookMode.Deep);
     }
 
-    protected virtual ThingFilter PrizeFilterInt
+    protected virtual ThingFilter PrizeFilter
     {
         get
         {

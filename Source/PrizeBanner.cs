@@ -10,16 +10,17 @@ public class PrizeBanner : IExposable
 {
     public PrizeBannerDef def;
     public Thing jackpot;
-    public List<Thing> prizes;
+    public List<Thing> consolationPrizes;
+    public int pullPrice;
 
     public PrizeBanner()
     {
     }
 
-    public PrizeBanner(PrizeBannerDef def, Thing jackpot, List<Thing> prizes)
+    public PrizeBanner(PrizeBannerDef def, Thing jackpot, List<Thing> consolationPrizes)
     {
         this.jackpot = jackpot;
-        this.prizes = prizes;
+        this.consolationPrizes = consolationPrizes;
         this.def = def;
     }
 
@@ -31,14 +32,14 @@ public class PrizeBanner : IExposable
     public override string ToString()
     {
         return
-            $"{def.LabelCap} {{ jackpot={jackpot}, prizes={string.Join(",", prizes)}, def={def} }}";
+            $"{def.LabelCap} {{ jackpot={jackpot}, consolationPrizes={string.Join(",", consolationPrizes)}, def={def} }}";
     }
 
     public void ExposeData()
     {
         Scribe_Defs.Look(ref def, "def");
         Scribe_Deep.Look(ref jackpot, true, "jackpot");
-        Scribe_Collections.Look(ref prizes, "prizes", true, LookMode.Deep);
+        Scribe_Collections.Look(ref consolationPrizes, "consolationPrizes", true, LookMode.Deep);
     }
 
     protected virtual ThingFilter PrizeFilter
@@ -70,15 +71,16 @@ public class PrizeBanner : IExposable
 
     protected virtual TechLevel MinTechLevel => def.minTechLevel;
 
-    public virtual void GenerateJackpot(PrizeCategory prizeCategory)
+    //TODO: remove prizeCategory arg, the category is presupposed
+    public virtual Thing GenerateJackpot()
     {
-        jackpot = GeneratePrize(prizeCategory);
+        return GeneratePrize(PrizeCategory.Jackpot);
     }
 
-    public virtual Thing GenerateConsolationThing(PrizeCategory prizeCategory,
-        float valueMaxOverride = 0f)
+    //TODO: remove prizeCategory arg, the category is presupposed
+    public virtual Thing GenerateConsolationThing(float valueMaxOverride = 0f)
     {
-        return GeneratePrize(prizeCategory, valueMaxOverride);
+        return GeneratePrize(PrizeCategory.Consolation, valueMaxOverride);
     }
 
     public virtual Thing GeneratePrize(PrizeCategory prizeCategory,
@@ -92,6 +94,11 @@ public class PrizeBanner : IExposable
         }
 
         return prize;
+    }
+
+    public bool CanPullOnBanner(Map map)
+    {
+        return TradeUtility.ColonyHasEnoughSilver(map, pullPrice);
     }
 
     public virtual Thing SelectPrizeDef(PrizeCategory prizeCategory,

@@ -13,7 +13,12 @@ public class ArchoGachaSettings : ModSettings
     // public static float maxConsolationOffset = 500f;
 
 
-    public float jackpotChance = 0.005f;
+    public float jackpotChance = 0.006f;
+    public float pullPriceFactor = 2f;
+    public float consolationChance = 0.2f;
+    
+    //debug settings:
+    public bool debugAlwaysPullable = false;
 
     //TODO: move labels and texts to translations
     public void DoSettingsWindowContents(Rect inRect)

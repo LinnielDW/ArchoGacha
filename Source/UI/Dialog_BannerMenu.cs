@@ -64,7 +64,7 @@ public class Dialog_BannerMenu : Window
                 
                 // y += 28f;
                 
-                if (banner.jackpot.def.DrawMatSingle != null && banner.jackpot.def.DrawMatSingle.mainTexture != null)
+                
                 {
                     var iconRect = new Rect(4f, y, 28f, 28f);
                     
@@ -79,38 +79,49 @@ public class Dialog_BannerMenu : Window
                     // Widgets.DrawBoxSolidWithOutline(iconRect, jackpotPrimaryCol,jackpotSecondaryCol);
                     Widgets.DrawHighlightIfMouseover(rect2);
                     
-                    Text.WordWrap = true;
-                    if (Mouse.IsOver(rect2))
-                    {
-                        string text2 = banner.jackpot.LabelNoParenthesisCap.AsTipTitle() +
-                                       GenLabel.LabelExtras(banner.jackpot, true, true) + "\n\n" +
-                                       banner.jackpot.DescriptionDetailed;
-                        if (banner.jackpot.def.useHitPoints)
+                    if (banner.jackpot != null && banner.jackpot.def.DrawMatSingle != null && banner.jackpot.def.DrawMatSingle.mainTexture != null){
+                        Widgets.ThingIcon(rect2, banner.jackpot, 1f, null, false);
+                        Text.WordWrap = true;
+                        if (Widgets.ButtonInvisible(rect2, true))
                         {
-                            text2 = string.Concat(new object[]
-                                { text2, "\n", banner.jackpot.HitPoints, " / ", banner.jackpot.MaxHitPoints });
+                            Find.WindowStack.Add(new Dialog_InfoCard(banner.jackpot));
                         }
 
-                        TooltipHandler.TipRegion(rect2, text2);
-                    }
+                        if (Mouse.IsOver(rect2))
+                        {
+                            string text2 = banner.jackpot.LabelNoParenthesisCap.AsTipTitle() +
+                                           GenLabel.LabelExtras(banner.jackpot, true, true) + "\n\n" +
+                                           banner.jackpot.DescriptionDetailed;
+                            if (banner.jackpot.def.useHitPoints)
+                            {
+                                text2 = string.Concat(new object[]
+                                    { text2, "\n", banner.jackpot.HitPoints, " / ", banner.jackpot.MaxHitPoints });
+                            }
 
-                    /*if (Mouse.IsOver(iconRect))
+                            TooltipHandler.TipRegion(rect2, text2);
+                        }
+                    }
+                    else
                     {
-                        GUI.color = ITab_Pawn_Gear.HighlightColor;
-                        GUI.DrawTexture(iconRect, TexUI.HighlightTex);
-                    }*/
-                    Widgets.ThingIcon(rect2, banner.jackpot, 1f, null, false);
-                    if (Widgets.ButtonInvisible(rect2, true))
-                    {
-                        Find.WindowStack.Add(new Dialog_InfoCard(banner.jackpot));
+                        Text.Anchor = TextAnchor.MiddleCenter;
+                        GUI.color = Color.black;
+                        GUI.DrawTexture(rect2.ContractedBy(4f), questionMark);
+                        GUI.color = Color.white;
+                        Text.Anchor = TextAnchor.UpperLeft;
+                        if (Mouse.IsOver(rect2))
+                        {
+                            string text2 = "ArchoGacha_ReplacedByRandom".Translate().AsTipTitle() +
+                                           "\n\n" +
+                                           "The jackpot has already been claimed. This reward will be a random item of comparable value to other rewards in the same tier.";
+
+                            TooltipHandler.TipRegion(rect2, text2);
+                        }
                     }
                 }
 
-                for (var index = 0; index < banner.prizes.Count; index++)
+                for (var index = 0; index < banner.consolationPrizes.Count; index++)
                 {
-                    var prize = banner.prizes[index];
-                    if (prize.def.DrawMatSingle != null &&
-                        prize.def.DrawMatSingle.mainTexture != null)
+                    
                     {
                         var iconRect = new Rect(4f + (4f + 28f) * (index + 1), y, 28f, 28f);
                         // GUI.color = Color.white;
@@ -121,23 +132,43 @@ public class Dialog_BannerMenu : Window
                         GUI.DrawTexture(rect2, Gradient);
                         // Widgets.DrawBoxSolidWithOutline(iconRect, jackpotSecondaryCol,jackpotPrimaryCol);
                         Widgets.DrawHighlightIfMouseover(rect2);
-                        if (Mouse.IsOver(rect2))
+                        var prize = banner.consolationPrizes[index];
+                        if (prize.def.DrawMatSingle != null &&
+                            prize.def.DrawMatSingle.mainTexture != null)
                         {
-                            string text2 = prize.LabelNoParenthesisCap.AsTipTitle() +
-                                           GenLabel.LabelExtras(prize, true, true) + "\n\n" +
-                                           prize.DescriptionDetailed;
-                            if (prize.def.useHitPoints)
+                            Widgets.ThingIcon(rect2, prize, 1f, null, false);
+                            if (Widgets.ButtonInvisible(rect2, true))
                             {
-                                text2 = string.Concat(text2, "\n", prize.HitPoints, " / ", prize.MaxHitPoints);
+                                Find.WindowStack.Add(new Dialog_InfoCard(prize));
                             }
+                            if (Mouse.IsOver(rect2))
+                            {
+                                string text2 = prize.LabelNoParenthesisCap.AsTipTitle() +
+                                               GenLabel.LabelExtras(prize, true, true) + "\n\n" +
+                                               prize.DescriptionDetailed;
+                                if (prize.def.useHitPoints)
+                                {
+                                    text2 = string.Concat(text2, "\n", prize.HitPoints, " / ", prize.MaxHitPoints);
+                                }
 
-                            TooltipHandler.TipRegion(rect2, text2);
+                                TooltipHandler.TipRegion(rect2, text2);
+                            }
                         }
-                        
-                        Widgets.ThingIcon(rect2, prize, 1f, null, false);
-                        if (Widgets.ButtonInvisible(rect2, true))
+                        else
                         {
-                            Find.WindowStack.Add(new Dialog_InfoCard(prize));
+                            Text.Anchor = TextAnchor.MiddleCenter;
+                            GUI.color = Color.black;
+                            GUI.DrawTexture(rect2.ContractedBy(4f), questionMark);
+                            GUI.color = Color.white;
+                            Text.Anchor = TextAnchor.UpperLeft;
+                            if (Mouse.IsOver(rect2))
+                            {
+                                string text2 = "ArchoGacha_ReplacedByRandom".Translate().AsTipTitle() +
+                                               "\n\n" +
+                                               "A random item of comparable value to other rewards in the same tier.";
+
+                                TooltipHandler.TipRegion(rect2, text2);
+                            }
                         }
                     }
                 }
@@ -153,6 +184,7 @@ public class Dialog_BannerMenu : Window
         listingStandard.End();
     }
 
+    private static readonly Texture2D questionMark = ContentFinder<Texture2D>.Get("UI/Overlays/QuestionMark", true);
     private static readonly Texture2D Gradient = ContentFinder<Texture2D>.Get("UI/Widgets/ArchoGachaGradient", true);
     private static readonly Color jackpotPrimaryCol = new Color(0.765F, 0.616F, 0.447F);
     private static readonly Color jackpotSecondaryCol = new Color(0.612F, 0.357F, 0.294F);

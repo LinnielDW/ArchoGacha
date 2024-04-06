@@ -3,9 +3,9 @@
 <Defs>
     <ArchoGacha.PrizeBannerDef>
         <defName>ArchoGacha_WeaponRanged</defName>
-        <label>Ranged PrizeBanner</label>
+        <label>Ranged Weapon Banner</label>
         <prizeBannerClass>ArchoGacha.PrizeBanners.EquipmentPrizeBanner</prizeBannerClass>
-        <spawnCountRange>0~1</spawnCountRange>
+        <spawnCountRange>1~1</spawnCountRange>
         <thingCategoryDef>WeaponsRanged</thingCategoryDef>
         <excludedCategoryDefs>
             <li>Grenades</li>
@@ -16,7 +16,7 @@
     </ArchoGacha.PrizeBannerDef>
     <ArchoGacha.PrizeBannerDef>
         <defName>ArchoGacha_WeaponMelee</defName>
-        <label>Melee Weapon PrizeBanner</label>
+        <label>Melee Weapon Banner</label>
         <prizeBannerClass>ArchoGacha.PrizeBanners.EquipmentPrizeBanner</prizeBannerClass>
         <spawnCountRange>0~1</spawnCountRange>
         <thingCategoryDef>WeaponsMelee</thingCategoryDef>
@@ -26,11 +26,11 @@
     </ArchoGacha.PrizeBannerDef>
     <ArchoGacha.PrizeBannerDef>
         <defName>ArchoGacha_Weapon</defName>
-        <label>Weapon PrizeBanner</label>
+        <label>Any Weapon Banner</label>
         <!-- TODO: add descriptions -->
         <description>Weapons PrizeBanner</description>
         <prizeBannerClass>ArchoGacha.PrizeBanners.EquipmentPrizeBanner</prizeBannerClass>
-        <spawnCountRange>1~2</spawnCountRange>
+        <spawnCountRange>0~1</spawnCountRange>
         <consolationCountRange>3~3</consolationCountRange>
         <thingCategoryDef>Weapons</thingCategoryDef>
         <minTechLevel>Industrial</minTechLevel>
@@ -41,7 +41,7 @@
     <!-- TODO: check numbers -->
     <ArchoGacha.PrizeBannerDef>
         <defName>ArchoGacha_Armor</defName>
-        <label>Armor PrizeBanner</label>
+        <label>Armor Banner</label>
         <prizeBannerClass>ArchoGacha.PrizeBanners.EquipmentPrizeBanner</prizeBannerClass>
         <spawnCountRange>1~1</spawnCountRange>
         <thingCategoryDef>ApparelArmor</thingCategoryDef>

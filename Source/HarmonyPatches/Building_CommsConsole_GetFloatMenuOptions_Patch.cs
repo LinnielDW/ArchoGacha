@@ -8,6 +8,7 @@ using Verse;
 
 namespace ArchoGacha.HarmonyPatches;
 
+//TODO: move this to a comp
 [HarmonyPatch(typeof(Building_CommsConsole), "GetFloatMenuOptions")]
 public static class Building_CommsConsole_GetFloatMenuOptions_Patch
 {

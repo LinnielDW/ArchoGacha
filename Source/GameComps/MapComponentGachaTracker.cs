@@ -51,6 +51,13 @@ public class MapComponentGachaTracker : MapComponent
         bannersEndTick = (int)(Find.TickManager.TicksGame +
                                60000 * settings.bannerDurationDays);
 
+        //TODO: add translation strings
+        Find.LetterStack.ReceiveLetter(
+            "ArchoGacha_BannersRefreshedLabel".Translate(),
+            "ArchoGacha_BannersRefreshed".Translate(),
+            LetterDefOf.PositiveEvent);
+
+        //TODO: add debug info setting
         /*foreach (var banner in activeBanners)
         {
             Log.Message(banner.ToString());

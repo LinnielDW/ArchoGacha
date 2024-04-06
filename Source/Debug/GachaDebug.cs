@@ -6,7 +6,7 @@ namespace ArchoGacha.Debug;
 
 public static class GachaDebug
 {
-    [DebugAction("ArchoGacha", name = "Debug Output Random PrizeBanner",
+    [DebugAction("ArchoGacha", name = "Debug Log Random PrizeBanner",
         allowedGameStates = AllowedGameStates.Playing,
         displayPriority = 9999)]
     private static void GenerateABanner()
@@ -15,12 +15,11 @@ public static class GachaDebug
         Log.Message(banner.ToString());
     }
 
-    [DebugAction("ArchoGacha", name = "RegenerateActiveBanners",
+    [DebugAction("ArchoGacha", name = "Regenerate Active Banners",
         allowedGameStates = AllowedGameStates.Playing,
         displayPriority = 9999)]
     private static void GenerateActiveBanners()
     {
         Find.CurrentMap.GetComponent<MapComponentGachaTracker>().GenerateActiveBanners();
-        // Log.Message(banner.ToString());
     }
 }

@@ -2,14 +2,14 @@
 
 <Defs>
     <ArchoGacha.PrizeBannerDef>
-        <defName>ArchoGacha_Weapon</defName>
-        <label>Weapon PrizeBanner</label>
-        <!-- TODO: add descriptions -->
-        <description>Weapons PrizeBanner</description>
-        <prizeBannerClass>ArchoGacha.PrizeBanners.QualityWeaponPrizeBanner</prizeBannerClass>
-        <spawnCountRange>1~2</spawnCountRange>
-        <consolationCountRange>3~3</consolationCountRange>
-        <thingCategoryDef>Weapons</thingCategoryDef>
+        <defName>ArchoGacha_WeaponRanged</defName>
+        <label>Ranged PrizeBanner</label>
+        <prizeBannerClass>ArchoGacha.PrizeBanners.EquipmentPrizeBanner</prizeBannerClass>
+        <spawnCountRange>0~1</spawnCountRange>
+        <thingCategoryDef>WeaponsRanged</thingCategoryDef>
+        <excludedCategoryDefs>
+            <li>Grenades</li>
+        </excludedCategoryDefs>
         <minTechLevel>Industrial</minTechLevel>
         <minJackpotMarketValue>2500</minJackpotMarketValue>
         <minConsolationMarketValue>1000</minConsolationMarketValue>
@@ -17,18 +17,21 @@
     <ArchoGacha.PrizeBannerDef>
         <defName>ArchoGacha_WeaponMelee</defName>
         <label>Melee Weapon PrizeBanner</label>
-        <prizeBannerClass>ArchoGacha.PrizeBanners.QualityWeaponPrizeBanner</prizeBannerClass>
+        <prizeBannerClass>ArchoGacha.PrizeBanners.EquipmentPrizeBanner</prizeBannerClass>
         <spawnCountRange>0~1</spawnCountRange>
-        <thingCategoryDef>Weapons</thingCategoryDef>
+        <thingCategoryDef>WeaponsMelee</thingCategoryDef>
         <minTechLevel>Medieval</minTechLevel>
         <minJackpotMarketValue>2500</minJackpotMarketValue>
         <minConsolationMarketValue>1000</minConsolationMarketValue>
     </ArchoGacha.PrizeBannerDef>
     <ArchoGacha.PrizeBannerDef>
-        <defName>ArchoGacha_WeaponRanged</defName>
-        <label>Ranged PrizeBanner</label>
-        <prizeBannerClass>ArchoGacha.PrizeBanners.QualityWeaponPrizeBanner</prizeBannerClass>
-        <spawnCountRange>0~1</spawnCountRange>
+        <defName>ArchoGacha_Weapon</defName>
+        <label>Weapon PrizeBanner</label>
+        <!-- TODO: add descriptions -->
+        <description>Weapons PrizeBanner</description>
+        <prizeBannerClass>ArchoGacha.PrizeBanners.EquipmentPrizeBanner</prizeBannerClass>
+        <spawnCountRange>1~2</spawnCountRange>
+        <consolationCountRange>3~3</consolationCountRange>
         <thingCategoryDef>Weapons</thingCategoryDef>
         <minTechLevel>Industrial</minTechLevel>
         <minJackpotMarketValue>2500</minJackpotMarketValue>
@@ -39,9 +42,9 @@
     <ArchoGacha.PrizeBannerDef>
         <defName>ArchoGacha_Armor</defName>
         <label>Armor PrizeBanner</label>
-        <prizeBannerClass>ArchoGacha.PrizeBanners.ArmorPrizeBanner</prizeBannerClass>
+        <prizeBannerClass>ArchoGacha.PrizeBanners.EquipmentPrizeBanner</prizeBannerClass>
         <spawnCountRange>1~1</spawnCountRange>
-        <thingCategoryDef>Apparel</thingCategoryDef>
+        <thingCategoryDef>ApparelArmor</thingCategoryDef>
         <minTechLevel>Medieval</minTechLevel>
         <minJackpotMarketValue>2500</minJackpotMarketValue>
         <minConsolationMarketValue>1000</minConsolationMarketValue>

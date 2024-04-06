@@ -41,7 +41,32 @@ public class PrizeBanner : IExposable
         Scribe_Collections.Look(ref prizes, "prizes", true, LookMode.Deep);
     }
 
-    protected virtual ThingCategoryDef FilterCategory => def.thingCategoryDef;
+    protected virtual ThingFilter PrizeFilterInt
+    {
+        get
+        {
+            if (filterInt == null || filterInt.AllowedDefCount == 0)
+            {
+                filterInt = new ThingFilter();
+
+                filterInt.SetAllow(def.thingCategoryDef, true);
+                foreach (var exclusion in def.excludedCategoryDefs)
+                {
+                    filterInt.SetAllow(exclusion, false);
+                }
+
+
+                if (filterInt.AllowedDefCount == 0)
+                {
+                    Log.Error($"{def.LabelCap} could not find anything matching its defined filter properties");
+                }
+            }
+
+            return filterInt;
+        }
+    }
+
+    private ThingFilter filterInt;
 
     protected virtual TechLevel MinTechLevel => def.minTechLevel;
 
@@ -75,8 +100,9 @@ public class PrizeBanner : IExposable
         throw new NotImplementedException();
     }
 
-    public virtual bool ReqValidator(ThingDef thingDef)
+    protected virtual bool ReqValidator(ThingDef thingDef)
     {
-        throw new NotImplementedException();
+        return !thingDef.destroyOnDrop &&
+               thingDef.techLevel >= MinTechLevel;
     }
 }

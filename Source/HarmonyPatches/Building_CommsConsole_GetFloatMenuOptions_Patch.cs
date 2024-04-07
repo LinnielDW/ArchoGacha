@@ -31,12 +31,13 @@ public static class Building_CommsConsole_GetFloatMenuOptions_Patch
     {
         // if (condition)
         {
+            //TODO: translation
             var floatMenuOption =
                 new FloatMenuOption("GachaMenu".Translate(),
                     delegate
                     {
                         Find.WindowStack.Add(
-                            new Dialog_BannerMenu(__instance.Map.GetComponent<MapComponentGachaTracker>()));
+                            new Dialog_BannerMenu(Current.Game.GetComponent<MapComponentGachaTracker>()));
                     });
             return floatMenuOption;
         }

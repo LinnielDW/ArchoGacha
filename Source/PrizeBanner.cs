@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using ArchoGacha.Utils;
 using RimWorld;
 using Verse;
+using static ArchoGacha.ArchoGachaMod;
 
 namespace ArchoGacha;
 
@@ -11,7 +12,22 @@ public class PrizeBanner : IExposable
     public PrizeBannerDef def;
     public Thing jackpot;
     public List<Thing> consolationPrizes;
-    public int pullPrice;
+    public float pullPrice;
+
+    private float pityThresholdInt = -1f;
+    
+    public float PityThreshold
+    {
+        get
+        {
+            if (pityThresholdInt < 0)
+            {
+                pityThresholdInt = pullPrice / (settings.jackpotChance * settings.pullPriceFactor);
+            }
+
+            return pityThresholdInt;
+        }
+    }
 
     public PrizeBanner()
     {
@@ -40,6 +56,7 @@ public class PrizeBanner : IExposable
         Scribe_Defs.Look(ref def, "def");
         Scribe_Deep.Look(ref jackpot, true, "jackpot");
         Scribe_Collections.Look(ref consolationPrizes, "consolationPrizes", true, LookMode.Deep);
+        Scribe_Values.Look(ref pullPrice, "pullPrice");
     }
 
     protected virtual ThingFilter PrizeFilter
@@ -96,9 +113,14 @@ public class PrizeBanner : IExposable
         return prize;
     }
 
-    public bool CanPullOnBanner(Map map)
+    public bool CanPull(Map map)
     {
-        return TradeUtility.ColonyHasEnoughSilver(map, pullPrice);
+        return TradeUtility.ColonyHasEnoughSilver(map, (int)pullPrice);
+    }    
+    
+    public bool CanPullTen(Map map)
+    {
+        return TradeUtility.ColonyHasEnoughSilver(map, (int)(pullPrice * 10));
     }
 
     public virtual Thing SelectPrizeDef(PrizeCategory prizeCategory,
@@ -112,4 +134,11 @@ public class PrizeBanner : IExposable
         return !thingDef.destroyOnDrop &&
                thingDef.techLevel >= MinTechLevel;
     }
+
+    //TODO: impl
+    // public Thing CreateJunk()
+    // {
+    //     
+    //     return ThingMaker.MakeThing();
+    // }
 }

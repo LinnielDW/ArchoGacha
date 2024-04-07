@@ -95,6 +95,12 @@
       <Content Include="TODO.md" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="..\Common\Languages\">
+        <Link>Common\Languages</Link>
+      </Folder>
+    </ItemGroup>
+
 
 
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
@@ -102,7 +108,7 @@
         <Copy SourceFiles="@(CommonFiles)" DestinationFolder="$(ModLocation)\%(RecursiveDir)" SkipUnchangedFiles="true" />
         <Copy SourceFiles="@(AboutFiles)" DestinationFolder="$(ModLocation)\About\%(RecursiveDir)"
               SkipUnchangedFiles="true" />
-        <Copy SourceFiles="@(version1_5)" DestinationFolder="$(ModLocation)\1.5\%(RecursiveDir)"
+        <Copy SourceFiles="@(version1_5)" DestinationFolder="$(ModLocation)\1.5\%(RecursiveDir)" Retries="3"
               SkipUnchangedFiles="true" />
         <Copy SourceFiles="..\LoadFolders.xml" DestinationFolder="$(ModLocation)" SkipUnchangedFiles="true" />
     </Target>

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using ArchoGacha.UI;
 using ArchoGacha.Utils;
 using RimWorld;
 using Verse;
@@ -8,11 +9,12 @@ using static ArchoGacha.ArchoGachaMod;
 
 namespace ArchoGacha.MapComponents;
 
-public class MapComponentGachaTracker : MapComponent
+public class MapComponentGachaTracker : GameComponent
 {
     public List<PrizeBanner> activeBanners = new();
-    public int pitySilverReserve;
-    public int bannersEndTick;
+    public float pitySilverReserve;
+    private int bannersEndTick;
+    private bool fiftyFifty;
 
     public override void ExposeData()
     {
@@ -21,11 +23,12 @@ public class MapComponentGachaTracker : MapComponent
             LookMode.Deep);
         Scribe_Values.Look(ref pitySilverReserve, "pitySilverReserve");
         Scribe_Values.Look(ref bannersEndTick, "bannersEndTick");
+        Scribe_Values.Look(ref fiftyFifty, "fiftyFifty");
     }
 
-    public override void MapComponentTick()
+    public override void GameComponentTick()
     {
-        base.MapComponentTick();
+        base.GameComponentTick();
         if (GenTicks.IsTickInterval(1000))
         {
             if (activeBanners.NullOrEmpty() ||
@@ -40,6 +43,7 @@ public class MapComponentGachaTracker : MapComponent
     public void GenerateActiveBanners()
     {
         activeBanners.Clear();
+        Dialog_BannerMenu.selectedBanner = null;
         foreach (var b in DefDatabase<PrizeBannerDef>.AllDefsListForReading)
         {
             for (var i = 0; i < b.spawnCountRange.RandomInRange; i++)
@@ -70,16 +74,14 @@ public class MapComponentGachaTracker : MapComponent
             .AllDefsListForReading.RandomElement());
     }
 
-    public PrizeBanner GenerateBannerFromDef(PrizeBannerDef def)
+    private PrizeBanner GenerateBannerFromDef(PrizeBannerDef def)
     {
         var prizeBanner =
             (PrizeBanner)Activator.CreateInstance(def.prizeBannerClass);
 
         prizeBanner.def = def;
         prizeBanner.jackpot = prizeBanner.GenerateJackpot();
-        prizeBanner.consolationPrizes = GenerateConsolations(prizeBanner,
-                //TODO: turn multiplier into a setting
-                prizeBanner.jackpot.MarketValue * settings.consolationChance)
+        prizeBanner.consolationPrizes = GenerateConsolations(prizeBanner, prizeBanner.jackpot.MarketValue * settings.consolationChance)
             .ToList();
         prizeBanner.pullPrice = (int)(prizeBanner.jackpot.MarketValue *
                                       settings.jackpotChance *
@@ -88,7 +90,7 @@ public class MapComponentGachaTracker : MapComponent
         return prizeBanner;
     }
 
-    public static IEnumerable<Thing> GenerateConsolations(
+    private static IEnumerable<Thing> GenerateConsolations(
         PrizeBanner prizeBanner,
         float valueMaxOverride = 0f)
     {
@@ -103,44 +105,87 @@ public class MapComponentGachaTracker : MapComponent
 
     public void PullOnBanner(PrizeBanner prizeBanner)
     {
-        if (prizeBanner.CanPullOnBanner(map) ||
-            Prefs.DevMode && settings.debugAlwaysPullable)
+        if (CanPullOnBanner(prizeBanner))
         {
-            TradeUtility.LaunchSilver(map, prizeBanner.pullPrice);
-            var prize = DecidePrize(prizeBanner);
-            DeliverPrize(prize);
-            //TODO: increment pity
+            DoPull(prizeBanner);
         }
+        //TODO: push notification/letter on banner result
+    }
+
+    public void PullTenOnBanner(PrizeBanner prizeBanner)
+    {
+        if (CanPullTenOnBanner(prizeBanner))
+        {
+            for (int i = 0; i < 10; i++)
+            {
+                DoPull(prizeBanner);
+            }
+            //TODO: push notification/letter on banner result
+        }
+    }
+
+    private void DoPull(PrizeBanner prizeBanner)
+    {
+        TradeUtility.LaunchSilver(Find.CurrentMap, (int)prizeBanner.pullPrice);
+        pitySilverReserve += prizeBanner.pullPrice;
+        // pityCount++;
+        var prize = DecidePrize(prizeBanner);
+        DeliverPrize(prize);
+    }
+
+    public bool CanPullOnBanner(PrizeBanner prizeBanner)
+    {
+        return prizeBanner.CanPull(Find.CurrentMap) ||
+               Prefs.DevMode && settings.debugAlwaysPullable;
+    }    
+    public bool CanPullTenOnBanner(PrizeBanner prizeBanner)
+    {
+        return prizeBanner.CanPullTen(Find.CurrentMap) ||
+               Prefs.DevMode && settings.debugAlwaysPullable;
     }
 
     public void DeliverPrize(Thing prize)
     {
-        TradeUtility.SpawnDropPod(DropCellFinder.TradeDropSpot(map), map,
+        TradeUtility.SpawnDropPod(DropCellFinder.TradeDropSpot(Find.CurrentMap), Find.CurrentMap,
             prize);
     }
 
     public Thing DecidePrize(PrizeBanner prizeBanner)
     {
-        //todo: check for pity activation
         var randOutcome = Rand.Value;
         if (Prefs.DevMode)
         {
             Log.Message($"Rand outcome: {randOutcome}");
         }
-        return randOutcome switch
+
+        switch (randOutcome)
         {
-            _ when randOutcome < settings.jackpotChance => SelectJackpot(
-                prizeBanner),
-            _ when randOutcome < settings.consolationChance =>
-                SelectConsolation(
-                    prizeBanner),
-            _ => ThingMaker.MakeThing(ThingDefOf.WoodLog)
-        };
+            case var _ when randOutcome < settings.jackpotChance || pitySilverReserve >= prizeBanner.PityThreshold:
+            {
+                // pityCount = 0;
+                var jackpot = SelectJackpot(prizeBanner);
+                pitySilverReserve = Math.Max(0, pitySilverReserve - (int)(jackpot.MarketValue * 2f));
+                return jackpot;
+            }
+            case var _ when randOutcome < settings.consolationChance:
+            {
+                // pityCount = 0;
+                return SelectConsolation(prizeBanner);
+            }
+            default:
+            {
+                //TODO: move to banner
+                return ThingMaker.MakeThing(ThingDefOf.WoodLog);
+            }
+        }
     }
 
+    //public int pityCount = 0;
+
+    
     public Thing SelectJackpot(PrizeBanner prizeBanner)
     {
-        if (Rand.Bool && prizeBanner.jackpot != null)
+        if ((Rand.Bool || fiftyFifty) && prizeBanner.jackpot != null)
         {
             if (Prefs.DevMode)
             {
@@ -154,13 +199,15 @@ public class MapComponentGachaTracker : MapComponent
         
         if (Prefs.DevMode)
         {
-            Log.Message("Lost 50/50. Generating new item:");
+            Log.Message("Lost 50/50. Generating new jackpot item:");
         }
-        return prizeBanner.GeneratePrize(PrizeCategory.Jackpot,
-            //TODO: move this to a var in the prizebanner
-            prizeBanner.pullPrice /(
-                settings.jackpotChance *
-                settings.pullPriceFactor));
+
+        if(prizeBanner.jackpot != null)
+        {
+            fiftyFifty = true;
+        }
+
+        return prizeBanner.GeneratePrize(PrizeCategory.Jackpot, prizeBanner.PityThreshold);
     }
 
     public Thing SelectConsolation(PrizeBanner prizeBanner)
@@ -182,13 +229,13 @@ public class MapComponentGachaTracker : MapComponent
             Log.Message("Won 50/50, deploying new item:");
         }
         return prizeBanner.GeneratePrize(PrizeCategory.Consolation,
-            //TODO: move this to a var in the prizebanner
-            prizeBanner.pullPrice / (
-                settings.jackpotChance *
-                settings.pullPriceFactor) * settings.consolationChance);
+            prizeBanner.PityThreshold * settings.consolationChance);
     }
 
-    public MapComponentGachaTracker(Map map) : base(map)
+    public MapComponentGachaTracker(): base()
+    {
+    }
+    public MapComponentGachaTracker(Game game)
     {
     }
 }

@@ -15,7 +15,7 @@ public class MapComponentGachaTracker : GameComponent
 {
     public List<PrizeBanner> activeBanners = new();
     public float pitySilverReserve;
-    private int bannersEndTick;
+    public int bannersEndTick;
     public bool lostFiftyFifty;
 
     public override void ExposeData()
@@ -85,9 +85,9 @@ public class MapComponentGachaTracker : GameComponent
         prizeBanner.jackpot = prizeBanner.GenerateJackpot();
         prizeBanner.consolationPrizes = GenerateConsolations(prizeBanner, prizeBanner.jackpot.MarketValue * settings.consolationChance)
             .ToList();
-        prizeBanner.pullPrice = (int)(prizeBanner.jackpot.MarketValue *
-                                      settings.jackpotChance *
-                                      settings.pullPriceFactor);
+        prizeBanner.pullPrice = prizeBanner.jackpot.MarketValue *
+                                settings.jackpotChance *
+                                settings.pullPriceFactor;
 
         return prizeBanner;
     }
@@ -169,7 +169,7 @@ public class MapComponentGachaTracker : GameComponent
             {
                 // pityCount = 0;
                 var jackpot = SelectJackpot(prizeBanner);
-                pitySilverReserve = Math.Max(0, pitySilverReserve - (int)(jackpot.MarketValue * 2f));
+                pitySilverReserve = Math.Max(0, pitySilverReserve - (int)(jackpot.MarketValue * settings.pullPriceFactor));
                 Find.LetterStack.ReceiveLetter("ArchoGacha_JackpotLetterLabel".Translate(), "ArchoGacha_JackpotLetter".Translate(jackpot.LabelCap),ArchoGachaDefOf.ArchoGacha_Jackpot, jackpot, hyperlinkThingDefs: new List<ThingDef>() {jackpot.def});
                 return jackpot;
             }
@@ -193,7 +193,7 @@ public class MapComponentGachaTracker : GameComponent
     
     public Thing SelectJackpot(PrizeBanner prizeBanner)
     {
-        if ((Rand.Bool || lostFiftyFifty) && prizeBanner.jackpot != null)
+        if ((Rand.Chance(settings.getFeatured) || lostFiftyFifty) && prizeBanner.jackpot != null)
         {
             if (Prefs.DevMode)
             {
@@ -217,7 +217,7 @@ public class MapComponentGachaTracker : GameComponent
 
     public Thing SelectConsolation(PrizeBanner prizeBanner)
     {
-        if (Rand.Bool && !prizeBanner.consolationPrizes.NullOrEmpty())
+        if (Rand.Chance(settings.getConsolationFeatured) && !prizeBanner.consolationPrizes.NullOrEmpty())
         {
             if (Prefs.DevMode)
             {

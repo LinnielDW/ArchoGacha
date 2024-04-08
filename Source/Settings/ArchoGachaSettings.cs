@@ -20,6 +20,9 @@ public class ArchoGachaSettings : ModSettings
     //debug settings:
     public bool debugAlwaysPullable = false;
 
+    public float getFeatured = 0.5f;
+    public float getConsolationFeatured = 0.75f;
+
     //TODO: move labels and texts to translations
     public void DoSettingsWindowContents(Rect inRect)
     {

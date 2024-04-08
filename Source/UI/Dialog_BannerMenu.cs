@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using ArchoGacha.MapComponents;
 using HarmonyLib;
 using RimWorld;
 using UnityEngine;
 using Verse;
+using static ArchoGacha.ArchoGachaMod;
 
 namespace ArchoGacha.UI;
 
@@ -24,6 +26,7 @@ public class Dialog_BannerMenu : Window
         draggable = true;
         doCloseX = true;
         preventCameraMotion = false;
+        resizeable = true;
     }
 
     public override Vector2 InitialSize
@@ -63,7 +66,7 @@ public class Dialog_BannerMenu : Window
         GUI.color = Color.gray;
         listingStandard.Indent();
         listingStandard.Label("ArchoGacha_Pity".Translate(comp.pitySilverReserve));
-        listingStandard.Gap(2f);
+        // listingStandard.Gap(2f);
         listingStandard.Outdent();
         Text.Font = GameFont.Small;
         GUI.color = Color.white;
@@ -125,55 +128,77 @@ public class Dialog_BannerMenu : Window
         Widgets.EndScrollView();
     }
 
+    public override void PreOpen()
+    {
+        base.PreOpen();
+        selectedBanner = null;
+    }
+
     private void DrawBannerDetailsPanel(Rect inRect,
         Listing_Standard listingStandard, float xOffset)
     {
         listingStandard.NewColumn();
-        Rect rghtPanel = new Rect(xOffset, listingStandard.CurHeight,2f * inRect.width / 3f,inRect.height - listingStandard.CurHeight);
+        Rect rghtPanel = new Rect(xOffset + 12f, listingStandard.CurHeight,
+            2f * inRect.width / 3f - 12f,inRect.height - listingStandard.CurHeight);
         listingStandard.Begin(rghtPanel);
         Rect rghtInner = new Rect(0f, 0f, rghtPanel.width, rghtPanel.height);
         if (selectedBanner != null)
         {
             Text.Font = GameFont.Medium;
-            listingStandard.Label(selectedBanner.def.LabelCap);
+            var bannerTooltip = new StringBuilder().AppendLine($"Probability Breakdown:");
+            bannerTooltip.AppendLine($"- The base chance to obtain an ultra rare reward is {settings.jackpotChance.ToStringPercent("0.#")}.");
+            bannerTooltip.AppendLine($"     You are guaranteed to obtain an ultra rare reward should your pity reserve exceed {(int)selectedBanner.PityThreshold}.");
+            bannerTooltip.AppendLine($"- The base chance to obtain a rare reward is {settings.jackpotChance.ToStringPercent("0.#")}.");
+            bannerTooltip.AppendLine($"\nBoosted Rate:");
+            bannerTooltip.AppendLine($"- The first time an ultra rare reward is obtained, there is a {settings.getFeatured.ToStringPercent("0.#")} chance to obtain the featured reward.");
+            bannerTooltip.AppendLine($"     If the ultra rare reward you obtain is not the featured reward, then the next ultra rare reward you obtain is guaranteed to be the featured ultra rare reward.");
+            bannerTooltip.AppendLine($"- When a rare reward is obtained, there is a {settings.getConsolationFeatured.ToStringPercent("0.#")} chance to obtain a featured rare reward.");
+            bannerTooltip.AppendLine($"- Featured rewards can only be obtained once per banner.");
+            bannerTooltip.AppendLine($"- Pity reserves and feature guarantees are shared between banners and carry over between banner refreshes.");
+            
+            
+            var bannerNameRect = listingStandard.Label(selectedBanner.def.LabelCap);
+
+            Text.Font = GameFont.Tiny;
+            GUI.color = Color.gray;
+            listingStandard.Indent();
+            var subtitleRect = listingStandard.Label("ArchoGacha_TimeRemaining".Translate((comp.bannersEndTick - Find.TickManager.TicksGame).ToStringTicksToPeriodVerbose()).ToString());
+            listingStandard.Outdent();
             Text.Font = GameFont.Small;
-            listingStandard.Gap(4f);
+            GUI.color = Color.white;
+            
+            var titleRect = new Rect(0f, bannerNameRect.y, bannerNameRect.width,
+                bannerNameRect.height + subtitleRect.height);
+            Widgets.DrawHighlightIfMouseover(titleRect);
+            TooltipHandler.TipRegion(titleRect,bannerTooltip.ToString().Trim());
+            // listingStandard.Label(selectedBanner.def.description);
 
             #region Draw Prizes
-            var jackpotPrizeRect = new Rect(4f, listingStandard.CurHeight, 42f, 42f);
+            listingStandard.LabelDouble("ArchoGacha_JackpotPrizes".Translate(settings.getFeatured.ToStringPercent("0.#")), 
+                "ArchoGacha_JackpotPrizes".Translate(settings.getConsolationFeatured.ToStringPercent("0.#")));
+            
+            var jackpotPrizeRect = new Rect(0, listingStandard.CurHeight, 42f, 42f);
             DrawJackpot(jackpotPrizeRect, selectedBanner.jackpot, 0, 0);
-            var offset = 1;
-            if (!comp.lostFiftyFifty && selectedBanner.jackpot != null)
-            {
-                Rect iconRect = new Rect(jackpotPrizeRect){ x = jackpotPrizeRect.xMax + 4 };
-                DrawJackpot(iconRect, null, 0, 0);
-                offset += 1;
-            }
-
+            
             for (var index = 0; index < selectedBanner.consolationPrizes.Count; index++)
             {
-                var consPrizeRect = new Rect(4f + 46f * (index + offset), listingStandard.CurHeight, 42f, 42f);
+                var consPrizeRect = new Rect(listingStandard.ColumnWidth / 2 + 46f * index, listingStandard.CurHeight, 42f, 42f);
                 DrawConsolation(consPrizeRect, selectedBanner.consolationPrizes[index], 0, 0);
             }
-
-            var randConsPrizeRect = new Rect(4f + 46f * (selectedBanner.consolationPrizes.Count + offset), listingStandard.CurHeight, 42f, 42f);
-            DrawConsolation(randConsPrizeRect, null, 0, 0);
-            #endregion
-                
+            
             listingStandard.Gap(42f);
-            listingStandard.Gap(6f);
+            #endregion
 
-            //TODO: put explanation of chances here
-            listingStandard.Label(
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-            );
+            listingStandard.Gap(4f);
+            Widgets.DrawLineHorizontal(0, listingStandard.CurHeight , listingStandard.ColumnWidth, Color.gray);
+            listingStandard.Gap(4f);
 
             #region Pull buttons
             var pullRect = new Rect(0f, rghtInner.yMax - 32f, rghtInner.width / 2f - 4f, 32f);
             var pullTenRect = new Rect(pullRect.width + 4f, pullRect.y, rghtInner.width / 2f - 4f, 32f);
             if (comp.CanPullOnBanner(selectedBanner))
             {
-                if (Widgets.ButtonText(pullRect,$"Pull ({selectedBanner.pullPrice} silver)"))
+                if (Widgets.ButtonText(pullRect,$"Pull ({(int)selectedBanner.pullPrice} silver)"))
                 {
                     if (selectedBanner != null)
                     {
@@ -202,13 +227,13 @@ public class Dialog_BannerMenu : Window
                 Widgets.DrawBox(pullRect, 2);
                 GUI.color = Color.white;
                 Text.Anchor = TextAnchor.MiddleCenter;
-                Widgets.Label(pullRect, $"Insufficient silver ({selectedBanner.pullPrice} silver)");
+                Widgets.Label(pullRect, $"Insufficient silver ({(int)selectedBanner.pullPrice} silver)");
                 Text.Anchor = TextAnchor.UpperLeft;
             }
                 
             if (comp.CanPullTenOnBanner(selectedBanner))
             {
-                if (Widgets.ButtonText(pullTenRect,$"Pull x10 ({selectedBanner.pullPrice * 10} silver)"))
+                if (Widgets.ButtonText(pullTenRect,$"Pull x10 ({(int)(selectedBanner.pullPrice * 10)} silver)"))
                 {
                     if (selectedBanner != null)
                     {
@@ -222,7 +247,7 @@ public class Dialog_BannerMenu : Window
                 Widgets.DrawBox(pullTenRect, 2);
                 GUI.color = Color.white;
                 Text.Anchor = TextAnchor.MiddleCenter;
-                Widgets.Label(pullTenRect, $"Insufficient silver ({selectedBanner.pullPrice * 10} silver)");
+                Widgets.Label(pullTenRect, $"Insufficient silver ({(int)(selectedBanner.pullPrice * 10)} silver)");
                 Text.Anchor = TextAnchor.UpperLeft;
             }
             #endregion
@@ -273,12 +298,24 @@ public class Dialog_BannerMenu : Window
         }
         else
         {
-            Text.Font = GameFont.Medium;
-            listingStandard.Label("ArchoGacha_PleaseSelectBanner".Translate());
             Text.Font = GameFont.Small;
-                
-            listingStandard.Gap(4f);
-            listingStandard.Label( "ArchoGacha_PleaseSelectBanner".Translate());
+            listingStandard.Label("ArchoGacha_PleaseSelectBanner".Translate());
+            listingStandard.Gap(8f);
+
+            var tooltip =
+                new StringBuilder().AppendLine($"Probability Breakdown:");
+            tooltip.AppendLine($"- The base chance to obtain an ultra rare reward is {settings.jackpotChance.ToStringPercent("0.#")}.");
+            tooltip.AppendLine($"     You are guaranteed to obtain an ultra rare reward should your pity reserve exceed the market value of the featured ultra rare reward.");
+            tooltip.AppendLine($"- The base chance to obtain a rare reward is {settings.jackpotChance.ToStringPercent("0.#")}.");
+            tooltip.AppendLine($"\nBoosted Rate:");
+            tooltip.AppendLine($"- The first time an ultra rare reward is obtained, there is a {settings.getFeatured.ToStringPercent("0.#")} chance to obtain the featured reward.");
+            tooltip.AppendLine($"     If the ultra rare reward you obtain is not the featured reward, then the next ultra rare reward you obtain is guaranteed to be the featured ultra rare reward.");
+            tooltip.AppendLine($"- When a rare reward is obtained, there is a {settings.getConsolationFeatured.ToStringPercent("0.#")} chance to obtain a featured rare reward.");
+            tooltip.AppendLine($"- Featured rewards can only be obtained once per banner.");
+            tooltip.AppendLine($"- Pity reserves and feature guarantees are shared between banners and carry over between banner refreshes.");
+            
+            listingStandard.Label(tooltip.ToString().Trim().TruncateHeight(rghtInner.width, rghtInner.height - listingStandard.CurHeight));
+            // TooltipHandler.TipRegion(rghtInner, tooltip.ToString().Trim());
         }
 
         listingStandard.End();

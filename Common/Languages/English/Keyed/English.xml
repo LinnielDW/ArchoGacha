@@ -3,4 +3,10 @@
     <ArchoGacha_GachaBanners>Banners</ArchoGacha_GachaBanners>
     <ArchoGacha_Pity>Pity reserve: {0} silver</ArchoGacha_Pity>
     <ArchoGacha_PityCount>Pity count: {0}</ArchoGacha_PityCount>
+    <ArchoGacha_JackpotPrizes>Featured reward ({0}):</ArchoGacha_JackpotPrizes>
+    <ArchoGacha_PleaseSelectBanner>Please select a banner from the list on the left.</ArchoGacha_PleaseSelectBanner>
+    
+    <ArchoGacha_TimeRemaining>{0} remaining</ArchoGacha_TimeRemaining>
+    
+    
 </LanguageData>

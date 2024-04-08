@@ -13,8 +13,8 @@ public class ArchoGachaSettings : ModSettings
     // public static float maxConsolationOffset = 500f;
 
 
-    public float jackpotChance = 0.006f;
-    public float pullPriceFactor = 2f;
+    public float jackpotChance = 0.016f;
+    public float pullPriceFactor = 1.75f;
     public float consolationChance = 0.2f;
     
     //debug settings:

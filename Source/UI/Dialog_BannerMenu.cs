@@ -33,8 +33,8 @@ public class Dialog_BannerMenu : Window
     {
         get
         {
-            float xSize = 800;
-            float ySize = 380;
+            float xSize = 730;
+            float ySize = 370;
             return new Vector2(xSize, ySize);
         }
     }
@@ -174,28 +174,43 @@ public class Dialog_BannerMenu : Window
             // listingStandard.Label(selectedBanner.def.description);
 
             #region Draw Prizes
-            listingStandard.LabelDouble("ArchoGacha_JackpotPrizes".Translate(settings.getFeatured.ToStringPercent("0.#")), 
-                "ArchoGacha_JackpotPrizes".Translate(settings.getConsolationFeatured.ToStringPercent("0.#")));
+
+            // listingStandard.Gap(16f);
+            Text.Font = GameFont.Medium;
+            listingStandard.Label("ArchoGacha_JackpotPrizes".Translate(settings.getFeatured.ToStringPercent("0.#")));
+            Text.Font = GameFont.Small;
+            Widgets.DrawLineHorizontal(0, listingStandard.CurHeight , listingStandard.ColumnWidth, Color.gray);
+            listingStandard.Gap(8f);
             
             var jackpotPrizeRect = new Rect(0, listingStandard.CurHeight, 42f, 42f);
             DrawJackpot(jackpotPrizeRect, selectedBanner.jackpot, 0, 0);
+            listingStandard.Gap(42f);
+            listingStandard.Gap(16f);
+            
+            
+            
+            Text.Font = GameFont.Medium;
+            listingStandard.Label("ArchoGacha_ConsolationPrizes".Translate(settings.getConsolationFeatured.ToStringPercent("0.#")));
+            Text.Font = GameFont.Small;
+            Widgets.DrawLineHorizontal(0, listingStandard.CurHeight , listingStandard.ColumnWidth, Color.gray);
+            listingStandard.Gap(8f);
             
             for (var index = 0; index < selectedBanner.consolationPrizes.Count; index++)
             {
-                var consPrizeRect = new Rect(listingStandard.ColumnWidth / 2 + 46f * index, listingStandard.CurHeight, 42f, 42f);
+                var consPrizeRect = new Rect(/*listingStandard.ColumnWidth / 2*/ + 46f * index, listingStandard.CurHeight, 42f, 42f);
                 DrawConsolation(consPrizeRect, selectedBanner.consolationPrizes[index], 0, 0);
             }
             
             listingStandard.Gap(42f);
             #endregion
 
-            listingStandard.Gap(4f);
-            Widgets.DrawLineHorizontal(0, listingStandard.CurHeight , listingStandard.ColumnWidth, Color.gray);
-            listingStandard.Gap(4f);
+            // listingStandard.Gap(4f);
+            // Widgets.DrawLineHorizontal(0, listingStandard.CurHeight , listingStandard.ColumnWidth, Color.gray);
+            // listingStandard.Gap(4f);
 
             #region Pull buttons
-            var pullRect = new Rect(0f, rghtInner.yMax - 32f, rghtInner.width / 2f - 4f, 32f);
-            var pullTenRect = new Rect(pullRect.width + 4f, pullRect.y, rghtInner.width / 2f - 4f, 32f);
+            var pullRect = new Rect(0f, rghtInner.yMax - 42f, rghtInner.width / 2f - 4f, 42f);
+            var pullTenRect = new Rect(pullRect.width + 4f, pullRect.y, rghtInner.width / 2f - 4f, 42f);
             if (comp.CanPullOnBanner(selectedBanner))
             {
                 if (Widgets.ButtonText(pullRect,$"Pull ({(int)selectedBanner.pullPrice} silver)"))

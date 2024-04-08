@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using ArchoGacha.Defs;
 using ArchoGacha.UI;
 using ArchoGacha.Utils;
 using RimWorld;
+using UnityEngine;
 using Verse;
 using static ArchoGacha.ArchoGachaMod;
 
@@ -14,7 +16,7 @@ public class MapComponentGachaTracker : GameComponent
     public List<PrizeBanner> activeBanners = new();
     public float pitySilverReserve;
     private int bannersEndTick;
-    private bool fiftyFifty;
+    public bool lostFiftyFifty;
 
     public override void ExposeData()
     {
@@ -23,7 +25,7 @@ public class MapComponentGachaTracker : GameComponent
             LookMode.Deep);
         Scribe_Values.Look(ref pitySilverReserve, "pitySilverReserve");
         Scribe_Values.Look(ref bannersEndTick, "bannersEndTick");
-        Scribe_Values.Look(ref fiftyFifty, "fiftyFifty");
+        Scribe_Values.Look(ref lostFiftyFifty, "lostFiftyFifty");
     }
 
     public override void GameComponentTick()
@@ -59,7 +61,7 @@ public class MapComponentGachaTracker : GameComponent
         Find.LetterStack.ReceiveLetter(
             "ArchoGacha_BannersRefreshedLabel".Translate(),
             "ArchoGacha_BannersRefreshed".Translate(),
-            LetterDefOf.PositiveEvent);
+            LetterDefOf.NeutralEvent);
 
         //TODO: add debug info setting
         /*foreach (var banner in activeBanners)
@@ -130,6 +132,9 @@ public class MapComponentGachaTracker : GameComponent
         pitySilverReserve += prizeBanner.pullPrice;
         // pityCount++;
         var prize = DecidePrize(prizeBanner);
+        
+        Dialog_BannerMenu.AddPulled(prize);
+
         DeliverPrize(prize);
     }
 
@@ -155,7 +160,7 @@ public class MapComponentGachaTracker : GameComponent
         var randOutcome = Rand.Value;
         if (Prefs.DevMode)
         {
-            Log.Message($"Rand outcome: {randOutcome}");
+            // Log.Message($"Rand outcome: {randOutcome}");
         }
 
         switch (randOutcome)
@@ -165,12 +170,15 @@ public class MapComponentGachaTracker : GameComponent
                 // pityCount = 0;
                 var jackpot = SelectJackpot(prizeBanner);
                 pitySilverReserve = Math.Max(0, pitySilverReserve - (int)(jackpot.MarketValue * 2f));
+                Find.LetterStack.ReceiveLetter("ArchoGacha_JackpotLetterLabel".Translate(), "ArchoGacha_JackpotLetter".Translate(jackpot.LabelCap),ArchoGachaDefOf.ArchoGacha_Jackpot, jackpot, hyperlinkThingDefs: new List<ThingDef>() {jackpot.def});
                 return jackpot;
             }
             case var _ when randOutcome < settings.consolationChance:
             {
                 // pityCount = 0;
-                return SelectConsolation(prizeBanner);
+                var consolation = SelectConsolation(prizeBanner);
+                Messages.Message("ArchoGacha_Consolation".Translate(consolation.LabelShort),consolation, MessageTypeDefOf.PositiveEvent);
+                return consolation;
             }
             default:
             {
@@ -185,15 +193,16 @@ public class MapComponentGachaTracker : GameComponent
     
     public Thing SelectJackpot(PrizeBanner prizeBanner)
     {
-        if ((Rand.Bool || fiftyFifty) && prizeBanner.jackpot != null)
+        if ((Rand.Bool || lostFiftyFifty) && prizeBanner.jackpot != null)
         {
             if (Prefs.DevMode)
             {
-                Log.Message("Won 50/50, deploying new item:");
+                Log.Message("Won 50/50, deploying jackpot item:");
             }
 
             var prize = prizeBanner.jackpot;
             prizeBanner.jackpot = null;
+            lostFiftyFifty = false;
             return prize;
         }
         
@@ -202,11 +211,7 @@ public class MapComponentGachaTracker : GameComponent
             Log.Message("Lost 50/50. Generating new jackpot item:");
         }
 
-        if(prizeBanner.jackpot != null)
-        {
-            fiftyFifty = true;
-        }
-
+        lostFiftyFifty = true;
         return prizeBanner.GeneratePrize(PrizeCategory.Jackpot, prizeBanner.PityThreshold);
     }
 
@@ -216,7 +221,7 @@ public class MapComponentGachaTracker : GameComponent
         {
             if (Prefs.DevMode)
             {
-                Log.Message("Won 50/50, deploying new item:");
+                // Log.Message("Won 50/50, deploying new item:");
             }
 
             var prize = prizeBanner.consolationPrizes.RandomElement();
@@ -226,7 +231,7 @@ public class MapComponentGachaTracker : GameComponent
         
         if (Prefs.DevMode)
         {
-            Log.Message("Won 50/50, deploying new item:");
+            // Log.Message("Won 50/50, deploying new item:");
         }
         return prizeBanner.GeneratePrize(PrizeCategory.Consolation,
             prizeBanner.PityThreshold * settings.consolationChance);

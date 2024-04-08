@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using ArchoGacha.MapComponents;
+using HarmonyLib;
 using RimWorld;
 using UnityEngine;
 using Verse;
@@ -65,18 +67,27 @@ public class Dialog_BannerMenu : Window
             // listingStandard.ColumnWidth = viewRect.width - 16f;
             listingStandard.Begin(scrollRect);
 
-            var y = 0f;
+            // var y = 0f;
 
             foreach (var banner in comp.activeBanners)
             {
-                //TODO: finish
-                //TODO: move 56 to variable
-                Rect rect = new Rect(0f, y, scrollRect.width, 42f);
-                Rect labelRect = new Rect(rect.x+42f+4f, rect.y, rect.width, 42f);
-                Widgets.DrawHighlightIfMouseover(labelRect);
-                if (Widgets.ButtonInvisible(labelRect))
+                Rect bannerRect = new Rect(0f, listingStandard.CurHeight, scrollRect.width, 42f);
+                
+                
+                var jackpotPrizeRect = new Rect(0f, listingStandard.CurHeight, 42f, 42f);
+                DrawJackpot(jackpotPrizeRect, banner.jackpot, 0, 0);
+                
+                Rect labelHoverRect = new Rect(jackpotPrizeRect.xMax+2, bannerRect.y, bannerRect.width - jackpotPrizeRect.xMax+2, 42f);
+                
+                Text.Anchor = TextAnchor.MiddleLeft;
+                Rect labelRect = new Rect(labelHoverRect.position.x + 4, labelHoverRect.position.y, labelHoverRect.size.x - 4, labelHoverRect.size.y);
+                Widgets.Label(labelRect, banner.def.LabelCap.Truncate(labelRect.width));
+                Text.Anchor = TextAnchor.UpperLeft;
+                Widgets.DrawHighlightIfMouseover(labelHoverRect);
+                if (Widgets.ButtonInvisible(labelHoverRect))
                 {
                     selectedBanner = banner;
+                    pulledThings.Clear();
                     /*if (selectedBanner != null)
                     {
                         rectCarousel.Clear();
@@ -94,14 +105,7 @@ public class Dialog_BannerMenu : Window
                         rectCarousel.Shuffle();
                     }*/
                 }
-                
-                Text.Anchor = TextAnchor.MiddleLeft;
-                Widgets.Label(labelRect, banner.def.LabelCap.Truncate(labelRect.width));
-                Text.Anchor = TextAnchor.UpperLeft;
-                var jackpotPrizeRect = new Rect(0f, y, 42f, 42f);
-                DrawJackpot(jackpotPrizeRect, banner.jackpot, 0, 0);
-                
-                y += 48f;
+                listingStandard.Gap(48f);
                 /*
                  
                 DrawJackpot(jackpotPrizeRect, banner.jackpot, 0, 0);
@@ -118,8 +122,9 @@ public class Dialog_BannerMenu : Window
 
             listingStandard.End();
             Widgets.EndScrollView();
-            
-            
+
+
+            listingStandard.NewColumn();
             Rect rghtPanel = new Rect(viewRect.width, listingStandard.CurHeight,2f * inRect.width / 3f,inRect.height - listingStandard.CurHeight);
             listingStandard.Begin(rghtPanel);
             Rect rghtInner = new Rect(0f, 0f, rghtPanel.width, rghtPanel.height);
@@ -134,13 +139,23 @@ public class Dialog_BannerMenu : Window
                 
                 var jackpotPrizeRect = new Rect(4f, listingStandard.CurHeight, 42f, 42f);
                 DrawJackpot(jackpotPrizeRect, selectedBanner.jackpot, 0, 0);
+                var offset = 1;
+                if (!comp.lostFiftyFifty && selectedBanner.jackpot != null)
+                {
+                    Rect iconRect = new Rect(jackpotPrizeRect){ x = jackpotPrizeRect.xMax + 4 };
+                    DrawJackpot(iconRect, null, 0, 0);
+                    offset += 1;
+                }
+
                 for (var index = 0; index < selectedBanner.consolationPrizes.Count; index++)
                 {
-                    
-                    var consPrizeRect = new Rect(4f + (4f + 42f) * (index + 1), listingStandard.CurHeight, 42f, 42f);
+                    var consPrizeRect = new Rect(4f + 46f * (index + offset), listingStandard.CurHeight, 42f, 42f);
                     DrawConsolation(consPrizeRect, selectedBanner.consolationPrizes[index], 0, 0);
                 }
 
+                var randConsPrizeRect = new Rect(4f + 46f * (selectedBanner.consolationPrizes.Count + offset), listingStandard.CurHeight, 42f, 42f);
+                DrawConsolation(randConsPrizeRect, null, 0, 0);
+                
                 listingStandard.Gap(42f);
                 listingStandard.Gap(4f);
                 // listingStandard.CurHeight += 42;
@@ -260,8 +275,8 @@ public class Dialog_BannerMenu : Window
     {
         prizeRect.x += x;
         prizeRect.y += y;
+        Widgets.DrawBoxSolid(prizeRect, prizeSecondaryCol);
         Rect iconRect = prizeRect.ContractedBy(1f);
-        Widgets.DrawBoxSolid(iconRect, prizeSecondaryCol);
         GUI.color = prizePrimaryCol;
         GUI.DrawTexture(iconRect, Gradient);
         Widgets.DrawHighlightIfMouseover(iconRect);
@@ -273,7 +288,7 @@ public class Dialog_BannerMenu : Window
         {
             Text.Anchor = TextAnchor.MiddleCenter;
             GUI.color = Color.black;
-            GUI.DrawTexture(iconRect.ContractedBy(4f), questionMark);
+            GUI.DrawTexture(prizeRect.ContractedBy(5f), questionMark);
             GUI.color = Color.white;
             Text.Anchor = TextAnchor.UpperLeft;
             if (Mouse.IsOver(iconRect))
@@ -322,8 +337,8 @@ public class Dialog_BannerMenu : Window
     {
         prizeRect.x += xOffset;
         prizeRect.y += yOffset;
+        Widgets.DrawBoxSolid(prizeRect, jackpotSecondaryCol);
         Rect iconRect = prizeRect.ContractedBy(1f);
-        Widgets.DrawBoxSolid(iconRect, jackpotSecondaryCol);
         GUI.color = jackpotPrimaryCol;
         GUI.DrawTexture(iconRect, Gradient);
         Widgets.DrawHighlightIfMouseover(iconRect);
@@ -336,14 +351,14 @@ public class Dialog_BannerMenu : Window
         {
             Text.Anchor = TextAnchor.MiddleCenter;
             GUI.color = Color.black;
-            GUI.DrawTexture(iconRect.ContractedBy(4f), questionMark);
+            GUI.DrawTexture(prizeRect.ContractedBy(5f), questionMark);
             GUI.color = Color.white;
             Text.Anchor = TextAnchor.UpperLeft;
             if (Mouse.IsOver(iconRect))
             {
                 string tooltip = "ArchoGacha_ReplacedByRandom".Translate().AsTipTitle() +
                                  "\n\n" +
-                                 "The jackpot has already been claimed. This reward will be a random item of comparable value to other rewards in the same tier.";
+                                 "This reward will be a random item of comparable value to other rewards in the same tier.";
 
                 TooltipHandler.TipRegion(iconRect, tooltip);
             }
@@ -371,6 +386,18 @@ public class Dialog_BannerMenu : Window
 
             TooltipHandler.TipRegion(iconRect, tooltip);
         }
+    }
+
+    public static List<Thing> pulledThings = new();
+
+    public static void AddPulled(Thing t)
+    {
+        if (pulledThings.Count >= 10)
+        {
+            pulledThings.RemoveAt(0);
+        }
+
+        pulledThings.Add(t);
     }
 
     public static PrizeBanner selectedBanner;

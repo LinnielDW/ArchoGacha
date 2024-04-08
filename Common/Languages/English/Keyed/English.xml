@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
     <ArchoGacha_GachaBanners>Banners</ArchoGacha_GachaBanners>
-    <ArchoGacha_Pity>Pity reserve: {0}</ArchoGacha_Pity>
+    <ArchoGacha_Pity>Pity reserve: {0} silver</ArchoGacha_Pity>
     <ArchoGacha_PityCount>Pity count: {0}</ArchoGacha_PityCount>
 </LanguageData>

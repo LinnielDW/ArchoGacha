@@ -103,7 +103,7 @@ public class PrizeBanner : IExposable
         if (prize == null)
         {
             Log.Warning(
-                $"{def.LabelCap} attempted to generate a prize but could not! Consider tweaking the minimum prize thresholds to a lower value");
+                $"ArchoGacha {def.LabelCap} attempted to generate a prize but could not! Skipping...");
         }
 
         return prize;

@@ -92,7 +92,8 @@ public class GameComponent_GachaTracker : GameComponent
 
         prizeBanner.def = def;
         prizeBanner.jackpot = prizeBanner.GenerateJackpot();
-        prizeBanner.pullPrice = prizeBanner.jackpot.MarketValue *
+        prizeBanner.pullPrice = prizeBanner.jackpot.MarketValue * 
+                                prizeBanner.def.valueMultiplier *
                                 settings.jackpotChance *
                                 settings.pullPriceFactor;
 
@@ -187,7 +188,7 @@ public class GameComponent_GachaTracker : GameComponent
             {
                 // pityCount = 0;
                 var jackpot = SelectJackpot(prizeBanner);
-                pitySilverReserve = Math.Max(0, pitySilverReserve - (int)(jackpot.MarketValue * settings.pullPriceFactor));
+                pitySilverReserve = Math.Max(0, pitySilverReserve - (int)(jackpot.MarketValue * prizeBanner.def.valueMultiplier * settings.pullPriceFactor));
                 Find.LetterStack.ReceiveLetter("ArchoGacha_JackpotLetterLabel".Translate(), "ArchoGacha_JackpotLetter".Translate(jackpot.LabelCap),ArchoGachaDefOf.ArchoGacha_Jackpot, jackpot, hyperlinkThingDefs: new List<ThingDef>() {jackpot.def});
                 return jackpot;
             }

@@ -100,8 +100,7 @@ public abstract class PrizeBanner : IExposable
         var prize = SelectPrizeDef(prizeCategory, valueMaxOverride, excludeJackpotDef);
         if (prize == null)
         {
-            Log.Warning(
-                $"ArchoGacha {def.LabelCap} attempted to generate a prize but could not! Skipping...");
+            // Log.Warning($"ArchoGacha {def.LabelCap} attempted to generate a prize but could not! Skipping...");
         }
 
         return prize;

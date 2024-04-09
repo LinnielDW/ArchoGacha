@@ -51,10 +51,11 @@ public static class ArchoGachaUtils
             : QualityCategory.Normal;
     }
 
-    public static bool IsValidStuffPair(PrizeBannerDef bannerDef, PrizeCategory prizeCategory,
+    public static bool IsValidStuffPair(PrizeBannerDef bannerDef,
+        PrizeCategory prizeCategory,
         ThingStuffPairWithQuality stuffPair, float valueMaxOverride = 0f)
     {
-        var marketValue = stuffPair.GetStatValue(StatDefOf.MarketValue);
+        var marketValue = stuffPair.GetStatValue(StatDefOf.MarketValue) * bannerDef.valueMultiplier;
         switch (prizeCategory)
         {
             case PrizeCategory.Jackpot:

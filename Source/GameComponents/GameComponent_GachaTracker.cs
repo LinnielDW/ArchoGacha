@@ -48,7 +48,6 @@ public class GameComponent_GachaTracker : GameComponent
             {
                 GenerateActiveBanners();
             }
-            //TODO: implement cleanup and handling pity (if needed), etc
         }
     }
 
@@ -203,7 +202,10 @@ public class GameComponent_GachaTracker : GameComponent
                 var trashFiltered = trash
                     .Where(t => t.BaseMarketValue <= prizeBanner.pullPrice)
                     .ToList();
-                return ThingMaker.MakeThing(trashFiltered.NullOrEmpty() ? ThingDefOf.WoodLog : trashFiltered.RandomElement());
+                var trashDef = trashFiltered.NullOrEmpty()
+                    ? ThingDefOf.WoodLog
+                    : trashFiltered.RandomElement();
+                return ThingMaker.MakeThing(trashDef, trashDef.defaultStuff);
             }
         }
     }

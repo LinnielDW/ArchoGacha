@@ -3,7 +3,7 @@ using ArchoGacha.Utils;
 
 namespace ArchoGacha;
 
-public class PrizeBanner : IExposable
+public abstract class PrizeBanner : IExposable
 {
     public PrizeBannerDef def;
     public Thing jackpot;
@@ -84,13 +84,11 @@ public class PrizeBanner : IExposable
 
     protected virtual TechLevel MinTechLevel => def.minTechLevel;
 
-    //TODO: remove prizeCategory arg, the category is presupposed
     public virtual Thing GenerateJackpot()
     {
         return GeneratePrize(PrizeCategory.Jackpot);
     }
 
-    //TODO: remove prizeCategory arg, the category is presupposed
     public virtual Thing GenerateConsolationThing(float valueMaxOverride = 0f)
     {
         return GeneratePrize(PrizeCategory.Consolation, valueMaxOverride);
@@ -119,11 +117,8 @@ public class PrizeBanner : IExposable
         return TradeUtility.ColonyHasEnoughSilver(map, (int)(pullPrice * 10));
     }
 
-    public virtual Thing SelectPrizeDef(PrizeCategory prizeCategory,
-        float valueMaxOverride = 0F, bool excludeJackpotDef = false)
-    {
-        throw new NotImplementedException();
-    }
+    protected abstract Thing SelectPrizeDef(PrizeCategory prizeCategory,
+        float valueMaxOverride = 0F, bool excludeJackpotDef = false);
 
     protected virtual bool ReqValidator(ThingDef thingDef)
     {

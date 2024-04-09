@@ -5,7 +5,7 @@ namespace ArchoGacha.PrizeBannerClasses;
 
 public class EquipmentPrizeBanner : PrizeBanner
 {
-    public override Thing SelectPrizeDef(PrizeCategory prizeCategory,
+    protected override Thing SelectPrizeDef(PrizeCategory prizeCategory,
         float valueMaxOverride = 0f, bool excludeJackpotDef = false)
     {
         var req = new ThingSetMakerParams

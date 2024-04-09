@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using ArchoGacha.MapComponents;
+using ArchoGacha.GameComponents;
 using HarmonyLib;
 using UnityEngine;
 
@@ -10,12 +10,12 @@ namespace ArchoGacha.UI;
 [StaticConstructorOnStartup]
 public class Dialog_BannerMenu : Window
 {
-    private MapComponentGachaTracker comp;
+    private GameComponent_GachaTracker comp;
     
     private static Vector2 scrollPosition = Vector2.zero;
     public static PrizeBanner selectedBanner;
 
-    public Dialog_BannerMenu(MapComponentGachaTracker comp) : base()
+    public Dialog_BannerMenu(GameComponent_GachaTracker comp) : base()
     {
         this.comp = comp;
         doCloseButton = false;

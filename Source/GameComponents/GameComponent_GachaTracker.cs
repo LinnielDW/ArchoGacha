@@ -1,13 +1,11 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using ArchoGacha.Defs;
 using ArchoGacha.UI;
 using ArchoGacha.Utils;
-using UnityEngine;
 
-namespace ArchoGacha.MapComponents;
+namespace ArchoGacha.GameComponents;
 
-public class MapComponentGachaTracker : GameComponent
+public class GameComponent_GachaTracker : GameComponent
 {
     public List<PrizeBanner> activeBanners = new();
     public float pitySilverReserve;
@@ -244,10 +242,10 @@ public class MapComponentGachaTracker : GameComponent
             prizeBanner.PityThreshold * settings.consolationChance);
     }
 
-    public MapComponentGachaTracker(): base()
+    public GameComponent_GachaTracker(): base()
     {
     }
-    public MapComponentGachaTracker(Game game)
+    public GameComponent_GachaTracker(Game game)
     {
     }
 }

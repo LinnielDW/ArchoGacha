@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using ArchoGacha.MapComponents;
+using ArchoGacha.GameComponents;
 using ArchoGacha.UI;
 using HarmonyLib;
 
@@ -35,7 +35,7 @@ public static class Building_CommsConsole_GetFloatMenuOptions_Patch
                     delegate
                     {
                         Find.WindowStack.Add(
-                            new Dialog_BannerMenu(Current.Game.GetComponent<MapComponentGachaTracker>()));
+                            new Dialog_BannerMenu(Current.Game.GetComponent<GameComponent_GachaTracker>()));
                     });
             return floatMenuOption;
         }

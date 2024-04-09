@@ -1,4 +1,4 @@
-using ArchoGacha.MapComponents;
+using ArchoGacha.GameComponents;
 using LudeonTK;
 
 namespace ArchoGacha.Debug;
@@ -10,7 +10,7 @@ public static class GachaDebug
         displayPriority = 9999)]
     private static void GenerateABanner()
     {
-        var banner = Current.Game.GetComponent<MapComponentGachaTracker>().GenerateRandomBanner();
+        var banner = Current.Game.GetComponent<GameComponent_GachaTracker>().GenerateRandomBanner();
         Log.Message(banner.ToString());
     }
 
@@ -19,7 +19,7 @@ public static class GachaDebug
         displayPriority = 9999)]
     private static void GenerateActiveBanners()
     {
-        Current.Game.GetComponent<MapComponentGachaTracker>().GenerateActiveBanners();
+        Current.Game.GetComponent<GameComponent_GachaTracker>().GenerateActiveBanners();
     }
     
     [DebugAction("ArchoGacha", name = "Pull jackpot on random active banner",
@@ -27,7 +27,7 @@ public static class GachaDebug
         displayPriority = 9999)]
     private static void DoPullJackpot()
     {
-        var comp = Current.Game.GetComponent<MapComponentGachaTracker>();
+        var comp = Current.Game.GetComponent<GameComponent_GachaTracker>();
         var banner = comp.activeBanners.RandomElement();
         var prize = comp.SelectJackpot(banner);
         comp.DeliverPrize(prize);
@@ -37,7 +37,7 @@ public static class GachaDebug
         displayPriority = 9999)]
     private static void DoPullConsolation()
     {
-        var comp = Current.Game.GetComponent<MapComponentGachaTracker>();
+        var comp = Current.Game.GetComponent<GameComponent_GachaTracker>();
         var banner = comp.activeBanners.RandomElement();
         var prize = comp.SelectConsolation(banner);
         comp.DeliverPrize(prize);
@@ -48,7 +48,7 @@ public static class GachaDebug
         displayPriority = 9999)]
     private static void DoPull()
     {
-        var comp = Current.Game.GetComponent<MapComponentGachaTracker>();
+        var comp = Current.Game.GetComponent<GameComponent_GachaTracker>();
         var prize = comp.DecidePrize(comp.activeBanners.RandomElement());
         comp.DeliverPrize(prize);
     }
@@ -58,7 +58,7 @@ public static class GachaDebug
         displayPriority = 9999)]
     private static void DoPullTen()
     {
-        var comp = Current.Game.GetComponent<MapComponentGachaTracker>();
+        var comp = Current.Game.GetComponent<GameComponent_GachaTracker>();
         var selectBanner = comp.activeBanners.RandomElement();
         for (int i = 0; i < 10; i++)
         {

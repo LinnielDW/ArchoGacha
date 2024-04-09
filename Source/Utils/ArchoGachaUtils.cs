@@ -4,7 +4,7 @@ namespace ArchoGacha.Utils;
 
 public static class ArchoGachaUtils
 {
-    private static readonly Func<PrizeCategory, QualityGenerator>
+    public static readonly Func<PrizeCategory, QualityGenerator>
         QualityFromPrizeCat = prizeCategory =>
             prizeCategory == PrizeCategory.Jackpot
                 ? QualityGenerator.Super
@@ -43,7 +43,7 @@ public static class ArchoGachaUtils
         }
     }
 
-    private static QualityCategory GenerateQuality(
+    public static QualityCategory GenerateQuality(
         QualityGenerator qualityGenerator, ThingDef thingDef)
     {
         return thingDef.HasComp(typeof(CompQuality))
@@ -51,7 +51,7 @@ public static class ArchoGachaUtils
             : QualityCategory.Normal;
     }
 
-    private static bool IsValidStuffPair(PrizeBannerDef bannerDef, PrizeCategory prizeCategory,
+    public static bool IsValidStuffPair(PrizeBannerDef bannerDef, PrizeCategory prizeCategory,
         ThingStuffPairWithQuality stuffPair, float valueMaxOverride = 0f)
     {
         var marketValue = stuffPair.GetStatValue(StatDefOf.MarketValue);

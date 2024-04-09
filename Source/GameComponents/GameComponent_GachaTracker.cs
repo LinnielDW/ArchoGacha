@@ -194,8 +194,12 @@ public class GameComponent_GachaTracker : GameComponent
             {
                 // pityCount = 0;
                 var consolation = SelectConsolation(prizeBanner);
-                Messages.Message("ArchoGacha_Consolation".Translate(consolation.LabelShort),consolation, MessageTypeDefOf.PositiveEvent);
-                return consolation;
+                if (consolation != null)
+                {
+                    Messages.Message("ArchoGacha_Consolation".Translate(consolation.LabelShort),consolation, MessageTypeDefOf.PositiveEvent);
+                    return consolation;
+                }
+                goto default;
             }
             default:
             {

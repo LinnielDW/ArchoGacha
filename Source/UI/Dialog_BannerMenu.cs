@@ -171,7 +171,6 @@ public class Dialog_BannerMenu : Window
 
             #region Draw Prizes
 
-            // listingStandard.Gap(16f);
             Text.Font = GameFont.Medium;
             listingStandard.Label("ArchoGacha_JackpotPrizes".Translate(settings.getFeatured.ToStringPercent("0.#")));
             Text.Font = GameFont.Small;
@@ -191,12 +190,7 @@ public class Dialog_BannerMenu : Window
             Widgets.DrawLineHorizontal(0, listingStandard.CurHeight , listingStandard.ColumnWidth, Color.gray);
             listingStandard.Gap(8f);
             
-            for (var index = 0; index < selectedBanner.consolationPrizes.Count; index++)
-            {
-                var consPrizeRect = new Rect(/*listingStandard.ColumnWidth / 2*/ + 46f * index, listingStandard.CurHeight, 42f, 42f);
-                DrawConsolation(consPrizeRect, selectedBanner.consolationPrizes[index], 0, 0);
-            }
-            
+            DrawConsolations(listingStandard);
             listingStandard.Gap(42f);
             #endregion
 
@@ -342,6 +336,23 @@ public class Dialog_BannerMenu : Window
         }
 
         listingStandard.End();
+    }
+
+    private static void DrawConsolations(Listing_Standard listingStandard)
+    {
+        if (selectedBanner.consolationPrizes.Count == 0)
+        {
+            var consPrizeRect = new Rect(46f, listingStandard.CurHeight, 42f, 42f);
+            DrawConsolation(consPrizeRect, null, 0, 0);
+        }
+        else
+        {
+            for (var index = 0; index < selectedBanner.consolationPrizes.Count; index++)
+            {
+                var consPrizeRect = new Rect(/*listingStandard.ColumnWidth / 2*/ + 46f * index, listingStandard.CurHeight, 42f, 42f);
+                DrawConsolation(consPrizeRect, selectedBanner.consolationPrizes[index], 0, 0);
+            }
+        }
     }
 
     private static readonly Texture2D questionMark = ContentFinder<Texture2D>.Get("UI/Overlays/QuestionMark");

@@ -60,6 +60,16 @@
 <!--        <minTechLevel>Medieval</minTechLevel>-->
         <minJackpotMarketValue>2000</minJackpotMarketValue>
     </ArchoGacha.PrizeBannerDef>
+    
+    <ArchoGacha.PrizeBannerDef>
+        <defName>ArchoGacha_Art</defName>
+        <label>Art Banner</label>
+        <prizeBannerClass>ArchoGacha.PrizeBannerClasses.EquipmentPrizeBanner</prizeBannerClass>
+        <spawnCountRange>0~1</spawnCountRange>
+        <thingCategoryDef>BuildingsArt</thingCategoryDef>
+<!--        <minTechLevel>Medieval</minTechLevel>-->
+        <minJackpotMarketValue>2000</minJackpotMarketValue>
+    </ArchoGacha.PrizeBannerDef>
     <!--
     ~1~ TODO: Impl
 

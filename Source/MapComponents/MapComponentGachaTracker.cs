@@ -219,7 +219,7 @@ public class MapComponentGachaTracker : GameComponent
         }
 
         lostFiftyFifty = true;
-        return prizeBanner.GeneratePrize(PrizeCategory.Jackpot, prizeBanner.PityThreshold);
+        return prizeBanner.GeneratePrize(PrizeCategory.Jackpot, prizeBanner.PityThreshold, true);
     }
 
     public Thing SelectConsolation(PrizeBanner prizeBanner)

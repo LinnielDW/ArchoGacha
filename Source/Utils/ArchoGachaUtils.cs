@@ -61,7 +61,7 @@ public static class ArchoGachaUtils
             {
                 return (valueMaxOverride == 0f && 
                         marketValue >= Math.Max(settings.minJackpotOffset, bannerDef.minJackpotMarketValue)) ||
-                       valueMaxOverride != 0f && marketValue <= valueMaxOverride;
+                       valueMaxOverride != 0f && marketValue <= valueMaxOverride && marketValue >= valueMaxOverride * 0.75f;
             }
             case PrizeCategory.Consolation:
             default:

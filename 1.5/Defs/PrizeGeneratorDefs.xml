@@ -50,12 +50,18 @@
         <minJackpotMarketValue>2500</minJackpotMarketValue>
 <!--        <minConsolationMarketValue>1000</minConsolationMarketValue>-->
     </ArchoGacha.PrizeBannerDef>
-
+    
+    <ArchoGacha.PrizeBannerDef>
+        <defName>ArchoGacha_BodyParts</defName>
+        <label>Implants Banner</label>
+        <prizeBannerClass>ArchoGacha.PrizeBannerClasses.EquipmentPrizeBanner</prizeBannerClass>
+        <spawnCountRange>0~1</spawnCountRange>
+        <thingCategoryDef>BodyParts</thingCategoryDef>
+<!--        <minTechLevel>Medieval</minTechLevel>-->
+        <minJackpotMarketValue>2000</minJackpotMarketValue>
+    </ArchoGacha.PrizeBannerDef>
     <!--
-    ~1~ TODO: Impl @1@
-    <ArchoGacha.PrizeGeneratorDef>
-        <defName>ArchoGacha_Bionic</defName>
-    </ArchoGacha.PrizeGeneratorDef>
+    ~1~ TODO: Impl
 
     <ArchoGacha.PrizeGeneratorDef>
         <defName>ArchoGacha_Art</defName>

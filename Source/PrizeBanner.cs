@@ -18,7 +18,7 @@ public class PrizeBanner : IExposable
         {
             if (pityThresholdInt < 0)
             {
-                pityThresholdInt = pullPrice / (settings.jackpotChance * settings.pullPriceFactor);
+                pityThresholdInt = pullPrice / settings.jackpotChance;
             }
 
             return pityThresholdInt;
@@ -97,9 +97,9 @@ public class PrizeBanner : IExposable
     }
 
     public virtual Thing GeneratePrize(PrizeCategory prizeCategory,
-        float valueMaxOverride = 0f)
+        float valueMaxOverride = 0f, bool excludeJackpotDef = false)
     {
-        var prize = SelectPrizeDef(prizeCategory, valueMaxOverride);
+        var prize = SelectPrizeDef(prizeCategory, valueMaxOverride, excludeJackpotDef);
         if (prize == null)
         {
             Log.Warning(
@@ -120,7 +120,7 @@ public class PrizeBanner : IExposable
     }
 
     public virtual Thing SelectPrizeDef(PrizeCategory prizeCategory,
-        float valueMaxOverride = 0f)
+        float valueMaxOverride = 0F, bool excludeJackpotDef = false)
     {
         throw new NotImplementedException();
     }

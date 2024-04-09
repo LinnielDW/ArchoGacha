@@ -78,7 +78,7 @@ public class Dialog_BannerMenu : Window
         viewRect = new Rect(inRect.x, listingStandard.CurHeight, inRect.width  / 3f,
             inRect.height - listingStandard.CurHeight);
         Rect scrollRect = new Rect(0f, 0f, viewRect.width - 16f,
-            60f * comp.activeBanners.Count );
+            48 * comp.activeBanners.Count );
 
         Widgets.BeginScrollView(viewRect, ref scrollPosition, scrollRect);
         listingStandard.Begin(scrollRect);
@@ -148,7 +148,7 @@ public class Dialog_BannerMenu : Window
             var bannerTooltip = new StringBuilder().AppendLine($"Probability Breakdown:");
             bannerTooltip.AppendLine($"- The base chance to obtain an ultra rare reward is {settings.jackpotChance.ToStringPercent("0.#")}.");
             bannerTooltip.AppendLine($"     You are guaranteed to obtain an ultra rare reward should your pity reserve exceed {(int)selectedBanner.PityThreshold}.");
-            bannerTooltip.AppendLine($"- The base chance to obtain a rare reward is {settings.jackpotChance.ToStringPercent("0.#")}.");
+            bannerTooltip.AppendLine($"- The base chance to obtain a rare reward is {settings.consolationChance.ToStringPercent("0.#")}.");
             bannerTooltip.AppendLine($"\nBoosted Rate:");
             bannerTooltip.AppendLine($"- The first time an ultra rare reward is obtained, there is a {settings.getFeatured.ToStringPercent("0.#")} chance to obtain the featured reward.");
             bannerTooltip.AppendLine($"     If the ultra rare reward you obtain is not the featured reward, then the next ultra rare reward you obtain is guaranteed to be the featured ultra rare reward.");
@@ -314,18 +314,30 @@ public class Dialog_BannerMenu : Window
         else
         {
             Text.Font = GameFont.Small;
-            listingStandard.Label("ArchoGacha_PleaseSelectBanner".Translate());
-            listingStandard.Gap(8f);
+            listingStandard.Label("ArchoGacha_PleaseSelectBanner".Translate().Colorize(new Color(0.9f, 0.9f, 0.3f)));
+            // listingStandard.Gap(8f);
+            
+            Text.Font = GameFont.Tiny;
+            GUI.color = Color.gray;
+            listingStandard.Indent();
+            var subtitleRect = listingStandard.Label("ArchoGacha_TimeRemaining".Translate((comp.bannersEndTick - Find.TickManager.TicksGame).ToStringTicksToPeriodVerbose()).ToString());
+            listingStandard.Outdent();
+            Text.Font = GameFont.Small;
+            GUI.color = Color.white;
+            
+            listingStandard.Gap(4f);
+            Widgets.DrawLineHorizontal(0, listingStandard.CurHeight , listingStandard.ColumnWidth, Color.gray);
+            listingStandard.Gap(4f);
 
             var tooltip =
-                new StringBuilder().AppendLine($"Probability Breakdown:");
-            tooltip.AppendLine($"- The base chance to obtain an ultra rare reward is {settings.jackpotChance.ToStringPercent("0.#")}.");
+                new StringBuilder().AppendLineTagged($"Probability Breakdown:");
+            tooltip.AppendLine($"- The base chance to obtain an ultra rare reward is <color=teal>{settings.jackpotChance.ToStringPercent("0.#")}</color>.");
             tooltip.AppendLine($"     You are guaranteed to obtain an ultra rare reward should your pity reserve exceed the market value of the featured ultra rare reward.");
-            tooltip.AppendLine($"- The base chance to obtain a rare reward is {settings.jackpotChance.ToStringPercent("0.#")}.");
+            tooltip.AppendLine($"- The base chance to obtain a rare reward is <color=teal>{settings.consolationChance.ToStringPercent("0.#")}</color>.");
             tooltip.AppendLine($"\nBoosted Rate:");
-            tooltip.AppendLine($"- The first time an ultra rare reward is obtained, there is a {settings.getFeatured.ToStringPercent("0.#")} chance to obtain the featured reward.");
+            tooltip.AppendLine($"- The first time an ultra rare reward is obtained, there is a <color=teal>{settings.getFeatured.ToStringPercent("0.#")}</color> chance to obtain the featured reward.");
             tooltip.AppendLine($"     If the ultra rare reward you obtain is not the featured reward, then the next ultra rare reward you obtain is guaranteed to be the featured ultra rare reward.");
-            tooltip.AppendLine($"- When a rare reward is obtained, there is a {settings.getConsolationFeatured.ToStringPercent("0.#")} chance to obtain a featured rare reward.");
+            tooltip.AppendLine($"- When a rare reward is obtained, there is a <color=teal>{settings.getConsolationFeatured.ToStringPercent("0.#")}</color> chance to obtain a featured rare reward.");
             tooltip.AppendLine($"- Featured rewards can only be obtained once per banner.");
             tooltip.AppendLine($"- Pity reserves and feature guarantees are shared between banners and carry over between banner refreshes.");
             

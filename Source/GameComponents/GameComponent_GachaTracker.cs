@@ -168,8 +168,9 @@ public class GameComponent_GachaTracker : GameComponent
 
     public void DeliverPrize(Thing prize)
     {
+        var mPrize = prize.TryMakeMinified();
         TradeUtility.SpawnDropPod(DropCellFinder.TradeDropSpot(Find.CurrentMap), Find.CurrentMap,
-            prize);
+            mPrize);
     }
 
     public Thing DecidePrize(PrizeBanner prizeBanner)

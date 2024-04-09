@@ -11,7 +11,7 @@ public class PrizeBanner : IExposable
 {
     public PrizeBannerDef def;
     public Thing jackpot;
-    public List<Thing> consolationPrizes;
+    public List<Thing> consolationPrizes = new List<Thing>();
     public float pullPrice;
 
     private float pityThresholdInt = -1f;
@@ -132,7 +132,7 @@ public class PrizeBanner : IExposable
     protected virtual bool ReqValidator(ThingDef thingDef)
     {
         return !thingDef.destroyOnDrop &&
-               thingDef.techLevel >= MinTechLevel;
+               thingDef.techLevel >= MinTechLevel && !consolationPrizes.Any(m => m.def == thingDef);
     }
 
     //TODO: impl

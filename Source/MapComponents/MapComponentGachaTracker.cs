@@ -54,8 +54,8 @@ public class MapComponentGachaTracker : GameComponent
             }
         }
 
-        bannersEndTick = (int)(Find.TickManager.TicksGame +
-                               60000 * settings.bannerDurationDays);
+        bannersEndTick = Find.TickManager.TicksGame +
+                         (int)(60000f * settings.bannerDurationDays);
 
         //TODO: add translation strings
         Find.LetterStack.ReceiveLetter(
@@ -83,13 +83,24 @@ public class MapComponentGachaTracker : GameComponent
 
         prizeBanner.def = def;
         prizeBanner.jackpot = prizeBanner.GenerateJackpot();
-        prizeBanner.consolationPrizes = GenerateConsolations(prizeBanner, prizeBanner.jackpot.MarketValue * settings.consolationChance)
-            .ToList();
         prizeBanner.pullPrice = prizeBanner.jackpot.MarketValue *
                                 settings.jackpotChance *
                                 settings.pullPriceFactor;
 
+        AddConsolations(prizeBanner,
+            prizeBanner.jackpot.MarketValue * settings.consolationChance);
+        
         return prizeBanner;
+    }
+
+    private static void AddConsolations(PrizeBanner prizeBanner,
+        float valueMaxOverride = 0f)
+    {        
+        for (int i = 0; i < prizeBanner.def.consolationCountRange.RandomInRange; i++)
+        {
+            var prize = prizeBanner.GenerateConsolationThing(valueMaxOverride);
+            if (prize != null) prizeBanner.consolationPrizes.Add(prize);
+        }
     }
 
     private static IEnumerable<Thing> GenerateConsolations(

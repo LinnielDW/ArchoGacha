@@ -2,7 +2,6 @@ using System.Reflection;
 using ArchoGacha.Settings;
 using HarmonyLib;
 using UnityEngine;
-using Verse;
 
 namespace ArchoGacha;
 

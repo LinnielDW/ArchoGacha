@@ -1,7 +1,5 @@
 using System.Linq;
 using ArchoGacha.Utils;
-using RimWorld;
-using Verse;
 
 namespace ArchoGacha.PrizeBannerClasses;
 

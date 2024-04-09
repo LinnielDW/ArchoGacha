@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using Verse;
 
 namespace ArchoGacha.Settings;
 

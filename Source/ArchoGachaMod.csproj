@@ -63,6 +63,7 @@
         <Compile Include="ArchoGachaMod.cs" />
         <Compile Include="Debug\GachaDebug.cs" />
         <Compile Include="Defs\ArchoGachaDefOf.cs" />
+        <Compile Include="GlobalUsings.cs" />
         <Compile Include="MapComponents\MapComponentGachaTracker.cs" />
         <Compile Include="HarmonyPatches\Building_CommsConsole_GetFloatMenuOptions_Patch.cs" />
         <Compile Include="PrizeBanner.cs" />

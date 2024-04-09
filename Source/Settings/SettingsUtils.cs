@@ -1,6 +1,4 @@
-﻿using Verse;
-
-namespace ArchoGacha.Settings;
+﻿namespace ArchoGacha.Settings;
 
 public static class SettingsUtils
 {

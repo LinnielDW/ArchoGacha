@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using ArchoGacha.Defs;
 using ArchoGacha.UI;
 using ArchoGacha.Utils;
-using RimWorld;
 using UnityEngine;
-using Verse;
-using static ArchoGacha.ArchoGachaMod;
 
 namespace ArchoGacha.MapComponents;
 

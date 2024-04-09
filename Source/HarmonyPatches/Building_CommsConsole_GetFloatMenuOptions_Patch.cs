@@ -3,8 +3,6 @@ using System.Linq;
 using ArchoGacha.MapComponents;
 using ArchoGacha.UI;
 using HarmonyLib;
-using RimWorld;
-using Verse;
 
 namespace ArchoGacha.HarmonyPatches;
 

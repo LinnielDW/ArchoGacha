@@ -13,7 +13,7 @@ public class ArchoGachaSettings : ModSettings
 
 
     public float jackpotChance = 0.006f;
-    public float pullPriceFactor = 1.6f;
+    public float pullPriceFactor = 1f;
     public float consolationChance = 0.1f;
     
     //debug settings:

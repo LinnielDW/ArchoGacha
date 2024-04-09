@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using ArchoGacha.Defs;
 using ArchoGacha.UI;
 using ArchoGacha.Utils;
@@ -11,6 +12,21 @@ public class GameComponent_GachaTracker : GameComponent
     public float pitySilverReserve;
     public int bannersEndTick;
     public bool lostFiftyFifty;
+
+    private List<ThingDef> trash = new();
+
+    public override void FinalizeInit()
+    {
+        base.FinalizeInit();
+        
+        trash = DefDatabase<ThingDef>.AllDefs.Where(d =>
+            d.category == ThingCategory.Item &&
+            d.tradeability.TraderCanSell() &&
+            d.equipmentType == EquipmentType.None &&
+            d.BaseMarketValue >= 1f &&
+            !d.HasComp(typeof(CompHatcher))
+        ).ToList();
+    }
 
     public override void ExposeData()
     {
@@ -187,8 +203,10 @@ public class GameComponent_GachaTracker : GameComponent
             }
             default:
             {
-                //TODO: move to banner
-                return ThingMaker.MakeThing(ThingDefOf.WoodLog);
+                var trashFiltered = trash
+                    .Where(t => t.BaseMarketValue <= prizeBanner.pullPrice)
+                    .ToList();
+                return ThingMaker.MakeThing(trashFiltered.NullOrEmpty() ? ThingDefOf.WoodLog : trashFiltered.RandomElement());
             }
         }
     }

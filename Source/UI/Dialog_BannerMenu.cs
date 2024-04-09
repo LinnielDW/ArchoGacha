@@ -342,7 +342,7 @@ public class Dialog_BannerMenu : Window
     {
         if (selectedBanner.consolationPrizes.Count == 0)
         {
-            var consPrizeRect = new Rect(46f, listingStandard.CurHeight, 42f, 42f);
+            var consPrizeRect = new Rect(0, listingStandard.CurHeight, 42f, 42f);
             DrawConsolation(consPrizeRect, null, 0, 0);
         }
         else

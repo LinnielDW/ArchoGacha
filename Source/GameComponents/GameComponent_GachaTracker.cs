@@ -151,10 +151,7 @@ public class GameComponent_GachaTracker : GameComponent
     {
         TradeUtility.LaunchSilver(Find.CurrentMap, (int)prizeBanner.pullPrice);
         pitySilverReserve += prizeBanner.pullPrice;
-        // pityCount++;
         var prize = DecidePrize(prizeBanner);
-        
-        Dialog_BannerMenu.AddPulled(prize);
 
         DeliverPrize(prize);
     }

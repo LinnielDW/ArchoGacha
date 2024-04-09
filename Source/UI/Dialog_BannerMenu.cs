@@ -62,7 +62,6 @@ public class Dialog_BannerMenu : Window
         GUI.color = Color.gray;
         listingStandard.Indent();
         listingStandard.Label("ArchoGacha_Pity".Translate(comp.pitySilverReserve));
-        // listingStandard.Gap(2f);
         listingStandard.Outdent();
         Text.Font = GameFont.Small;
         GUI.color = Color.white;
@@ -81,7 +80,6 @@ public class Dialog_BannerMenu : Window
 
         foreach (var banner in comp.activeBanners)
         {
-            // Rect bannerRect = new Rect(0f, listingStandard.CurHeight, scrollRect.width, 42f);
             var jackpotPrizeRect = new Rect(0f, listingStandard.CurHeight, 42f, 42f);
             DrawJackpot(jackpotPrizeRect, banner.jackpot, 0, 0);
 
@@ -94,23 +92,6 @@ public class Dialog_BannerMenu : Window
             if (Widgets.ButtonInvisible(labelHoverRect))
             {
                 selectedBanner = banner;
-                pulledThings.Clear();
-                /*if (selectedBanner != null)
-                    {
-                        rectCarousel.Clear();
-                        if (selectedBanner.jackpot != null)
-                        {
-                            rectCarousel.Add(DrawJackpotWithThing(selectedBanner.jackpot));
-                        }
-                        rectCarousel.Add(DrawJackpotWithThing(null));
-                        for (var index = 0; index < selectedBanner.consolationPrizes.Count; index++)
-                        {
-                            rectCarousel.Add(DrawCons(selectedBanner.consolationPrizes[index]));
-                        }
-                        
-                        rectCarousel.Add(DrawCons(null));
-                        rectCarousel.Shuffle();
-                    }*/
             }
                 
             Text.Anchor = TextAnchor.MiddleLeft;
@@ -208,21 +189,6 @@ public class Dialog_BannerMenu : Window
                     if (selectedBanner != null)
                     {
                         comp.PullOnBanner(selectedBanner);
-                        /* TODO: Nice to have: carousel
-                            isSpinning = true;
-                            rectCarousel.Clear();
-                            if (selectedBanner.jackpot != null)
-                            {
-                                rectCarousel.Add(DrawJackpotWithThing(selectedBanner.jackpot));
-                            }
-                            rectCarousel.Add(DrawJackpotWithThing(null));
-                            for (var index = 0; index < selectedBanner.consolationPrizes.Count; index++)
-                            {
-                                rectCarousel.Add(DrawCons(selectedBanner.consolationPrizes[index]));
-                            }
-
-                            rectCarousel.Add(DrawCons(null));
-                            rectCarousel.Shuffle();*/
                     }
                 }
             }
@@ -256,61 +222,16 @@ public class Dialog_BannerMenu : Window
                 Text.Anchor = TextAnchor.UpperLeft;
             }
             #endregion
-
-            /*TODO: nice to have: pull results
-                listingStandard.Gap(32f);
-                if (pulledThings.Count != 0)
-                {
-                    for (var index = 0; index < pulledThings.Count; index++)
-                    {
-                        // var iconRect = new Rect(rghtInner.width/index - (4f + 46F * index)/2, listingStandard.CurHeight, 42f, 42f);
-                        
-                        var iconRect = new Rect(4f + 46f * index, listingStandard.CurHeight, 42f, 42f);
-                        Widgets.DrawBox(iconRect, 2);
-                        Widgets.ThingIcon(iconRect.ContractedBy(4f), pulledThings[index]);
-                    }
-                }*/
-            /*TODO: nice to have: carousel
-                 if (isSpinning)
-                {
-                    
-                    rightY += 32f;
-                    // var modulo = GenTicks.TicksGame % 100;
-                    
-                    float periodLength = 100f;
-                    float relativePosition = GenTicks.TicksGame % periodLength;
-                    float maxExtraFactor = 2f;
-                    
-                    for (var index = 0; index < rectCarousel.Count; index++)
-                    {
-                        bool looped =
-                            (relativePosition ) > (periodLength) - (index) *
-                            (periodLength / rectCarousel.Count);
-                        //
-                        // float height = descending ? (periodLength-relativePosition) * (periodLength / (float)rectCarousel.Count) : relativePosition * (periodLength / (float)rectCarousel.Count);
-
-
-                        // var scaledFactor = relativePosition/(index * (periodLength / rectCarousel.Count));
-                        // var scaledFactor = periodLength % relativePosition;
-                        var drawAction = rectCarousel[index];
-                        var prizeRect = new Rect(100f + (4f + 28f) * index,
-                            rightY, 28f, 28f);
-                        drawAction(prizeRect, !looped ? relativePosition -(4f + 28f) : relativePosition - (4f + 28f) *
-                            rectCarousel.Count, 0);
-                    }
-                    rightY += 32f;
-                }*/
         }
         else
         {
             Text.Font = GameFont.Small;
             listingStandard.Label("ArchoGacha_PleaseSelectBanner".Translate().Colorize(new Color(0.9f, 0.9f, 0.3f)));
-            // listingStandard.Gap(8f);
             
             Text.Font = GameFont.Tiny;
             GUI.color = Color.gray;
             listingStandard.Indent();
-            var subtitleRect = listingStandard.Label("ArchoGacha_TimeRemaining".Translate((comp.bannersEndTick - Find.TickManager.TicksGame).ToStringTicksToPeriodVerbose()).ToString());
+            listingStandard.Label("ArchoGacha_TimeRemaining".Translate((comp.bannersEndTick - Find.TickManager.TicksGame).ToStringTicksToPeriodVerbose()).ToString());
             listingStandard.Outdent();
             Text.Font = GameFont.Small;
             GUI.color = Color.white;
@@ -332,7 +253,6 @@ public class Dialog_BannerMenu : Window
             tooltip.AppendLine($"- Pity reserves and feature guarantees are shared between banners and carry over between banner refreshes.");
             
             listingStandard.Label(tooltip.ToString().Trim().TruncateHeight(rghtInner.width, rghtInner.height - listingStandard.CurHeight));
-            // TooltipHandler.TipRegion(rghtInner, tooltip.ToString().Trim());
         }
 
         listingStandard.End();
@@ -349,7 +269,7 @@ public class Dialog_BannerMenu : Window
         {
             for (var index = 0; index < selectedBanner.consolationPrizes.Count; index++)
             {
-                var consPrizeRect = new Rect(/*listingStandard.ColumnWidth / 2*/ + 46f * index, listingStandard.CurHeight, 42f, 42f);
+                var consPrizeRect = new Rect(46f * index, listingStandard.CurHeight, 42f, 42f);
                 DrawConsolation(consPrizeRect, selectedBanner.consolationPrizes[index], 0, 0);
             }
         }
@@ -468,37 +388,6 @@ public class Dialog_BannerMenu : Window
 
             TooltipHandler.TipRegion(iconRect, tooltip);
         }
-    }
-
-    #endregion
-    
-    //TODO: nice to haves
-    #region NiceToHaves
-    
-    // private int tickStart;
-    // private static bool isSpinning
-    public List<Action<Rect,float, float>> rectCarousel = new();
-    public static List<Thing> pulledThings = new();
-
-
-    private static Action<Rect, float, float> DrawCons(Thing thing)
-    {
-        return (prizeRect, x, y) => DrawConsolation(prizeRect, thing, x, y);
-    }
-
-    private static Action<Rect, float, float> DrawJackpotWithThing(Thing thing)
-    {
-        return (rect, xOffset, yOffset) => DrawJackpot(rect,thing, xOffset, yOffset);
-    }
-
-    public static void AddPulled(Thing t)
-    {
-        if (pulledThings.Count >= 10)
-        {
-            pulledThings.RemoveAt(0);
-        }
-
-        pulledThings.Add(t);
     }
 
     #endregion

@@ -3,7 +3,7 @@
 <Defs>
     <ArchoGacha.PrizeBannerDef>
         <defName>ArchoGacha_WeaponRanged</defName>
-        <label>Ranged Weapon Banner</label>
+        <label>Ranged Weapons Banner</label>
         <prizeBannerClass>ArchoGacha.PrizeBannerClasses.EquipmentPrizeBanner</prizeBannerClass>
         <spawnCountRange>1~1</spawnCountRange>
         <thingCategoryDef>WeaponsRanged</thingCategoryDef>
@@ -16,7 +16,7 @@
     </ArchoGacha.PrizeBannerDef>
     <ArchoGacha.PrizeBannerDef>
         <defName>ArchoGacha_WeaponMelee</defName>
-        <label>Melee Weapon Banner</label>
+        <label>Melee Weapons Banner</label>
         <prizeBannerClass>ArchoGacha.PrizeBannerClasses.EquipmentPrizeBanner</prizeBannerClass>
         <spawnCountRange>0~1</spawnCountRange>
         <thingCategoryDef>WeaponsMelee</thingCategoryDef>
@@ -26,7 +26,7 @@
     </ArchoGacha.PrizeBannerDef>
     <ArchoGacha.PrizeBannerDef>
         <defName>ArchoGacha_Weapon</defName>
-        <label>Any Weapon Banner</label>
+        <label>Weapons Banner</label>
         <!-- TODO: add descriptions -->
         <description>Weapons PrizeBanner</description>
         <prizeBannerClass>ArchoGacha.PrizeBannerClasses.EquipmentPrizeBanner</prizeBannerClass>

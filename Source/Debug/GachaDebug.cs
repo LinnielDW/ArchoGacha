@@ -10,7 +10,7 @@ public static class GachaDebug
         displayPriority = 9999)]
     private static void GenerateABanner()
     {
-        var banner = Current.Game.GetComponent<GameComponent_GachaTracker>().GenerateRandomBanner();
+        var banner = BannerMaker.GenerateRandomBanner();
         Log.Message(banner.ToString());
     }
 
@@ -39,7 +39,7 @@ public static class GachaDebug
     {
         var comp = Current.Game.GetComponent<GameComponent_GachaTracker>();
         var banner = comp.activeBanners.RandomElement();
-        var prize = comp.SelectConsolation(banner);
+        var prize = PrizePickerUtil.SelectConsolation(banner);
         comp.DeliverPrize(prize);
     }
     

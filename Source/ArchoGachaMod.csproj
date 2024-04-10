@@ -63,6 +63,8 @@
         <Compile Include="ArchoGachaMod.cs" />
         <Compile Include="Debug\GachaDebug.cs" />
         <Compile Include="Defs\ArchoGachaDefOf.cs" />
+        <Compile Include="GameComponents\BannerMaker.cs" />
+        <Compile Include="GameComponents\PrizePickerUtil.cs" />
         <Compile Include="GlobalUsings.cs" />
         <Compile Include="GameComponents\GameComponent_GachaTracker.cs" />
         <Compile Include="HarmonyPatches\Building_CommsConsole_GetFloatMenuOptions_Patch.cs" />

@@ -129,11 +129,4 @@ public abstract class PrizeBanner : IExposable
         return !thingDef.destroyOnDrop &&
                thingDef.techLevel >= MinTechLevel && !consolationPrizes.Any(m => m.def == thingDef);
     }
-
-    //TODO: impl
-    // public Thing CreateJunk()
-    // {
-    //     
-    //     return ThingMaker.MakeThing();
-    // }
 }

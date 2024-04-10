@@ -44,8 +44,6 @@
         </includeCategoryDefs>
         <minTechLevel>Industrial</minTechLevel>
         <minJackpotMarketValue>2500</minJackpotMarketValue>
-        &lt;!&ndash;        the minimum value something can spawn when the settings.useGlobalConsolationOffset set to true&ndash;&gt;
-        &lt;!&ndash;        <minConsolationMarketValue>1000</minConsolationMarketValue>&ndash;&gt;
     </ArchoGacha.PrizeBannerDef>-->
 
     <!-- TODO: check numbers -->

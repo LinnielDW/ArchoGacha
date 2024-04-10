@@ -17,6 +17,14 @@ public class StackablePrizeBanner : PrizeBanner
         };
 
         var allowedDefs = ThingSetMakerUtility.GetAllowedThingDefs(req);
+        if (prizeCategory == PrizeCategory.Consolation)
+        {
+            allowedDefs = allowedDefs.Where(t =>valueMaxOverride != 0f &&
+                                            t.BaseMarketValue *
+                                            def.valueMultiplier <=
+                                            valueMaxOverride * 0.75f);
+        }
+        
         var thingStuffPairs = CalculateAllowedThingStuffPairs(allowedDefs, prizeCategory).ToList();
 
         var x = thingStuffPairs.RandomElement();
@@ -24,24 +32,20 @@ public class StackablePrizeBanner : PrizeBanner
         var t = ThingMaker.MakeThing(x.thing, x.stuff);
         //too expensive
         
-        var marketValue = t.MarketValue * def.valueMultiplier;
-        if (valueMaxOverride != 0f && marketValue >= valueMaxOverride * 0.5f && prizeCategory == PrizeCategory.Consolation)
-        {
-            return null;
-        }
+        var marketValue = t.MarketValue * def.valueMultiplier * t.stackCount;
 
-        if (!IsValidStuffPair(def, prizeCategory, t, valueMaxOverride))
+        if (!IsAttractiveEnough(def, prizeCategory, t, valueMaxOverride))
         {
             if (prizeCategory == PrizeCategory.Jackpot)
             {
-                if (valueMaxOverride != 0f && t.MarketValue < valueMaxOverride)
+                if (valueMaxOverride != 0f && marketValue < valueMaxOverride)
                 {
-                    t.stackCount = (int)(valueMaxOverride / t.MarketValue);
+                    t.stackCount = (int)(valueMaxOverride / marketValue);
                 }
                 else if (valueMaxOverride == 0f && 
                          t.MarketValue < Math.Max(settings.minJackpotOffset, def.minJackpotMarketValue))
                 {
-                    t.stackCount = (int)(Math.Max(settings.minJackpotOffset, def.minJackpotMarketValue) / t.MarketValue);
+                    t.stackCount = (int)(Math.Max(settings.minJackpotOffset, def.minJackpotMarketValue) / marketValue);
                 }
             }
             else
@@ -52,36 +56,16 @@ public class StackablePrizeBanner : PrizeBanner
                 {
                     t.stackCount = (int)(Math.Max(
                         settings.minConsolationOffset,
-                        def.minConsolationMarketValue) / t.MarketValue);
+                        def.minConsolationMarketValue) / marketValue);
                 }
-                else if(valueMaxOverride != 0f && t.MarketValue < valueMaxOverride)
+                else if(valueMaxOverride != 0f && marketValue < valueMaxOverride)
                 {
-                    t.stackCount = (int)(valueMaxOverride / t.MarketValue);
+                    t.stackCount = (int)(valueMaxOverride / marketValue);
                 }
             }
         }
 
         return t;
-
-
-        // var t = new ThingSetMaker_StackCount().Generate(req);
-        /*switch (prizeCategory)
-        {
-            case PrizeCategory.Jackpot:
-            {
-                return (valueMaxOverride == 0f &&
-                        marketValue >= Math.Max(settings.minJackpotOffset, bannerDef.minJackpotMarketValue)) ||
-                       valueMaxOverride != 0f && marketValue <= valueMaxOverride;
-            }
-            case PrizeCategory.Consolation:
-            default:
-            {
-                return (settings.useGlobalConsolationOffset &&
-                        marketValue >= Math.Max(settings.minConsolationOffset, bannerDef.minConsolationMarketValue) &&
-                        marketValue <= settings.minJackpotOffset) ||
-                       (valueMaxOverride != 0f && marketValue <= valueMaxOverride);
-            }
-        }*/
     }
     
     public static IEnumerable<ThingStuffPairWithQuality>
@@ -114,7 +98,7 @@ public class StackablePrizeBanner : PrizeBanner
         }
     }
     
-    public static bool IsValidStuffPair(PrizeBannerDef bannerDef,
+    public static bool IsAttractiveEnough(PrizeBannerDef bannerDef,
         PrizeCategory prizeCategory,
         Thing t, float valueMaxOverride = 0f)
     {
@@ -130,12 +114,10 @@ public class StackablePrizeBanner : PrizeBanner
             case PrizeCategory.Consolation:
             default:
             {
-                Log.Message(bannerDef.label);
-                Log.Message(valueMaxOverride);
                 return (settings.useGlobalConsolationOffset && 
                         marketValue >= Math.Max(settings.minConsolationOffset, bannerDef.minConsolationMarketValue) && 
                         marketValue <= settings.minJackpotOffset) || 
-                       (valueMaxOverride != 0f && marketValue <= valueMaxOverride * 0.33f);
+                       (valueMaxOverride != 0f && marketValue > valueMaxOverride * 0.5f);
             }
         }
     }

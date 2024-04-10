@@ -6,38 +6,44 @@
         <label>Ranged Weapons Banner</label>
         <prizeBannerClass>ArchoGacha.PrizeBannerClasses.EquipmentPrizeBanner</prizeBannerClass>
         <spawnCountRange>1~1</spawnCountRange>
-        <thingCategoryDef>WeaponsRanged</thingCategoryDef>
+        <includeCategoryDefs>
+            <li>WeaponsRanged</li>
+        </includeCategoryDefs>
         <excludedCategoryDefs>
             <li>Grenades</li>
         </excludedCategoryDefs>
         <minTechLevel>Industrial</minTechLevel>
         <minJackpotMarketValue>2500</minJackpotMarketValue>
-<!--        <minConsolationMarketValue>1000</minConsolationMarketValue>-->
+        <!--        <minConsolationMarketValue>1000</minConsolationMarketValue>-->
     </ArchoGacha.PrizeBannerDef>
     <ArchoGacha.PrizeBannerDef>
         <defName>ArchoGacha_WeaponMelee</defName>
         <label>Melee Weapons Banner</label>
         <prizeBannerClass>ArchoGacha.PrizeBannerClasses.EquipmentPrizeBanner</prizeBannerClass>
         <spawnCountRange>0~1</spawnCountRange>
-        <thingCategoryDef>WeaponsMelee</thingCategoryDef>
+        <includeCategoryDefs>
+            <li>WeaponsMelee</li>
+        </includeCategoryDefs>
         <minTechLevel>Medieval</minTechLevel>
         <minJackpotMarketValue>2500</minJackpotMarketValue>
-<!--        <minConsolationMarketValue>1000</minConsolationMarketValue>-->
+        <!--        <minConsolationMarketValue>1000</minConsolationMarketValue>-->
     </ArchoGacha.PrizeBannerDef>
-    <ArchoGacha.PrizeBannerDef>
+    
+    <!--<ArchoGacha.PrizeBannerDef>
         <defName>ArchoGacha_Weapon</defName>
         <label>Weapons Banner</label>
-        <!-- TODO: add descriptions -->
         <description>Weapons PrizeBanner</description>
         <prizeBannerClass>ArchoGacha.PrizeBannerClasses.EquipmentPrizeBanner</prizeBannerClass>
         <spawnCountRange>0~1</spawnCountRange>
         <consolationCountRange>3~3</consolationCountRange>
-        <thingCategoryDef>Weapons</thingCategoryDef>
+        <includeCategoryDefs>
+            <li>Weapons</li>
+        </includeCategoryDefs>
         <minTechLevel>Industrial</minTechLevel>
         <minJackpotMarketValue>2500</minJackpotMarketValue>
-<!--        the minimum value something can spawn when the settings.useGlobalConsolationOffset set to true-->
-<!--        <minConsolationMarketValue>1000</minConsolationMarketValue>-->
-    </ArchoGacha.PrizeBannerDef>
+        &lt;!&ndash;        the minimum value something can spawn when the settings.useGlobalConsolationOffset set to true&ndash;&gt;
+        &lt;!&ndash;        <minConsolationMarketValue>1000</minConsolationMarketValue>&ndash;&gt;
+    </ArchoGacha.PrizeBannerDef>-->
 
     <!-- TODO: check numbers -->
     <ArchoGacha.PrizeBannerDef>
@@ -45,57 +51,68 @@
         <label>Armor Banner</label>
         <prizeBannerClass>ArchoGacha.PrizeBannerClasses.EquipmentPrizeBanner</prizeBannerClass>
         <spawnCountRange>1~1</spawnCountRange>
-        <thingCategoryDef>ApparelArmor</thingCategoryDef>
+        <includeCategoryDefs>
+            <li>ApparelArmor</li>
+        </includeCategoryDefs>
         <minTechLevel>Medieval</minTechLevel>
         <minJackpotMarketValue>2500</minJackpotMarketValue>
-<!--        <minConsolationMarketValue>1000</minConsolationMarketValue>-->
+        <!--        <minConsolationMarketValue>1000</minConsolationMarketValue>-->
     </ArchoGacha.PrizeBannerDef>
-    
+
     <ArchoGacha.PrizeBannerDef>
         <defName>ArchoGacha_BodyParts</defName>
         <label>Implants Banner</label>
         <prizeBannerClass>ArchoGacha.PrizeBannerClasses.EquipmentPrizeBanner</prizeBannerClass>
         <spawnCountRange>0~1</spawnCountRange>
-        <thingCategoryDef>BodyParts</thingCategoryDef>
-<!--        <minTechLevel>Medieval</minTechLevel>-->
+        <includeCategoryDefs>
+            <li>BodyParts</li>
+        </includeCategoryDefs>
+        <!--        <minTechLevel>Medieval</minTechLevel>-->
         <minJackpotMarketValue>2000</minJackpotMarketValue>
     </ArchoGacha.PrizeBannerDef>
-    
+
     <ArchoGacha.PrizeBannerDef>
         <defName>ArchoGacha_Art</defName>
         <label>Art Banner</label>
         <prizeBannerClass>ArchoGacha.PrizeBannerClasses.EquipmentPrizeBanner</prizeBannerClass>
         <spawnCountRange>0~1</spawnCountRange>
-        <thingCategoryDef>BuildingsArt</thingCategoryDef>
+        <includeCategoryDefs>
+            <li>BuildingsArt</li>
+        </includeCategoryDefs>
         <minJackpotMarketValue>2000</minJackpotMarketValue>
     </ArchoGacha.PrizeBannerDef>
-    
+
     <ArchoGacha.PrizeBannerDef>
         <defName>ArchoGacha_Book</defName>
         <label>Books Banner</label>
         <prizeBannerClass>ArchoGacha.PrizeBannerClasses.EquipmentPrizeBanner</prizeBannerClass>
         <spawnCountRange>1~1</spawnCountRange>
-        <thingCategoryDef>Books</thingCategoryDef>
+        <includeCategoryDefs>
+            <li>Books</li>
+            <li>Techprints</li>
+        </includeCategoryDefs>
         <minJackpotMarketValue>750</minJackpotMarketValue>
         <valueMultiplier>1.4</valueMultiplier>
     </ArchoGacha.PrizeBannerDef>
     
-    <!--    <ArchoGacha.PrizeBannerDef>
-            <defName>ArchoGacha_Consumable</defName>
-            <label>Consumables Banner</label>
-        </ArchoGacha.PrizeBannerDef>-->
-
-    <!--TODO: Impl
-
     <ArchoGacha.PrizeBannerDef>
         <defName>ArchoGacha_Consumable</defName>
+        <label>Items Banner</label>
+        <prizeBannerClass>ArchoGacha.PrizeBannerClasses.StackablePrizeBanner</prizeBannerClass>
+        <spawnCountRange>1~1</spawnCountRange>
+        <includeCategoryDefs>
+            <li>Manufactured</li>
+            <li>Neurotrainers</li>
+            <li>Artifacts</li>
+            <li>FoodMeals</li>
+        </includeCategoryDefs>
+        <excludedCategoryDefs>
+            <li>Textiles</li>
+        </excludedCategoryDefs>
+        <minJackpotMarketValue>2500</minJackpotMarketValue>
     </ArchoGacha.PrizeBannerDef>
-    <ArchoGacha.PrizeBannerDef>
-        <defName>ArchoGacha_Book</defName>
-    </ArchoGacha.PrizeBannerDef>
-    -->
 
-    <!-- TODO: nice to haves -->
+<!--     TODO: nice to haves -->
     <!--<ArchoGacha.PrizeBannerDef>
         <defName>ArchoGacha_PawnKind</defName>
     </ArchoGacha.PrizeBannerDef>

@@ -11,9 +11,13 @@ public class ArchoGachaSettings : ModSettings
     public float minConsolationOffset = 250f;
     // public static float maxConsolationOffset = 500f;
 
+    //TODO: add all this to settings menu
+    public bool limitBanners = false;
+    public int bannerLimit = 5;
+
 
     public float jackpotChance = 0.006f;
-    public float pullPriceFactor = 1f;
+    public float pullPriceFactor = 1.4f;
     public float consolationChance = 0.1f;
     
     //debug settings:

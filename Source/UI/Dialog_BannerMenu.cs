@@ -1,8 +1,5 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Text;
 using ArchoGacha.GameComponents;
-using HarmonyLib;
 using UnityEngine;
 
 namespace ArchoGacha.UI;
@@ -30,7 +27,7 @@ public class Dialog_BannerMenu : Window
         get
         {
             float xSize = 730;
-            float ySize = 370;
+            float ySize = 420;
             return new Vector2(xSize, ySize);
         }
     }
@@ -294,7 +291,7 @@ public class Dialog_BannerMenu : Window
         GUI.DrawTexture(prizeRect, Gradient);
         Widgets.DrawHighlightIfMouseover(prizeRect);
         Rect iconRect = prizeRect.ContractedBy(1f);
-        if (prize != null) 
+        if (prize != null && prize.def.DrawMatSingle != null && prize.def.DrawMatSingle.mainTexture != null) 
         {
             DrawBannerConsolation(iconRect, prize);
         }
@@ -306,19 +303,24 @@ public class Dialog_BannerMenu : Window
 
     private static void DrawBannerConsolation(Rect iconRect, Thing prize)
     {
-        if (prize.def.DrawMatSingle != null && prize.def.DrawMatSingle.mainTexture != null)
+        Widgets.ThingIcon(iconRect, prize);
+        if (prize.stackCount > 1)
         {
-            Widgets.ThingIcon(iconRect, prize);
+            Text.Anchor = TextAnchor.LowerRight;
+            Text.Font = GameFont.Tiny;
+            Widgets.Label(iconRect, prize.stackCount.ToString());
+            Text.Anchor = TextAnchor.UpperLeft;
+            Text.Font = GameFont.Small;
         }
 
+        Text.WordWrap = true;
         if (Widgets.ButtonInvisible(iconRect))
         {
             Find.WindowStack.Add(new Dialog_InfoCard(prize));
         }
         if (Mouse.IsOver(iconRect))
         {
-            string tooltip = prize.LabelNoParenthesisCap.AsTipTitle() +
-                             GenLabel.LabelExtras(prize, true, true) + "\n\n" +
+            string tooltip = prize.Label.AsTipTitle() + "\n\n" +
                              prize.DescriptionDetailed;
             if (prize.def.useHitPoints)
             {
@@ -370,6 +372,14 @@ public class Dialog_BannerMenu : Window
     private static void DrawBannerJackpot(Rect iconRect, Thing jackpot)
     {
         Widgets.ThingIcon(iconRect, jackpot);
+        if (jackpot.stackCount > 1)
+        {
+            Text.Anchor = TextAnchor.LowerRight;
+            Text.Font = GameFont.Tiny;
+            Widgets.Label(iconRect,jackpot.stackCount.ToString());
+            Text.Anchor = TextAnchor.UpperLeft;
+            Text.Font = GameFont.Small;
+        }
         Text.WordWrap = true;
         if (Widgets.ButtonInvisible(iconRect))
         {
@@ -378,8 +388,7 @@ public class Dialog_BannerMenu : Window
 
         if (Mouse.IsOver(iconRect))
         {
-            string tooltip = jackpot.LabelNoParenthesisCap.AsTipTitle() +
-                             GenLabel.LabelExtras(jackpot, true, true) + "\n\n" +
+            string tooltip = jackpot.Label.AsTipTitle() + "\n\n" +
                              jackpot.DescriptionDetailed;
             if (jackpot.def.useHitPoints)
             {

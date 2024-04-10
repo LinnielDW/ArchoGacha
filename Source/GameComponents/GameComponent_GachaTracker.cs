@@ -55,11 +55,23 @@ public class GameComponent_GachaTracker : GameComponent
     {
         activeBanners.Clear();
         Dialog_BannerMenu.selectedBanner = null;
-        foreach (var b in DefDatabase<PrizeBannerDef>.AllDefsListForReading)
+
+        if (settings.limitBanners && DefDatabase<PrizeBannerDef>.AllDefsListForReading.Sum(b => b.spawnCountRange.max) > settings.bannerLimit)
         {
-            for (var i = 0; i < b.spawnCountRange.RandomInRange; i++)
+            while (activeBanners.Count < settings.bannerLimit)
             {
-                activeBanners.Add(GenerateBannerFromDef(b));
+                var banner = DefDatabase<PrizeBannerDef>.AllDefsListForReading.Where(def => def.spawnCountRange.max < activeBanners.Count(activeBanner => activeBanner.def == def)).RandomElement();
+                activeBanners.Add(GenerateBannerFromDef(banner));
+            }
+        }
+        else
+        {
+            foreach (var b in DefDatabase<PrizeBannerDef>.AllDefsListForReading)
+            {
+                for (var i = 0; i < b.spawnCountRange.RandomInRange; i++)
+                {
+                    activeBanners.Add(GenerateBannerFromDef(b));
+                }
             }
         }
 
@@ -95,10 +107,12 @@ public class GameComponent_GachaTracker : GameComponent
         prizeBanner.pullPrice = prizeBanner.jackpot.MarketValue * 
                                 prizeBanner.def.valueMultiplier *
                                 settings.jackpotChance *
-                                settings.pullPriceFactor;
+                                settings.pullPriceFactor 
+                                * prizeBanner.jackpot.stackCount
+                                ;
 
         AddConsolations(prizeBanner,
-            prizeBanner.jackpot.MarketValue * settings.consolationChance);
+            prizeBanner.jackpot.MarketValue * prizeBanner.jackpot.stackCount * settings.consolationChance);
         
         return prizeBanner;
     }
@@ -188,7 +202,7 @@ public class GameComponent_GachaTracker : GameComponent
             {
                 // pityCount = 0;
                 var jackpot = SelectJackpot(prizeBanner);
-                pitySilverReserve = Math.Max(0, pitySilverReserve - (int)(jackpot.MarketValue * prizeBanner.def.valueMultiplier * settings.pullPriceFactor));
+                pitySilverReserve = Math.Max(0, pitySilverReserve - (int)(jackpot.MarketValue * jackpot.stackCount * prizeBanner.def.valueMultiplier * settings.pullPriceFactor * jackpot.stackCount));
                 Find.LetterStack.ReceiveLetter("ArchoGacha_JackpotLetterLabel".Translate(), "ArchoGacha_JackpotLetter".Translate(jackpot.LabelCap),ArchoGachaDefOf.ArchoGacha_Jackpot, jackpot, hyperlinkThingDefs: new List<ThingDef>() {jackpot.def});
                 return jackpot;
             }
@@ -206,7 +220,7 @@ public class GameComponent_GachaTracker : GameComponent
             default:
             {
                 var trashFiltered = trash
-                    .Where(t => t.BaseMarketValue <= prizeBanner.pullPrice)
+                    .Where(t => t.BaseMarketValue <= prizeBanner.pullPrice/settings.pullPriceFactor)
                     .ToList();
                 var trashDef = trashFiltered.NullOrEmpty()
                     ? ThingDefOf.WoodLog
@@ -216,9 +230,6 @@ public class GameComponent_GachaTracker : GameComponent
         }
     }
 
-    //public int pityCount = 0;
-
-    
     public Thing SelectJackpot(PrizeBanner prizeBanner)
     {
         if ((Rand.Chance(settings.getFeatured) || lostFiftyFifty) && prizeBanner.jackpot != null)
@@ -240,7 +251,7 @@ public class GameComponent_GachaTracker : GameComponent
         }
 
         lostFiftyFifty = true;
-        return prizeBanner.GeneratePrize(PrizeCategory.Jackpot, prizeBanner.PityThreshold, true);
+        return prizeBanner.GeneratePrize(PrizeCategory.Jackpot, prizeBanner.PityThreshold/settings.pullPriceFactor, true);
     }
 
     public Thing SelectConsolation(PrizeBanner prizeBanner)
@@ -262,7 +273,7 @@ public class GameComponent_GachaTracker : GameComponent
             // Log.Message("Won 50/50, deploying new item:");
         }
         return prizeBanner.GeneratePrize(PrizeCategory.Consolation,
-            prizeBanner.PityThreshold * settings.consolationChance);
+            prizeBanner.PityThreshold / settings.pullPriceFactor * settings.consolationChance);
     }
 
     public GameComponent_GachaTracker(): base()

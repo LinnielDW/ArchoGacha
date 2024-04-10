@@ -7,7 +7,7 @@ public class PrizeBannerDef : Def
     public Type prizeBannerClass = typeof(PrizeBanner);
     public IntRange spawnCountRange = IntRange.one;
     public IntRange consolationCountRange = new(2, 3);
-    public ThingCategoryDef thingCategoryDef;
+    public List<ThingCategoryDef> includeCategoryDefs = new();
     public List<ThingCategoryDef> excludedCategoryDefs = new();
     public TechLevel minTechLevel = TechLevel.Undefined;
     public float valueMultiplier = 1f;

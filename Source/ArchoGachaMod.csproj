@@ -67,7 +67,7 @@
         <Compile Include="GameComponents\GameComponent_GachaTracker.cs" />
         <Compile Include="HarmonyPatches\Building_CommsConsole_GetFloatMenuOptions_Patch.cs" />
         <Compile Include="PrizeBanner.cs" />
-<!--        <Compile Include="PrizeBannerClasses\BionicPrizeBanner.cs" />-->
+        <Compile Include="PrizeBannerClasses\StackablePrizeBanner.cs" />
         <Compile Include="PrizeBannerClasses\EquipmentPrizeBanner.cs" />
         <Compile Include="PrizeBannerDef.cs" />
         <Compile Include="Settings\ArchoGachaSettings.cs" />

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using ArchoGacha.Utils;
 
 namespace ArchoGacha;
@@ -63,7 +64,11 @@ public abstract class PrizeBanner : IExposable
             {
                 filterInt = new ThingFilter();
 
-                filterInt.SetAllow(def.thingCategoryDef, true);
+                // filterInt.SetAllow(def.includeCategoryDefs, true);
+                foreach (var inclusion in def.includeCategoryDefs)
+                {
+                    filterInt.SetAllow(inclusion, true);
+                }
                 foreach (var exclusion in def.excludedCategoryDefs)
                 {
                     filterInt.SetAllow(exclusion, false);

@@ -4,10 +4,9 @@ using ArchoGacha.Utils;
 
 namespace ArchoGacha.PrizeBannerClasses;
 
-//TODO: consider: don't need?
-public class BionicPrizeBanner : PrizeBanner
+public class StackablePrizeBanner : PrizeBanner
 {
-    public override Thing SelectPrizeDef(PrizeCategory prizeCategory,
+    protected override Thing SelectPrizeDef(PrizeCategory prizeCategory,
         float valueMaxOverride = 0F, bool excludeJackpotDef = false)
     {
         var req = new ThingSetMakerParams
@@ -18,15 +17,20 @@ public class BionicPrizeBanner : PrizeBanner
         };
 
         var allowedDefs = ThingSetMakerUtility.GetAllowedThingDefs(req);
-        var thingStuffPairs =
-            CalculateAllowedThingStuffPairs(def, allowedDefs,
-                prizeCategory, valueMaxOverride).ToList();
+        var thingStuffPairs = CalculateAllowedThingStuffPairs(allowedDefs, prizeCategory).ToList();
 
         var x = thingStuffPairs.RandomElement();
         
         var t = ThingMaker.MakeThing(x.thing, x.stuff);
-        if (!ArchoGachaUtils.IsValidStuffPair(def, prizeCategory, x,
-                valueMaxOverride))
+        //too expensive
+        
+        var marketValue = t.MarketValue * def.valueMultiplier;
+        if (valueMaxOverride != 0f && marketValue >= valueMaxOverride * 0.5f && prizeCategory == PrizeCategory.Consolation)
+        {
+            return null;
+        }
+
+        if (!IsValidStuffPair(def, prizeCategory, t, valueMaxOverride))
         {
             if (prizeCategory == PrizeCategory.Jackpot)
             {
@@ -37,9 +41,7 @@ public class BionicPrizeBanner : PrizeBanner
                 else if (valueMaxOverride == 0f && 
                          t.MarketValue < Math.Max(settings.minJackpotOffset, def.minJackpotMarketValue))
                 {
-                    t.stackCount = (int)(Math.Max(settings.minJackpotOffset,
-                                             def.minJackpotMarketValue) /
-                                         t.MarketValue);
+                    t.stackCount = (int)(Math.Max(settings.minJackpotOffset, def.minJackpotMarketValue) / t.MarketValue);
                 }
             }
             else
@@ -57,16 +59,12 @@ public class BionicPrizeBanner : PrizeBanner
                     t.stackCount = (int)(valueMaxOverride / t.MarketValue);
                 }
             }
-
-
         }
 
-
         return t;
+
+
         // var t = new ThingSetMaker_StackCount().Generate(req);
-
-
-
         /*switch (prizeCategory)
         {
             case PrizeCategory.Jackpot:
@@ -87,8 +85,8 @@ public class BionicPrizeBanner : PrizeBanner
     }
     
     public static IEnumerable<ThingStuffPairWithQuality>
-        CalculateAllowedThingStuffPairs(PrizeBannerDef bannerDef,IEnumerable<ThingDef> allowed,
-            PrizeCategory prizeCategory, float valueMaxOverride = 0f)
+        CalculateAllowedThingStuffPairs(IEnumerable<ThingDef> allowed,
+            PrizeCategory prizeCategory)
     {
         var qualityGenerator = ArchoGachaUtils.QualityFromPrizeCat(prizeCategory);
         foreach (var thingDef in allowed)
@@ -113,6 +111,32 @@ public class BionicPrizeBanner : PrizeBanner
             bool IsDerpValidator(ThingDef stuffDef) =>
                 !ThingSetMakerUtility.IsDerpAndDisallowed(thingDef, stuffDef,
                     qualityGenerator);
+        }
+    }
+    
+    public static bool IsValidStuffPair(PrizeBannerDef bannerDef,
+        PrizeCategory prizeCategory,
+        Thing t, float valueMaxOverride = 0f)
+    {
+        var marketValue = t.MarketValue * bannerDef.valueMultiplier;
+        switch (prizeCategory)
+        {
+            case PrizeCategory.Jackpot:
+            {
+                return (valueMaxOverride == 0f && 
+                        marketValue >= Math.Max(settings.minJackpotOffset, bannerDef.minJackpotMarketValue)) ||
+                       valueMaxOverride != 0f && marketValue <= valueMaxOverride && marketValue >= valueMaxOverride * 0.75f;
+            }
+            case PrizeCategory.Consolation:
+            default:
+            {
+                Log.Message(bannerDef.label);
+                Log.Message(valueMaxOverride);
+                return (settings.useGlobalConsolationOffset && 
+                        marketValue >= Math.Max(settings.minConsolationOffset, bannerDef.minConsolationMarketValue) && 
+                        marketValue <= settings.minJackpotOffset) || 
+                       (valueMaxOverride != 0f && marketValue <= valueMaxOverride * 0.33f);
+            }
         }
     }
 }

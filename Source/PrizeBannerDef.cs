@@ -11,6 +11,8 @@ public class PrizeBannerDef : Def
     public List<ThingCategoryDef> excludedCategoryDefs = new();
     public TechLevel minTechLevel = TechLevel.Undefined;
     public float valueMultiplier = 1f;
+    public float selectionWeight = 500;
+    public float displayPriority = 1;
 
     public float minJackpotMarketValue;
     

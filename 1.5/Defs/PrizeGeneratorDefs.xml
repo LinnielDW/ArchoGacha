@@ -14,6 +14,8 @@
         </excludedCategoryDefs>
         <minTechLevel>Industrial</minTechLevel>
         <minJackpotMarketValue>2500</minJackpotMarketValue>
+        <selectionWeight>750</selectionWeight>
+        <displayPriority>999</displayPriority>
         <!--        <minConsolationMarketValue>1000</minConsolationMarketValue>-->
     </ArchoGacha.PrizeBannerDef>
     <ArchoGacha.PrizeBannerDef>
@@ -26,6 +28,7 @@
         </includeCategoryDefs>
         <minTechLevel>Medieval</minTechLevel>
         <minJackpotMarketValue>2500</minJackpotMarketValue>
+        <displayPriority>998</displayPriority>
         <!--        <minConsolationMarketValue>1000</minConsolationMarketValue>-->
     </ArchoGacha.PrizeBannerDef>
     
@@ -56,6 +59,8 @@
         </includeCategoryDefs>
         <minTechLevel>Medieval</minTechLevel>
         <minJackpotMarketValue>2500</minJackpotMarketValue>
+        <selectionWeight>350</selectionWeight>
+        <displayPriority>997</displayPriority>
         <!--        <minConsolationMarketValue>1000</minConsolationMarketValue>-->
     </ArchoGacha.PrizeBannerDef>
 
@@ -68,7 +73,9 @@
             <li>BodyParts</li>
         </includeCategoryDefs>
         <!--        <minTechLevel>Medieval</minTechLevel>-->
-        <minJackpotMarketValue>2000</minJackpotMarketValue>
+        <minJackpotMarketValue>1500</minJackpotMarketValue>
+        <selectionWeight>250</selectionWeight>
+        <displayPriority>950</displayPriority>
     </ArchoGacha.PrizeBannerDef>
 
     <ArchoGacha.PrizeBannerDef>
@@ -80,26 +87,28 @@
             <li>BuildingsArt</li>
         </includeCategoryDefs>
         <minJackpotMarketValue>2000</minJackpotMarketValue>
+        <selectionWeight>100</selectionWeight>
     </ArchoGacha.PrizeBannerDef>
 
     <ArchoGacha.PrizeBannerDef>
         <defName>ArchoGacha_Book</defName>
-        <label>Books Banner</label>
+        <label>Readables Banner</label>
         <prizeBannerClass>ArchoGacha.PrizeBannerClasses.EquipmentPrizeBanner</prizeBannerClass>
-        <spawnCountRange>1~1</spawnCountRange>
+        <spawnCountRange>0~1</spawnCountRange>
         <includeCategoryDefs>
             <li>Books</li>
             <li>Techprints</li>
         </includeCategoryDefs>
         <minJackpotMarketValue>750</minJackpotMarketValue>
-        <valueMultiplier>1.4</valueMultiplier>
+<!--        <valueMultiplier>1.4</valueMultiplier>-->
+        <selectionWeight>150</selectionWeight>
     </ArchoGacha.PrizeBannerDef>
     
     <ArchoGacha.PrizeBannerDef>
         <defName>ArchoGacha_Consumable</defName>
         <label>Items Banner</label>
         <prizeBannerClass>ArchoGacha.PrizeBannerClasses.StackablePrizeBanner</prizeBannerClass>
-        <spawnCountRange>1~1</spawnCountRange>
+        <spawnCountRange>0~1</spawnCountRange>
         <includeCategoryDefs>
             <li>Manufactured</li>
             <li>Neurotrainers</li>
@@ -110,6 +119,8 @@
             <li>Textiles</li>
         </excludedCategoryDefs>
         <minJackpotMarketValue>2500</minJackpotMarketValue>
+        <selectionWeight>200</selectionWeight>
+        <displayPriority>1</displayPriority>
     </ArchoGacha.PrizeBannerDef>
 
 <!--     TODO: nice to haves -->

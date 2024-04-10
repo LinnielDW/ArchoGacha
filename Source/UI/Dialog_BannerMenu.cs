@@ -27,7 +27,7 @@ public class Dialog_BannerMenu : Window
         get
         {
             float xSize = 730;
-            float ySize = 420;
+            float ySize = 370;
             return new Vector2(xSize, ySize);
         }
     }

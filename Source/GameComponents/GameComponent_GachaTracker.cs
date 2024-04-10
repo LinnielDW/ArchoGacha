@@ -60,7 +60,8 @@ public class GameComponent_GachaTracker : GameComponent
         {
             while (activeBanners.Count < settings.bannerLimit)
             {
-                var banner = DefDatabase<PrizeBannerDef>.AllDefsListForReading.Where(def => def.spawnCountRange.max < activeBanners.Count(activeBanner => activeBanner.def == def)).RandomElement();
+                var banner = DefDatabase<PrizeBannerDef>.AllDefsListForReading.Where(def => def.spawnCountRange.max > activeBanners.Count(activeBanner => activeBanner.def == def))
+                    .RandomElementByWeight(d => d.selectionWeight);
                 activeBanners.Add(GenerateBannerFromDef(banner));
             }
         }
@@ -74,6 +75,7 @@ public class GameComponent_GachaTracker : GameComponent
                 }
             }
         }
+        activeBanners.SortByDescending(b => b.def.displayPriority);
 
         bannersEndTick = Find.TickManager.TicksGame +
                          (int)(60000f * settings.bannerDurationDays);
@@ -107,9 +109,8 @@ public class GameComponent_GachaTracker : GameComponent
         prizeBanner.pullPrice = prizeBanner.jackpot.MarketValue * 
                                 prizeBanner.def.valueMultiplier *
                                 settings.jackpotChance *
-                                settings.pullPriceFactor 
-                                * prizeBanner.jackpot.stackCount
-                                ;
+                                settings.pullPriceFactor *
+                                prizeBanner.jackpot.stackCount;
 
         AddConsolations(prizeBanner,
             prizeBanner.jackpot.MarketValue * prizeBanner.jackpot.stackCount * settings.consolationChance);

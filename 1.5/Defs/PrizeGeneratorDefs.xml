@@ -13,11 +13,12 @@
             <li>Grenades</li>
         </excludedCategoryDefs>
         <minTechLevel>Industrial</minTechLevel>
-        <minJackpotMarketValue>2500</minJackpotMarketValue>
+        <minJackpotMarketValue>2000</minJackpotMarketValue>
         <selectionWeight>750</selectionWeight>
         <displayPriority>999</displayPriority>
-        <!--        <minConsolationMarketValue>1000</minConsolationMarketValue>-->
+        <valueMultiplier>1.5</valueMultiplier>
     </ArchoGacha.PrizeBannerDef>
+
     <ArchoGacha.PrizeBannerDef>
         <defName>ArchoGacha_WeaponMelee</defName>
         <label>Melee Weapons Banner</label>
@@ -27,9 +28,8 @@
             <li>WeaponsMelee</li>
         </includeCategoryDefs>
         <minTechLevel>Medieval</minTechLevel>
-        <minJackpotMarketValue>2500</minJackpotMarketValue>
+        <minJackpotMarketValue>2250</minJackpotMarketValue>
         <displayPriority>998</displayPriority>
-        <!--        <minConsolationMarketValue>1000</minConsolationMarketValue>-->
     </ArchoGacha.PrizeBannerDef>
     
     <!--<ArchoGacha.PrizeBannerDef>
@@ -46,7 +46,6 @@
         <minJackpotMarketValue>2500</minJackpotMarketValue>
     </ArchoGacha.PrizeBannerDef>-->
 
-    <!-- TODO: check numbers -->
     <ArchoGacha.PrizeBannerDef>
         <defName>ArchoGacha_Armor</defName>
         <label>Armor Banner</label>
@@ -59,7 +58,6 @@
         <minJackpotMarketValue>2500</minJackpotMarketValue>
         <selectionWeight>350</selectionWeight>
         <displayPriority>997</displayPriority>
-        <!--        <minConsolationMarketValue>1000</minConsolationMarketValue>-->
     </ArchoGacha.PrizeBannerDef>
 
     <ArchoGacha.PrizeBannerDef>
@@ -70,7 +68,6 @@
         <includeCategoryDefs>
             <li>BodyParts</li>
         </includeCategoryDefs>
-        <!--        <minTechLevel>Medieval</minTechLevel>-->
         <minJackpotMarketValue>1500</minJackpotMarketValue>
         <valueMultiplier>2.5</valueMultiplier>
         <selectionWeight>250</selectionWeight>

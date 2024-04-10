@@ -8,6 +8,8 @@
     <packageId>Arquebus.ArchoGacha</packageId>
     <description>ArchoGacha</description>
 
+<!--    TODO: make preview img and mod icon-->
+<!--    TODO: add description-->
     <loadAfter>
         <li>Ludeon.RimWorld</li>
         <li>Ludeon.RimWorld.Ideology</li>

@@ -55,13 +55,13 @@ public static class ArchoGachaUtils
         PrizeCategory prizeCategory,
         ThingStuffPairWithQuality stuffPair, float valueMaxOverride = 0f)
     {
-        var marketValue = stuffPair.GetStatValue(StatDefOf.MarketValue) * bannerDef.valueMultiplier;
+        var marketValue = stuffPair.GetStatValue(StatDefOf.MarketValue) ;
         switch (prizeCategory)
         {
             case PrizeCategory.Jackpot:
             {
                 return (valueMaxOverride == 0f && 
-                        marketValue >= Math.Max(settings.minJackpotOffset, bannerDef.minJackpotMarketValue)) ||
+                        marketValue  * bannerDef.valueMultiplier >= Math.Max(settings.minJackpotOffset, bannerDef.minJackpotMarketValue)) ||
                        valueMaxOverride != 0f && marketValue <= valueMaxOverride && marketValue >= valueMaxOverride * 0.75f;
             }
             case PrizeCategory.Consolation:
@@ -70,7 +70,7 @@ public static class ArchoGachaUtils
                 return (settings.useGlobalConsolationOffset && 
                         marketValue >= Math.Max(settings.minConsolationOffset, bannerDef.minConsolationMarketValue) && 
                         marketValue <= settings.minJackpotOffset) || 
-                       (valueMaxOverride != 0f && marketValue <= valueMaxOverride);
+                       (valueMaxOverride != 0f && marketValue / bannerDef.valueMultiplier <= valueMaxOverride);
             }
         }
     }

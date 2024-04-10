@@ -32,7 +32,7 @@ public class StackablePrizeBanner : PrizeBanner
         var t = ThingMaker.MakeThing(x.thing, x.stuff);
         //too expensive
         
-        var marketValue = t.MarketValue * def.valueMultiplier * t.stackCount;
+        var marketValue = t.MarketValue * t.stackCount;
 
         if (!IsAttractiveEnough(def, prizeCategory, t, valueMaxOverride))
         {

@@ -74,6 +74,7 @@
         </includeCategoryDefs>
         <!--        <minTechLevel>Medieval</minTechLevel>-->
         <minJackpotMarketValue>1500</minJackpotMarketValue>
+        <valueMultiplier>2.5</valueMultiplier>
         <selectionWeight>250</selectionWeight>
         <displayPriority>950</displayPriority>
     </ArchoGacha.PrizeBannerDef>
@@ -100,7 +101,7 @@
             <li>Techprints</li>
         </includeCategoryDefs>
         <minJackpotMarketValue>750</minJackpotMarketValue>
-<!--        <valueMultiplier>1.4</valueMultiplier>-->
+        <valueMultiplier>3</valueMultiplier>
         <selectionWeight>150</selectionWeight>
     </ArchoGacha.PrizeBannerDef>
     

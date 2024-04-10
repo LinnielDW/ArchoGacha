@@ -1,6 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
     <ArchoGachaCategory>ArchoGacha</ArchoGachaCategory>
+    <ArchoGacha_CallLabel>View Active ArchoGacha Banners</ArchoGacha_CallLabel>
+    <GetInfoText>ArchoGacha</GetInfoText>
     <ArchoGacha_GachaBanners>Banners</ArchoGacha_GachaBanners>
     <ArchoGacha_Pity>Pity reserve: {0} silver</ArchoGacha_Pity>
     <ArchoGacha_PityCount>Pity count: {0}</ArchoGacha_PityCount>

@@ -7,7 +7,7 @@ using static ArchoGacha.GameComponents.PrizePickerUtil;
 
 namespace ArchoGacha.GameComponents;
 
-public class GameComponent_GachaTracker : GameComponent
+public class GameComponent_GachaTracker : GameComponent, ICommunicable
 {
     public List<PrizeBanner> activeBanners = new();
     public float pitySilverReserve;
@@ -145,5 +145,34 @@ public class GameComponent_GachaTracker : GameComponent
     }
     public GameComponent_GachaTracker(Game game)
     {
+    }
+
+    public string GetCallLabel()
+    {
+        return "ArchoGacha_CallLabel".Translate();
+    }
+
+    public string GetInfoText()
+    {
+        return "ArchoGacha_CallText".Translate();
+    }
+
+    public void TryOpenComms(Pawn negotiator)
+    {
+        Find.WindowStack.Add(new Dialog_BannerMenu(this));
+    }
+
+    public Faction GetFaction()
+    {
+        return null;
+    }
+
+    public FloatMenuOption CommFloatMenuOption(Building_CommsConsole console,
+        Pawn negotiator)
+    {
+        return FloatMenuUtility.DecoratePrioritizedTask(new FloatMenuOption(GetCallLabel(), delegate
+        {
+            console.GiveUseCommsJob(negotiator, this);
+        }, MenuOptionPriority.InitiateSocial), negotiator, console);
     }
 }

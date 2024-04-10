@@ -28,4 +28,16 @@
     <ArchoGacha_Instructions_RatesConsolation>- When a rare reward is obtained, there is a {0} chance to obtain a featured rare reward.</ArchoGacha_Instructions_RatesConsolation>
     <ArchoGacha_Instructions_FeatureSingleton>- Featured rewards can only be obtained once per banner.</ArchoGacha_Instructions_FeatureSingleton>
     <ArchoGacha_Instructions_PityTransfer>- Pity reserves and feature guarantees are shared between banners and carry over between banner refreshes.</ArchoGacha_Instructions_PityTransfer>
+
+    <ArchoGacha_bannerDurationDays>Banner duration (days)</ArchoGacha_bannerDurationDays>
+    <ArchoGacha_minJackpotOffset>Minimum Ultra-Rare prize value</ArchoGacha_minJackpotOffset>
+<!--    <ArchoGacha_useGlobalConsolationOffset></ArchoGacha_useGlobalConsolationOffset>-->
+<!--    <ArchoGacha_minConsolationOffset></ArchoGacha_minConsolationOffset>-->
+    <ArchoGacha_limitBanners>Use active banner limit</ArchoGacha_limitBanners>
+    <ArchoGacha_bannerLimit>Active banner limit</ArchoGacha_bannerLimit>
+    <ArchoGacha_jackpotChance>Ultra-rare chance</ArchoGacha_jackpotChance>
+    <ArchoGacha_pullPriceFactor>ArchoGacha profit margin</ArchoGacha_pullPriceFactor>
+    <ArchoGacha_getFeatured>Ultra-rare featured chance</ArchoGacha_getFeatured>
+    <ArchoGacha_getConsolationFeatured>Consolation featured chance</ArchoGacha_getConsolationFeatured>
+    <ArchoGacha_debugAlwaysPullable>DEBUG: Always pullable</ArchoGacha_debugAlwaysPullable>
 </LanguageData>

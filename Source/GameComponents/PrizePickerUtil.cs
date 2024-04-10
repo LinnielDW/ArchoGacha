@@ -22,7 +22,7 @@ public static class PrizePickerUtil
                 // pityCount = 0;
                 var jackpot = gachaTracker.SelectJackpot(prizeBanner);
                 gachaTracker.pitySilverReserve = Math.Max(0, gachaTracker.pitySilverReserve - (int)(jackpot.MarketValue * jackpot.stackCount * settings.pullPriceFactor * jackpot.stackCount));
-                Find.LetterStack.ReceiveLetter("ArchoGacha_JackpotLetterLabel".Translate(), "ArchoGacha_JackpotLetter".Translate(jackpot.LabelCap),ArchoGachaDefOf.ArchoGacha_Jackpot, jackpot, hyperlinkThingDefs: new List<ThingDef>() {jackpot.def});
+                Find.LetterStack.ReceiveLetter("ArchoGacha_JackpotLetterLabel".Translate(), "ArchoGacha_JackpotLetter".Translate(jackpot.LabelShortCap),ArchoGachaDefOf.ArchoGacha_Jackpot, jackpot, hyperlinkThingDefs: new List<ThingDef>() {jackpot.def});
                 return jackpot;
             }
             case var _ when randOutcome < settings.consolationChance:
@@ -31,7 +31,7 @@ public static class PrizePickerUtil
                 var consolation = SelectConsolation(prizeBanner);
                 if (consolation != null)
                 {
-                    Messages.Message("ArchoGacha_Consolation".Translate(consolation.LabelShort),consolation, MessageTypeDefOf.PositiveEvent);
+                    Messages.Message("ArchoGacha_Consolation".Translate(consolation.LabelShortCap),consolation, MessageTypeDefOf.PositiveEvent);
                     return consolation;
                 }
                 goto default;

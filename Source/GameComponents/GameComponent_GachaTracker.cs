@@ -81,7 +81,6 @@ public class GameComponent_GachaTracker : GameComponent
         bannersEndTick = Find.TickManager.TicksGame +
                          (int)(60000f * settings.bannerDurationDays);
 
-        //TODO: add translation strings
         Find.LetterStack.ReceiveLetter(
             "ArchoGacha_BannersRefreshedLabel".Translate(),
             "ArchoGacha_BannersRefreshed".Translate(),

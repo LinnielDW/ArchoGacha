@@ -119,16 +119,18 @@ public class Dialog_BannerMenu : Window
         if (selectedBanner != null)
         {
             Text.Font = GameFont.Medium;
-            var bannerTooltip = new StringBuilder().AppendLine($"Probability Breakdown:");
-            bannerTooltip.AppendLine($"- The base chance to obtain an ultra rare reward is {settings.jackpotChance.ToStringPercent("0.#")}.");
-            bannerTooltip.AppendLine($"     You are guaranteed to obtain an ultra rare reward should your pity reserve exceed {(int)selectedBanner.PityThreshold}.");
-            bannerTooltip.AppendLine($"- The base chance to obtain a rare reward is {settings.consolationChance.ToStringPercent("0.#")}.");
-            bannerTooltip.AppendLine($"\nBoosted Rate:");
-            bannerTooltip.AppendLine($"- The first time an ultra rare reward is obtained, there is a {settings.getFeatured.ToStringPercent("0.#")} chance to obtain the featured reward.");
-            bannerTooltip.AppendLine($"     If the ultra rare reward you obtain is not the featured reward, then the next ultra rare reward you obtain is guaranteed to be the featured ultra rare reward.");
-            bannerTooltip.AppendLine($"- When a rare reward is obtained, there is a {settings.getConsolationFeatured.ToStringPercent("0.#")} chance to obtain a featured rare reward.");
-            bannerTooltip.AppendLine($"- Featured rewards can only be obtained once per banner.");
-            bannerTooltip.AppendLine($"- Pity reserves and feature guarantees are shared between banners and carry over between banner refreshes.");
+            var pityThresholdString = ((int)selectedBanner.PityThreshold).ToString();
+            var bannerTooltip = new StringBuilder();
+            bannerTooltip.AppendLine("ArchoGacha_Instructions_ProbBreakdown".Translate());
+            bannerTooltip.AppendLine(string.Format("ArchoGacha_Instructions_ProbJackpot".Translate().Resolve(),settings.jackpotChance.ToStringPercent("0.#").Colorize(teal)));
+            bannerTooltip.AppendLine(string.Format("ArchoGacha_Instructions_ProbPity".Translate().Resolve(),pityThresholdString.Colorize(teal)));
+            bannerTooltip.AppendLine(string.Format("ArchoGacha_Instructions_ProbConsolation".Translate().Resolve(),settings.consolationChance.ToStringPercent("0.#").Colorize(teal)));
+            bannerTooltip.AppendLine("ArchoGacha_Instructions_Rates".Translate());
+            bannerTooltip.AppendLine(string.Format("ArchoGacha_Instructions_RatesJackpot".Translate().Resolve(),settings.getFeatured.ToStringPercent("0.#").Colorize(teal)));
+            bannerTooltip.AppendLine("ArchoGacha_Instructions_RatesJackpotLoss".Translate());
+            bannerTooltip.AppendLine(string.Format("ArchoGacha_Instructions_RatesConsolation".Translate().Resolve(),settings.getConsolationFeatured.ToStringPercent("0.#").Colorize(teal)));
+            bannerTooltip.AppendLine("ArchoGacha_Instructions_FeatureSingleton".Translate());
+            bannerTooltip.AppendLine("ArchoGacha_Instructions_PityTransfer".Translate());
             
             
             var bannerNameRect = listingStandard.Label(selectedBanner.def.LabelCap);
@@ -223,7 +225,7 @@ public class Dialog_BannerMenu : Window
         else
         {
             Text.Font = GameFont.Small;
-            listingStandard.Label("ArchoGacha_PleaseSelectBanner".Translate().Colorize(new Color(0.9f, 0.9f, 0.3f)));
+            listingStandard.Label("ArchoGacha_PleaseSelectBanner".Translate().Colorize(yellow));
             
             Text.Font = GameFont.Tiny;
             GUI.color = Color.gray;
@@ -237,17 +239,18 @@ public class Dialog_BannerMenu : Window
             Widgets.DrawLineHorizontal(0, listingStandard.CurHeight , listingStandard.ColumnWidth, Color.gray);
             listingStandard.Gap(4f);
 
-            var tooltip =
-                new StringBuilder().AppendLineTagged($"Probability Breakdown:");
-            tooltip.AppendLine($"- The base chance to obtain an ultra rare reward is <color=teal>{settings.jackpotChance.ToStringPercent("0.#")}</color>.");
-            tooltip.AppendLine($"     You are guaranteed to obtain an ultra rare reward should your pity reserve exceed the market value of the featured ultra rare reward.");
-            tooltip.AppendLine($"- The base chance to obtain a rare reward is <color=teal>{settings.consolationChance.ToStringPercent("0.#")}</color>.");
-            tooltip.AppendLine($"\nBoosted Rate:");
-            tooltip.AppendLine($"- The first time an ultra rare reward is obtained, there is a <color=teal>{settings.getFeatured.ToStringPercent("0.#")}</color> chance to obtain the featured reward.");
-            tooltip.AppendLine($"     If the ultra rare reward you obtain is not the featured reward, then the next ultra rare reward you obtain is guaranteed to be the featured ultra rare reward.");
-            tooltip.AppendLine($"- When a rare reward is obtained, there is a <color=teal>{settings.getConsolationFeatured.ToStringPercent("0.#")}</color> chance to obtain a featured rare reward.");
-            tooltip.AppendLine($"- Featured rewards can only be obtained once per banner.");
-            tooltip.AppendLine($"- Pity reserves and feature guarantees are shared between banners and carry over between banner refreshes.");
+            
+            var tooltip = new StringBuilder();
+            tooltip.AppendLine("ArchoGacha_Instructions_ProbBreakdown".Translate());
+            tooltip.AppendLine(string.Format("ArchoGacha_Instructions_ProbJackpot".Translate().Resolve(),settings.jackpotChance.ToStringPercent("0.#").Colorize(teal)));
+            tooltip.AppendLine("ArchoGacha_Instructions_ProbPityUncalculated".Translate());
+            tooltip.AppendLine(string.Format("ArchoGacha_Instructions_ProbConsolation".Translate().Resolve(),settings.consolationChance.ToStringPercent("0.#").Colorize(teal)));
+            tooltip.AppendLine("ArchoGacha_Instructions_Rates".Translate());
+            tooltip.AppendLine(string.Format("ArchoGacha_Instructions_RatesJackpot".Translate().Resolve(),settings.getFeatured.ToStringPercent("0.#").Colorize(teal)));
+            tooltip.AppendLine("ArchoGacha_Instructions_RatesJackpotLoss".Translate());
+            tooltip.AppendLine(string.Format("ArchoGacha_Instructions_RatesConsolation".Translate().Resolve(),settings.getConsolationFeatured.ToStringPercent("0.#").Colorize(teal)));
+            tooltip.AppendLine("ArchoGacha_Instructions_FeatureSingleton".Translate());
+            tooltip.AppendLine("ArchoGacha_Instructions_PityTransfer".Translate());
             
             listingStandard.Label(tooltip.ToString().Trim().TruncateHeight(rghtInner.width, rghtInner.height - listingStandard.CurHeight));
         }
@@ -278,6 +281,8 @@ public class Dialog_BannerMenu : Window
     private static readonly Color jackpotSecondaryCol = new Color(0.612F, 0.357F, 0.294F);
     private static readonly Color prizePrimaryCol = new Color(0.71f, 0.71f, 0.71f);
     private static readonly Color prizeSecondaryCol = new Color(0.41f, 0.41f, 0.41f);
+    private static readonly Color teal = new Color(0.008F, 0.58F, 0.53F);
+    private static readonly Color yellow = new Color(0.9f, 0.9f, 0.3f);
 
     #region Draw icon methods
     

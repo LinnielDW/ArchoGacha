@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
+    <ArchoGachaCategory>ArchoGacha</ArchoGachaCategory>
     <ArchoGacha_GachaBanners>Banners</ArchoGacha_GachaBanners>
     <ArchoGacha_Pity>Pity reserve: {0} silver</ArchoGacha_Pity>
     <ArchoGacha_PityCount>Pity count: {0}</ArchoGacha_PityCount>
@@ -8,6 +9,21 @@
     <ArchoGacha_PleaseSelectBanner>Please select a banner from the list on the left.</ArchoGacha_PleaseSelectBanner>
     
     <ArchoGacha_TimeRemaining>{0} remaining</ArchoGacha_TimeRemaining>
+    <ArchoGacha_BannersRefreshedLabel>ArchoGacha Banners Refreshed</ArchoGacha_BannersRefreshedLabel>
+    <ArchoGacha_BannersRefreshed>Dear creature,\n\nA new series of ArchoGacha Banners has become available.\n\nPlease got to a commms console to find out more!</ArchoGacha_BannersRefreshed>
+    <ArchoGacha_JackpotLetterLabel>Ultra-Rare Prize</ArchoGacha_JackpotLetterLabel>
+    <ArchoGacha_JackpotLetter>Congratulations creature, the ultra-Rare prize '{0}' is now yours!</ArchoGacha_JackpotLetter>
+    <ArchoGacha_Consolation>Rare prize: {0}</ArchoGacha_Consolation>
     
-    
+    <ArchoGacha_Instructions_ProbBreakdown>Probability Breakdown:</ArchoGacha_Instructions_ProbBreakdown>
+    <ArchoGacha_Instructions_ProbJackpot>- The base chance to obtain an ultra rare reward is {0}.</ArchoGacha_Instructions_ProbJackpot>
+    <ArchoGacha_Instructions_ProbPity>     You are guaranteed to obtain an ultra rare reward should your pity reserve exceed {0}.</ArchoGacha_Instructions_ProbPity>
+    <ArchoGacha_Instructions_ProbPityUncalculated>     You are guaranteed to obtain an ultra rare reward should your pity reserve exceed the market value of the featured ultra rare reward.</ArchoGacha_Instructions_ProbPityUncalculated>
+    <ArchoGacha_Instructions_ProbConsolation>- The base chance to obtain a rare reward is {0}.</ArchoGacha_Instructions_ProbConsolation>
+    <ArchoGacha_Instructions_Rates>\nBoosted Rates:</ArchoGacha_Instructions_Rates>
+    <ArchoGacha_Instructions_RatesJackpot>- The first time an ultra rare reward is obtained, there is a {0} chance to obtain the featured reward.</ArchoGacha_Instructions_RatesJackpot>
+    <ArchoGacha_Instructions_RatesJackpotLoss>     If the ultra rare reward you obtain is not the featured reward, then the next ultra rare reward you obtain is guaranteed to be the featured ultra rare reward.</ArchoGacha_Instructions_RatesJackpotLoss>
+    <ArchoGacha_Instructions_RatesConsolation>- When a rare reward is obtained, there is a {0} chance to obtain a featured rare reward.</ArchoGacha_Instructions_RatesConsolation>
+    <ArchoGacha_Instructions_FeatureSingleton>- Featured rewards can only be obtained once per banner.</ArchoGacha_Instructions_FeatureSingleton>
+    <ArchoGacha_Instructions_PityTransfer>- Pity reserves and feature guarantees are shared between banners and carry over between banner refreshes.</ArchoGacha_Instructions_PityTransfer>
 </LanguageData>

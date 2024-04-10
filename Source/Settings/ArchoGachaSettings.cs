@@ -4,7 +4,7 @@ namespace ArchoGacha.Settings;
 
 public class ArchoGachaSettings : ModSettings
 {
-    public float bannerDurationDays = 3.5f;
+    public float bannerDurationDays = 4f;
 
     public float minJackpotOffset = 500;
     public bool useGlobalConsolationOffset;

@@ -16,6 +16,8 @@
     <ArchoGacha_JackpotLetterLabel>Ultra-Rare Prize</ArchoGacha_JackpotLetterLabel>
     <ArchoGacha_JackpotLetter>Congratulations creature, the ultra-Rare prize '{0}' is now yours!</ArchoGacha_JackpotLetter>
     <ArchoGacha_Consolation>Rare prize: {0}</ArchoGacha_Consolation>
+    <ArchoGacha_ReplacedByRandom>A randomly generated prize</ArchoGacha_ReplacedByRandom>
+    <ArchoGacha_ReplacedByRandomDesc>Prizes in this tier have already been claimed or failed to generate and will instead be replaced by a random prize following the same rules.</ArchoGacha_ReplacedByRandomDesc>
     
     <ArchoGacha_Instructions_ProbBreakdown>Probability Breakdown:</ArchoGacha_Instructions_ProbBreakdown>
     <ArchoGacha_Instructions_ProbJackpot>- The base chance to obtain an ultra rare reward is {0}.</ArchoGacha_Instructions_ProbJackpot>

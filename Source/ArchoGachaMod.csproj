@@ -43,6 +43,9 @@
         <AboutFiles Include="..\About\**">
             <Link>About\%(RecursiveDir)%(Filename)%(Extension)</Link>
         </AboutFiles>
+        <version1_4 Include="..\1.4\**">
+            <Link>1.4\%(RecursiveDir)%(Filename)%(Extension)</Link>
+        </version1_4>
         <version1_5 Include="..\1.5\**">
             <Link>1.5\%(RecursiveDir)%(Filename)%(Extension)</Link>
         </version1_5>
@@ -50,7 +53,7 @@
 
 
     <ItemGroup>
-        <PackageReference Include="Krafs.Rimworld.Ref" Version="1.5.4059-beta" />
+        <PackageReference Include="Krafs.Rimworld.Ref" Version="1.5.4061" />
         <PackageReference Include="Lib.Harmony" Version="2.3.3">
             <ExcludeAssets>runtime</ExcludeAssets>
             <IncludeAssets>compile; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -113,6 +116,8 @@
         <Copy SourceFiles="@(AboutFiles)" DestinationFolder="$(ModLocation)\About\%(RecursiveDir)"
               SkipUnchangedFiles="true" />
         <Copy SourceFiles="@(version1_5)" DestinationFolder="$(ModLocation)\1.5\%(RecursiveDir)" Retries="3"
+              SkipUnchangedFiles="true" />
+        <Copy SourceFiles="@(version1_4)" DestinationFolder="$(ModLocation)\1.4\%(RecursiveDir)" Retries="3"
               SkipUnchangedFiles="true" />
         <Copy SourceFiles="..\LoadFolders.xml" DestinationFolder="$(ModLocation)" SkipUnchangedFiles="true" />
     </Target>

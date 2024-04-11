@@ -366,9 +366,9 @@ public class Dialog_BannerMenu : Window
         Text.Anchor = TextAnchor.UpperLeft;
         if (Mouse.IsOver(prizeRect))
         {
-            string tooltip = "ArchoGacha_ReplacedByRandom".Translate().AsTipTitle() +
+            string tooltip = "ArchoGacha_ReplacedByRandom".Translate().Resolve().AsTipTitle() +
                              "\n\n" +
-                             "A random item of comparable value to other rewards in the same tier.";
+                             "ArchoGacha_ReplacedByRandomDesc".Translate();
 
             TooltipHandler.TipRegion(prizeRect, tooltip);
         }

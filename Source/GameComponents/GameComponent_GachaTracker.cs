@@ -14,13 +14,13 @@ public class GameComponent_GachaTracker : GameComponent, ICommunicable
     public int bannersEndTick;
     public bool lostFiftyFifty;
 
-    public List<ThingDef> trash = new();
+    public List<ThingDef> trashGeneric = new();
 
     public override void FinalizeInit()
     {
         base.FinalizeInit();
         
-        trash = DefDatabase<ThingDef>.AllDefs.Where(d =>
+        trashGeneric = DefDatabase<ThingDef>.AllDefs.Where(d =>
             d.category == ThingCategory.Item &&
             d.tradeability.TraderCanSell() &&
             d.equipmentType == EquipmentType.None &&
@@ -81,10 +81,17 @@ public class GameComponent_GachaTracker : GameComponent, ICommunicable
         bannersEndTick = Find.TickManager.TicksGame +
                          (int)(60000f * settings.bannerDurationDays);
 
-        Find.LetterStack.ReceiveLetter(
-            "ArchoGacha_BannersRefreshedLabel".Translate(),
-            "ArchoGacha_BannersRefreshed".Translate(),
-            LetterDefOf.NeutralEvent);
+        if (settings.letterOnBannerRefresh)
+        {
+            Find.LetterStack.ReceiveLetter(
+                "ArchoGacha_BannersRefreshedLabel".Translate(),
+                "ArchoGacha_BannersRefreshed".Translate(),
+                LetterDefOf.NeutralEvent);
+        }
+        else
+        {
+            Messages.Message("ArchoGacha_BannersRefreshedMessage".Translate(), MessageTypeDefOf.NeutralEvent);
+        }
 
         //TODO: add debug info setting
         /*foreach (var banner in activeBanners)

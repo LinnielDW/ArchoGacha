@@ -5,6 +5,7 @@ namespace ArchoGacha.Settings;
 public class ArchoGachaSettings : ModSettings
 {
     public float bannerDurationDays = 4f;
+    public bool letterOnBannerRefresh = true;
 
     public float minJackpotOffset = 500f;
     public bool useGlobalConsolationOffset;
@@ -32,6 +33,7 @@ public class ArchoGachaSettings : ModSettings
 
         listingStandard.Begin(inRect);
         listingStandard.DrawLabelledNumericSetting(ref bannerDurationDays, "ArchoGacha_bannerDurationDays", 1f, 999999f);
+        listingStandard.CheckboxLabeled("ArchoGacha_letterOnBannerRefresh".Translate(), ref letterOnBannerRefresh);
         listingStandard.DrawLabelledNumericSetting(ref minJackpotOffset, "ArchoGacha_minJackpotOffset", 0f, 999999f);
         
         // listingStandard.CheckboxLabeled("ArchoGacha_useGlobalConsolationOffset".Translate(), ref useGlobalConsolationOffset, "Use the minConsolationOffset value to generate consolation prizes instead of the usual ");
@@ -61,6 +63,7 @@ public class ArchoGachaSettings : ModSettings
     public override void ExposeData()
     {
         Scribe_Values.Look(ref bannerDurationDays, "ArchoGacha_Label_bannerDurationDays", 4f);
+        Scribe_Values.Look(ref letterOnBannerRefresh, "ArchoGacha_Label_letterOnBannerRefresh", true);
         Scribe_Values.Look(ref minJackpotOffset, "ArchoGacha_Label_minJackpotOffset", 500f);
         Scribe_Values.Look(ref useGlobalConsolationOffset, "ArchoGacha_Label_useGlobalConsolationOffset");
         Scribe_Values.Look(ref minConsolationOffset, "ArchoGacha_Label_minConsolationOffset", 250f);

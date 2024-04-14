@@ -1,7 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <Defs>
-    <ArchoGacha.PrizeBannerDef>
+    <ArchoGacha.PrizeBannerDef Name="GachaTemplate" Abstract="True">
+        <spawnCountRange>0~1</spawnCountRange>
+        <trashOverrideDefs>
+            <li>WoodLog</li>
+            <li>Steel</li>
+            <li>Silver</li>
+            <li>Leather_Plain</li>
+        </trashOverrideDefs>
+        <minJackpotMarketValue>2000</minJackpotMarketValue>
+    </ArchoGacha.PrizeBannerDef>
+
+    <ArchoGacha.PrizeBannerDef ParentName="GachaTemplate">
         <defName>ArchoGacha_WeaponRanged</defName>
         <label>Ranged Weapons Banner</label>
         <prizeBannerClass>ArchoGacha.PrizeBannerClasses.EquipmentPrizeBanner</prizeBannerClass>
@@ -13,13 +24,12 @@
             <li>Grenades</li>
         </excludedCategoryDefs>
         <minTechLevel>Industrial</minTechLevel>
-        <minJackpotMarketValue>2000</minJackpotMarketValue>
         <selectionWeight>750</selectionWeight>
         <displayPriority>999</displayPriority>
         <valueMultiplier>1.5</valueMultiplier>
     </ArchoGacha.PrizeBannerDef>
 
-    <ArchoGacha.PrizeBannerDef>
+    <ArchoGacha.PrizeBannerDef ParentName="GachaTemplate">
         <defName>ArchoGacha_WeaponMelee</defName>
         <label>Melee Weapons Banner</label>
         <prizeBannerClass>ArchoGacha.PrizeBannerClasses.EquipmentPrizeBanner</prizeBannerClass>
@@ -46,7 +56,7 @@
         <minJackpotMarketValue>2500</minJackpotMarketValue>
     </ArchoGacha.PrizeBannerDef>-->
 
-    <ArchoGacha.PrizeBannerDef>
+    <ArchoGacha.PrizeBannerDef ParentName="GachaTemplate">
         <defName>ArchoGacha_Armor</defName>
         <label>Armor Banner</label>
         <prizeBannerClass>ArchoGacha.PrizeBannerClasses.EquipmentPrizeBanner</prizeBannerClass>
@@ -60,7 +70,7 @@
         <displayPriority>997</displayPriority>
     </ArchoGacha.PrizeBannerDef>
 
-    <ArchoGacha.PrizeBannerDef>
+    <ArchoGacha.PrizeBannerDef ParentName="GachaTemplate">
         <defName>ArchoGacha_BodyParts</defName>
         <label>Implants Banner</label>
         <prizeBannerClass>ArchoGacha.PrizeBannerClasses.EquipmentPrizeBanner</prizeBannerClass>
@@ -74,7 +84,7 @@
         <displayPriority>950</displayPriority>
     </ArchoGacha.PrizeBannerDef>
 
-    <ArchoGacha.PrizeBannerDef>
+    <ArchoGacha.PrizeBannerDef ParentName="GachaTemplate">
         <defName>ArchoGacha_Art</defName>
         <label>Art Banner</label>
         <prizeBannerClass>ArchoGacha.PrizeBannerClasses.EquipmentPrizeBanner</prizeBannerClass>
@@ -82,11 +92,10 @@
         <includeCategoryDefs>
             <li>BuildingsArt</li>
         </includeCategoryDefs>
-        <minJackpotMarketValue>2000</minJackpotMarketValue>
         <selectionWeight>100</selectionWeight>
     </ArchoGacha.PrizeBannerDef>
 
-    <ArchoGacha.PrizeBannerDef>
+    <ArchoGacha.PrizeBannerDef ParentName="GachaTemplate">
         <defName>ArchoGacha_Book</defName>
         <label>Readables Banner</label>
         <prizeBannerClass>ArchoGacha.PrizeBannerClasses.EquipmentPrizeBanner</prizeBannerClass>
@@ -100,7 +109,7 @@
         <selectionWeight>150</selectionWeight>
     </ArchoGacha.PrizeBannerDef>
     
-    <ArchoGacha.PrizeBannerDef>
+    <ArchoGacha.PrizeBannerDef ParentName="GachaTemplate">
         <defName>ArchoGacha_Consumable</defName>
         <label>Items Banner</label>
         <prizeBannerClass>ArchoGacha.PrizeBannerClasses.StackablePrizeBanner</prizeBannerClass>

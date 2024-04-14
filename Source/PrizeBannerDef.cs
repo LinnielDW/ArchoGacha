@@ -18,5 +18,7 @@ public class PrizeBannerDef : Def
     
     //the minimum value something can spawn when the settings.useGlobalConsolationOffset set to true
     public float minConsolationMarketValue = 100f;
-    
+
+    public List<ThingDef> trashOverrideDefs = new();
+
 }

@@ -38,7 +38,13 @@ public static class PrizePickerUtil
             }
             default:
             {
-                var trashFiltered = gachaTracker.trash
+                var trash = gachaTracker.trashGeneric;
+                if (!prizeBanner.def.trashOverrideDefs.NullOrEmpty())
+                {
+                    trash = prizeBanner.def.trashOverrideDefs;
+                }
+
+                var trashFiltered = trash
                     .Where(t => t.BaseMarketValue <= prizeBanner.pullPrice/settings.pullPriceFactor)
                     .ToList();
                 var trashDef = trashFiltered.NullOrEmpty()

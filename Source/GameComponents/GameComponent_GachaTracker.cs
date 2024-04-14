@@ -10,7 +10,7 @@ namespace ArchoGacha.GameComponents;
 public class GameComponent_GachaTracker : GameComponent, ICommunicable
 {
     public List<PrizeBanner> activeBanners = new();
-    public float pitySilverReserve;
+    public int pitySilverReserve;
     public int bannersEndTick;
     public bool lostFiftyFifty;
 
@@ -122,7 +122,7 @@ public class GameComponent_GachaTracker : GameComponent, ICommunicable
 
     private void DoPull(PrizeBanner prizeBanner)
     {
-        TradeUtility.LaunchSilver(Find.CurrentMap, (int)prizeBanner.pullPrice);
+        TradeUtility.LaunchSilver(Find.CurrentMap, prizeBanner.pullPrice);
         pitySilverReserve += prizeBanner.pullPrice;
         var prize = this.DecidePrize(prizeBanner);
 

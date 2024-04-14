@@ -119,7 +119,7 @@ public class Dialog_BannerMenu : Window
         if (selectedBanner != null)
         {
             Text.Font = GameFont.Medium;
-            var pityThresholdString = ((int)selectedBanner.PityThreshold).ToString();
+            var pityThresholdString = selectedBanner.PityThreshold.ToString();
             var bannerTooltip = new StringBuilder();
             bannerTooltip.AppendLine("ArchoGacha_Instructions_ProbBreakdown".Translate());
             bannerTooltip.AppendLine(string.Format("ArchoGacha_Instructions_ProbJackpot".Translate().Resolve(),settings.jackpotChance.ToStringPercent("0.#").Colorize(teal)));
@@ -183,7 +183,7 @@ public class Dialog_BannerMenu : Window
             var pullTenRect = new Rect(pullRect.width + 4f, pullRect.y, rghtInner.width / 2f - 4f, 42f);
             if (comp.CanPullOnBanner(selectedBanner))
             {
-                if (Widgets.ButtonText(pullRect,$"Pull ({(int)selectedBanner.pullPrice} silver)"))
+                if (Widgets.ButtonText(pullRect,$"Pull ({selectedBanner.pullPrice} silver)"))
                 {
                     if (selectedBanner != null)
                     {
@@ -197,13 +197,13 @@ public class Dialog_BannerMenu : Window
                 Widgets.DrawBox(pullRect, 2);
                 GUI.color = Color.white;
                 Text.Anchor = TextAnchor.MiddleCenter;
-                Widgets.Label(pullRect, $"Insufficient silver ({(int)selectedBanner.pullPrice} silver)");
+                Widgets.Label(pullRect, $"Insufficient silver ({selectedBanner.pullPrice} silver)");
                 Text.Anchor = TextAnchor.UpperLeft;
             }
                 
             if (comp.CanPullTenOnBanner(selectedBanner))
             {
-                if (Widgets.ButtonText(pullTenRect,$"Pull x10 ({(int)(selectedBanner.pullPrice * 10)} silver)"))
+                if (Widgets.ButtonText(pullTenRect,$"Pull x10 ({selectedBanner.pullPrice * 10} silver)"))
                 {
                     if (selectedBanner != null)
                     {
@@ -217,7 +217,7 @@ public class Dialog_BannerMenu : Window
                 Widgets.DrawBox(pullTenRect, 2);
                 GUI.color = Color.white;
                 Text.Anchor = TextAnchor.MiddleCenter;
-                Widgets.Label(pullTenRect, $"Insufficient silver ({(int)(selectedBanner.pullPrice * 10)} silver)");
+                Widgets.Label(pullTenRect, $"Insufficient silver ({selectedBanner.pullPrice * 10} silver)");
                 Text.Anchor = TextAnchor.UpperLeft;
             }
             #endregion

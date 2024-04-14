@@ -9,17 +9,17 @@ public abstract class PrizeBanner : IExposable
     public PrizeBannerDef def;
     public Thing jackpot;
     public List<Thing> consolationPrizes = new List<Thing>();
-    public float pullPrice;
+    public int pullPrice;
 
-    private float pityThresholdInt = -1f;
+    private int pityThresholdInt = -1;
     
-    public float PityThreshold
+    public int PityThreshold
     {
         get
         {
             if (pityThresholdInt < 0)
             {
-                pityThresholdInt = pullPrice / settings.jackpotChance;
+                pityThresholdInt = (int)Math.Ceiling(pullPrice / settings.jackpotChance);
             }
 
             return pityThresholdInt;
@@ -113,12 +113,12 @@ public abstract class PrizeBanner : IExposable
 
     public bool CanPull(Map map)
     {
-        return TradeUtility.ColonyHasEnoughSilver(map, (int)pullPrice);
+        return TradeUtility.ColonyHasEnoughSilver(map, pullPrice);
     }    
     
     public bool CanPullTen(Map map)
     {
-        return TradeUtility.ColonyHasEnoughSilver(map, (int)(pullPrice * 10));
+        return TradeUtility.ColonyHasEnoughSilver(map, pullPrice * 10);
     }
 
     protected abstract Thing SelectPrizeDef(PrizeCategory prizeCategory,

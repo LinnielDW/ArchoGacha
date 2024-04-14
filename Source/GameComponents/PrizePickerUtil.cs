@@ -21,7 +21,7 @@ public static class PrizePickerUtil
             {
                 // pityCount = 0;
                 var jackpot = gachaTracker.SelectJackpot(prizeBanner);
-                gachaTracker.pitySilverReserve = Math.Max(0, gachaTracker.pitySilverReserve - (int)(jackpot.MarketValue * jackpot.stackCount * settings.pullPriceFactor * jackpot.stackCount));
+                gachaTracker.pitySilverReserve = Math.Max(0, gachaTracker.pitySilverReserve - (int)Math.Ceiling(jackpot.MarketValue * jackpot.stackCount * settings.pullPriceFactor * jackpot.stackCount));
                 Find.LetterStack.ReceiveLetter("ArchoGacha_JackpotLetterLabel".Translate(), "ArchoGacha_JackpotLetter".Translate(jackpot.LabelShortCap),ArchoGachaDefOf.ArchoGacha_Jackpot, jackpot, hyperlinkThingDefs: new List<ThingDef>() {jackpot.def});
                 return jackpot;
             }

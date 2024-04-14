@@ -40,12 +40,12 @@ public class StackablePrizeBanner : PrizeBanner
             {
                 if (valueMaxOverride != 0f && marketValue < valueMaxOverride)
                 {
-                    t.stackCount = (int)(valueMaxOverride / marketValue);
+                    t.stackCount = (int)Math.Ceiling(valueMaxOverride / marketValue);
                 }
                 else if (valueMaxOverride == 0f && 
                          t.MarketValue < Math.Max(settings.minJackpotOffset, def.minJackpotMarketValue))
                 {
-                    t.stackCount = (int)(Math.Max(settings.minJackpotOffset, def.minJackpotMarketValue) / marketValue);
+                    t.stackCount = (int)Math.Ceiling(Math.Max(settings.minJackpotOffset, def.minJackpotMarketValue) / marketValue);
                 }
             }
             else
@@ -54,13 +54,13 @@ public class StackablePrizeBanner : PrizeBanner
                     t.MarketValue < Math.Max(settings.minConsolationOffset,
                         def.minConsolationMarketValue))
                 {
-                    t.stackCount = (int)(Math.Max(
+                    t.stackCount = (int)Math.Ceiling(Math.Max(
                         settings.minConsolationOffset,
                         def.minConsolationMarketValue) / marketValue);
                 }
                 else if(valueMaxOverride != 0f && marketValue < valueMaxOverride)
                 {
-                    t.stackCount = (int)(valueMaxOverride / marketValue);
+                    t.stackCount = (int)Math.Ceiling(valueMaxOverride / marketValue);
                 }
             }
         }

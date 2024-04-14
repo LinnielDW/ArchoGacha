@@ -11,6 +11,7 @@
     <ArchoGacha_PleaseSelectBanner>Please select a banner from the list on the left.</ArchoGacha_PleaseSelectBanner>
     
     <ArchoGacha_TimeRemaining>{0} remaining</ArchoGacha_TimeRemaining>
+    <ArchoGacha_BannersRefreshedMessage>ArchoGacha Banners have been refreshed</ArchoGacha_BannersRefreshedMessage>
     <ArchoGacha_BannersRefreshedLabel>ArchoGacha Banners Refreshed</ArchoGacha_BannersRefreshedLabel>
     <ArchoGacha_BannersRefreshed>Dear creature,\n\nA new series of ArchoGacha Banners has become available.\n\nPlease got to a commms console to find out more!</ArchoGacha_BannersRefreshed>
     <ArchoGacha_JackpotLetterLabel>Ultra-Rare Prize</ArchoGacha_JackpotLetterLabel>
@@ -32,14 +33,22 @@
     <ArchoGacha_Instructions_PityTransfer>- Pity reserves and feature guarantees are shared between banners and carry over between banner refreshes.</ArchoGacha_Instructions_PityTransfer>
 
     <ArchoGacha_bannerDurationDays>Banner duration (days)</ArchoGacha_bannerDurationDays>
+    <ArchoGacha_bannerDurationDaysTooltip>How long active Banners last for\n\nDefault: 4</ArchoGacha_bannerDurationDaysTooltip>
+    <ArchoGacha_letterOnBannerRefresh>Send Letter notifying of Banner Refreshes</ArchoGacha_letterOnBannerRefresh>
     <ArchoGacha_minJackpotOffset>Minimum Ultra-Rare prize value</ArchoGacha_minJackpotOffset>
+    <ArchoGacha_minJackpotOffsetTooltip>The absolute minimum value Ultra-Rare prizes will try to generate to.\nOverriden by individual banners if their specified minimum prize value is higher.\n\nDefault: 500</ArchoGacha_minJackpotOffsetTooltip>
 <!--    <ArchoGacha_useGlobalConsolationOffset></ArchoGacha_useGlobalConsolationOffset>-->
 <!--    <ArchoGacha_minConsolationOffset></ArchoGacha_minConsolationOffset>-->
     <ArchoGacha_limitBanners>Use active banner limit</ArchoGacha_limitBanners>
     <ArchoGacha_bannerLimit>Active banner limit</ArchoGacha_bannerLimit>
+    <ArchoGacha_bannerLimitTooltip>The amount of banners that will generate after the current banners end\n\nDefault: 4</ArchoGacha_bannerLimitTooltip>
     <ArchoGacha_jackpotChance>Ultra-rare chance</ArchoGacha_jackpotChance>
+    <ArchoGacha_jackpotChanceTooltip>The chance of pulling an ultra-rare reward\n\nDefault: 0.006</ArchoGacha_jackpotChanceTooltip>
     <ArchoGacha_pullPriceFactor>ArchoGacha profit margin</ArchoGacha_pullPriceFactor>
+    <ArchoGacha_pullPriceFactorTooltip>The price multiplier to the cost of pulling on banners compared to the real cost of the item. Higher is more realistic.\n\nDefault: 1.25</ArchoGacha_pullPriceFactorTooltip>
     <ArchoGacha_getFeatured>Ultra-rare featured chance</ArchoGacha_getFeatured>
+    <ArchoGacha_getFeaturedTooltip>When pulling an ultra-rare reward, the chance that you will pull the featured reward\n\nDefault: 0.5</ArchoGacha_getFeaturedTooltip>
     <ArchoGacha_getConsolationFeatured>Consolation featured chance</ArchoGacha_getConsolationFeatured>
+    <ArchoGacha_getConsolationFeaturedTooltip>When pulling a consolation reward, the chance that you will pull a featured reward\n\nDefault: 0.75</ArchoGacha_getConsolationFeaturedTooltip>
     <ArchoGacha_debugAlwaysPullable>DEBUG: Always pullable</ArchoGacha_debugAlwaysPullable>
 </LanguageData>

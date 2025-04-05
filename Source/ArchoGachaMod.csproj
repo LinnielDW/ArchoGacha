@@ -58,6 +58,12 @@
             <ExcludeAssets>runtime</ExcludeAssets>
             <IncludeAssets>compile; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
+        <PackageReference Include="Krafs.Publicizer" Version="2.3.0">
+          <PrivateAssets>all</PrivateAssets>
+          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <Publicize Include="Assembly-CSharp:Verse.PawnGenerator.TryGenerateNewPawnInternal" />
+        <Publicize Include="Assembly-CSharp:Verse.Widgets.ThingIconWorker" />
     </ItemGroup>
     <!-- The below condition will check if you've defined a reference called "Assembly-CSharp" and if that reference exists on disk.
         If that reference does not exist, it will add Krafs Rimworld Ref to the project. If it does exist, Krafs won't be added
@@ -72,6 +78,7 @@
         <Compile Include="GameComponents\GameComponent_GachaTracker.cs" />
         <Compile Include="HarmonyPatches\Building_CommsConsole_GetFloatMenuOptions_Patch.cs" />
         <Compile Include="PrizeBanner.cs" />
+        <Compile Include="PrizeBannerClasses\PawnPrizeBanner.cs" />
         <Compile Include="PrizeBannerClasses\StackablePrizeBanner.cs" />
         <Compile Include="PrizeBannerClasses\EquipmentPrizeBanner.cs" />
         <Compile Include="PrizeBannerDef.cs" />
@@ -100,12 +107,6 @@
 
     <ItemGroup>
       <Content Include="TODO.md" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="..\Common\Languages\">
-        <Link>Common\Languages</Link>
-      </Folder>
     </ItemGroup>
 
 

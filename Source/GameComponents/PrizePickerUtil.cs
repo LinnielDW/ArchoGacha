@@ -19,15 +19,19 @@ public static class PrizePickerUtil
         {
             case var _ when randOutcome < settings.jackpotChance || gachaTracker.pitySilverReserve >= prizeBanner.PityThreshold:
             {
-                // pityCount = 0;
                 var jackpot = gachaTracker.SelectJackpot(prizeBanner);
                 gachaTracker.pitySilverReserve = Math.Max(0, gachaTracker.pitySilverReserve - (int)Math.Ceiling(jackpot.MarketValue * jackpot.stackCount * settings.pullPriceFactor * jackpot.stackCount));
+                //TODO: consider moving this to a banner specific side-effects method
+                if (jackpot is Pawn pawn)
+                {
+                    RecruitUtility.Recruit(pawn, Faction.OfPlayer);
+                }
+
                 Find.LetterStack.ReceiveLetter("ArchoGacha_JackpotLetterLabel".Translate(), "ArchoGacha_JackpotLetter".Translate(jackpot.LabelShortCap),ArchoGachaDefOf.ArchoGacha_Jackpot, jackpot, hyperlinkThingDefs: new List<ThingDef>() {jackpot.def});
                 return jackpot;
             }
             case var _ when randOutcome < settings.consolationChance:
             {
-                // pityCount = 0;
                 var consolation = SelectConsolation(prizeBanner);
                 if (consolation != null)
                 {

@@ -13,6 +13,7 @@ public class PrizeBannerDef : Def
     public float valueMultiplier = 1f;
     public float selectionWeight = 500;
     public float displayPriority = 1;
+    public float drawSizeFactor = 1f;
 
     public float minJackpotMarketValue;
     

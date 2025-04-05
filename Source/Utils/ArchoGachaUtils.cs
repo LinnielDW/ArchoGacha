@@ -12,7 +12,8 @@ public static class ArchoGachaUtils
 
     //TODO: consider moving this to EquipmentPrizeBanner
     public static IEnumerable<ThingStuffPairWithQuality>
-        CalculateAllowedThingStuffPairs(PrizeBannerDef bannerDef,IEnumerable<ThingDef> allowed,
+        CalculateAllowedThingStuffPairs(PrizeBannerDef bannerDef,
+            IEnumerable<ThingDef> allowed,
             PrizeCategory prizeCategory, float valueMaxOverride = 0f)
     {
         var qualityGenerator = QualityFromPrizeCat(prizeCategory);
@@ -55,22 +56,29 @@ public static class ArchoGachaUtils
         PrizeCategory prizeCategory,
         ThingStuffPairWithQuality stuffPair, float valueMaxOverride = 0f)
     {
-        var marketValue = stuffPair.GetStatValue(StatDefOf.MarketValue) ;
+        var marketValue = stuffPair.GetStatValue(StatDefOf.MarketValue);
         switch (prizeCategory)
         {
             case PrizeCategory.Jackpot:
             {
-                return (valueMaxOverride == 0f && 
-                        marketValue  * bannerDef.valueMultiplier >= Math.Max(settings.minJackpotOffset, bannerDef.minJackpotMarketValue)) ||
-                       valueMaxOverride != 0f && marketValue <= valueMaxOverride && marketValue >= valueMaxOverride * 0.75f;
+                return (valueMaxOverride == 0f &&
+                        marketValue * bannerDef.valueMultiplier >=
+                        Math.Max(settings.minJackpotOffset,
+                            bannerDef.minJackpotMarketValue)) ||
+                       valueMaxOverride != 0f &&
+                       marketValue <= valueMaxOverride &&
+                       marketValue >= valueMaxOverride * 0.75f;
             }
             case PrizeCategory.Consolation:
             default:
             {
-                return (settings.useGlobalConsolationOffset && 
-                        marketValue >= Math.Max(settings.minConsolationOffset, bannerDef.minConsolationMarketValue) && 
-                        marketValue <= settings.minJackpotOffset) || 
-                       (valueMaxOverride != 0f && marketValue / bannerDef.valueMultiplier <= valueMaxOverride);
+                return (settings.useGlobalConsolationOffset &&
+                        marketValue >= Math.Max(settings.minConsolationOffset,
+                            bannerDef.minConsolationMarketValue) &&
+                        marketValue <= settings.minJackpotOffset) ||
+                       (valueMaxOverride != 0f &&
+                        marketValue / bannerDef.valueMultiplier <=
+                        valueMaxOverride);
             }
         }
     }

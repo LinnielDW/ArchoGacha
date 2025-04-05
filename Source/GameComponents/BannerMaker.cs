@@ -10,11 +10,7 @@ public static class BannerMaker
             (PrizeBanner)Activator.CreateInstance(def.prizeBannerClass);
 
         prizeBanner.def = def;
-        prizeBanner.jackpot = prizeBanner.GenerateJackpot();
-        prizeBanner.pullPrice = (int)Math.Ceiling(prizeBanner.jackpot.MarketValue * 
-                                             settings.jackpotChance *
-                                             settings.pullPriceFactor *
-                                             prizeBanner.jackpot.stackCount);
+        prizeBanner.GenerateJackpot();
 
         AddConsolations(prizeBanner,
             prizeBanner.jackpot.MarketValue * prizeBanner.jackpot.stackCount * settings.consolationChance);

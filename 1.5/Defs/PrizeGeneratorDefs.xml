@@ -127,11 +127,21 @@
         <selectionWeight>200</selectionWeight>
         <displayPriority>1</displayPriority>
     </ArchoGacha.PrizeBannerDef>
+    
+    <ArchoGacha.PrizeBannerDef ParentName="GachaTemplate">
+        <defName>ArchoGacha_Pawn</defName>
+        <label>Pawn Banner</label>
+        <prizeBannerClass>ArchoGacha.PrizeBannerClasses.PawnPrizeBanner</prizeBannerClass>
+        <spawnCountRange>1~1</spawnCountRange>
+        <valueMultiplier>1</valueMultiplier>
+        <minJackpotMarketValue>5000</minJackpotMarketValue>
+        <selectionWeight>2000</selectionWeight>
+        <displayPriority>999999</displayPriority>
+        <drawSizeFactor>1.7</drawSizeFactor>
+    </ArchoGacha.PrizeBannerDef>
 
 <!--     TODO: nice to haves -->
-    <!--<ArchoGacha.PrizeBannerDef>
-        <defName>ArchoGacha_PawnKind</defName>
-    </ArchoGacha.PrizeBannerDef>
+    <!--
     <ArchoGacha.PrizeBannerDef>
         <defName>ArchoGacha_Animal</defName>
     </ArchoGacha.PrizeBannerDef>

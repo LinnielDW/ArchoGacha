@@ -89,9 +89,19 @@ public abstract class PrizeBanner : IExposable
 
     protected virtual TechLevel MinTechLevel => def.minTechLevel;
 
-    public virtual Thing GenerateJackpot()
+    public virtual void GenerateJackpot()
     {
-        return GeneratePrize(PrizeCategory.Jackpot);
+        var generatedJackpot = GeneratePrize(PrizeCategory.Jackpot);
+        jackpot = generatedJackpot;
+        CalculatePullPrice();
+    }
+
+    public virtual void CalculatePullPrice()
+    {
+        pullPrice = (int)Math.Ceiling(jackpot.MarketValue * 
+                                           settings.jackpotChance *
+                                           settings.pullPriceFactor *
+                                           jackpot.stackCount);
     }
 
     public virtual Thing GenerateConsolationThing(float valueMaxOverride = 0f)

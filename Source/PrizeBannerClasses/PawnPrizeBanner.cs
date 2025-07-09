@@ -25,7 +25,7 @@ public class PawnPrizeBanner : PrizeBanner
                 pk is not CreepJoinerFormKindDef &&
                 pk.apparelMoney.TrueMin + pk.weaponMoney.TrueMin >
                 Math.Max(settings.minJackpotOffset, def.minJackpotMarketValue)).ToList();
-            Log.Message(validKinds.ToStringSafeEnumerable());
+            // Log.Message(validKinds.ToStringSafeEnumerable());
             kind = validKinds.RandomElement();
         }
         else

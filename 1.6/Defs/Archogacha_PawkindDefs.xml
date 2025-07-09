@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Defs>
+    <PawnKindDef>
+        <defName>ArchoGacha_Pawnkind_Supreme</defName>
+        <race>Human</race>
+        <label>archogacha supreme</label>
+        <combatPower>150</combatPower>
+        <weaponTags>
+            <li>GunHeavy</li>
+            <li>SpacerGun</li>
+            <li>MedievalMeleeAdvanced</li>
+            <li>UltratechMelee</li>
+            <li>Bladelink</li>
+        </weaponTags>
+        <maxGenerationAge>40</maxGenerationAge>
+        <apparelMoney>7000~10000</apparelMoney>
+        <techHediffsMoney>1000~4000</techHediffsMoney>
+        <techHediffsMaxAmount>4</techHediffsMaxAmount>
+        <invNutrition>2.55</invNutrition>
+        <techHediffsChance>0.5</techHediffsChance>
+        <weaponMoney>1100~5000</weaponMoney>
+
+        <apparelTags>
+            <li>SpacerMilitary</li>
+            <li>IndustrialAdvanced</li>
+            <li>IndustrialMilitaryBasic</li>
+            <li>IndustrialMilitaryAdvanced</li>
+        </apparelTags>
+        <disallowedTraits>
+            <li>BodyPurist</li>
+        </disallowedTraits>
+        <itemQuality>Good</itemQuality>
+        <specificApparelRequirements>
+            <li>
+                <bodyPartGroup>Torso</bodyPartGroup>
+                <apparelLayer>OnSkin</apparelLayer>
+                <stuff>Synthread</stuff>
+            </li>
+            <li>
+                <bodyPartGroup>Legs</bodyPartGroup>
+                <apparelLayer>OnSkin</apparelLayer>
+                <stuff>Synthread</stuff>
+            </li>
+        </specificApparelRequirements>
+        <techHediffsTags>
+            <li>Advanced</li>
+        </techHediffsTags>
+        <skills>
+            <li>
+                <skill>Shooting</skill>
+                <range>2~10</range>
+            </li>
+            <li>
+
+                <skill>Melee</skill>
+                <range>2~10</range>
+            </li>
+        </skills>
+
+        <initialWillRange>4~6</initialWillRange>
+        <initialResistanceRange>17~26</initialResistanceRange>
+    </PawnKindDef>
+</Defs>

@@ -5,7 +5,7 @@ namespace ArchoGacha;
 public class PrizeBannerDef : Def
 {
     public Type prizeBannerClass = typeof(PrizeBanner);
-    public IntRange spawnCountRange = IntRange.one;
+    public IntRange spawnCountRange = IntRange.One;
     public IntRange consolationCountRange = new(2, 3);
     public List<ThingCategoryDef> includeCategoryDefs = new();
     public List<ThingCategoryDef> excludedCategoryDefs = new();

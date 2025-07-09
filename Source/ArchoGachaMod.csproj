@@ -21,7 +21,7 @@
         <DebugSymbols>true</DebugSymbols>
         <DebugType>portable</DebugType>
         <Optimize>false</Optimize>
-        <OutputPath>../1.5/Assemblies</OutputPath>
+        <OutputPath>../1.6/Assemblies</OutputPath>
         <DefineConstants>DEBUG;TRACE</DefineConstants>
         <ErrorReport>prompt</ErrorReport>
         <WarningLevel>4</WarningLevel>
@@ -30,7 +30,7 @@
     <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
         <DebugType>none</DebugType>
         <Optimize>true</Optimize>
-        <OutputPath>../1.5/Assemblies</OutputPath>
+        <OutputPath>../1.6/Assemblies</OutputPath>
         <DefineConstants>TRACE</DefineConstants>
         <ErrorReport>prompt</ErrorReport>
         <WarningLevel>4</WarningLevel>
@@ -49,12 +49,15 @@
         <version1_5 Include="..\1.5\**">
             <Link>1.5\%(RecursiveDir)%(Filename)%(Extension)</Link>
         </version1_5>
+        <version1_6 Include="..\1.6\**">
+            <Link>1.6\%(RecursiveDir)%(Filename)%(Extension)</Link>
+        </version1_6>
     </ItemGroup>
 
 
     <ItemGroup>
-        <PackageReference Include="Krafs.Rimworld.Ref" Version="1.5.4061" />
-        <PackageReference Include="Lib.Harmony" Version="2.3.3">
+        <PackageReference Include="Krafs.Rimworld.Ref" Version="1.6.4515-beta" />
+        <PackageReference Include="Lib.Harmony" Version="2.3.6">
             <ExcludeAssets>runtime</ExcludeAssets>
             <IncludeAssets>compile; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
@@ -71,6 +74,7 @@
     <ItemGroup>
         <Compile Include="ArchoGachaMod.cs" />
         <Compile Include="Debug\GachaDebug.cs" />
+<!--        <Compile Include="Debug\SpriteExporter.cs" />-->
         <Compile Include="Defs\ArchoGachaDefOf.cs" />
         <Compile Include="GameComponents\BannerMaker.cs" />
         <Compile Include="GameComponents\PrizePickerUtil.cs" />
@@ -115,6 +119,8 @@
     <Target Name="CopyCustomContent" AfterTargets="AfterBuild">
         <Copy SourceFiles="@(CommonFiles)" DestinationFolder="$(ModLocation)\%(RecursiveDir)" SkipUnchangedFiles="true" />
         <Copy SourceFiles="@(AboutFiles)" DestinationFolder="$(ModLocation)\About\%(RecursiveDir)"
+              SkipUnchangedFiles="true" />
+        <Copy SourceFiles="@(version1_6)" DestinationFolder="$(ModLocation)\1.6\%(RecursiveDir)" Retries="3"
               SkipUnchangedFiles="true" />
         <Copy SourceFiles="@(version1_5)" DestinationFolder="$(ModLocation)\1.5\%(RecursiveDir)" Retries="3"
               SkipUnchangedFiles="true" />

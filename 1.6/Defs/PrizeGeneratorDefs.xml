@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<Defs>
+    <ArchoGacha.PrizeBannerDef Name="GachaTemplate" Abstract="True">
+        <spawnCountRange>0~1</spawnCountRange>
+        <trashOverrideDefs>
+            <li>WoodLog</li>
+            <li>Steel</li>
+            <li>Silver</li>
+            <li>Leather_Plain</li>
+        </trashOverrideDefs>
+        <minJackpotMarketValue>2000</minJackpotMarketValue>
+    </ArchoGacha.PrizeBannerDef>
+
+    <ArchoGacha.PrizeBannerDef ParentName="GachaTemplate">
+        <defName>ArchoGacha_WeaponRanged</defName>
+        <label>Ranged Weapons Banner</label>
+        <prizeBannerClass>ArchoGacha.PrizeBannerClasses.EquipmentPrizeBanner</prizeBannerClass>
+        <spawnCountRange>1~1</spawnCountRange>
+        <includeCategoryDefs>
+            <li>WeaponsRanged</li>
+        </includeCategoryDefs>
+        <excludedCategoryDefs>
+            <li>Grenades</li>
+        </excludedCategoryDefs>
+        <minTechLevel>Industrial</minTechLevel>
+        <selectionWeight>750</selectionWeight>
+        <displayPriority>999</displayPriority>
+        <valueMultiplier>1.5</valueMultiplier>
+    </ArchoGacha.PrizeBannerDef>
+
+    <ArchoGacha.PrizeBannerDef ParentName="GachaTemplate">
+        <defName>ArchoGacha_WeaponMelee</defName>
+        <label>Melee Weapons Banner</label>
+        <prizeBannerClass>ArchoGacha.PrizeBannerClasses.EquipmentPrizeBanner</prizeBannerClass>
+        <spawnCountRange>0~1</spawnCountRange>
+        <includeCategoryDefs>
+            <li>WeaponsMelee</li>
+        </includeCategoryDefs>
+        <minTechLevel>Medieval</minTechLevel>
+        <minJackpotMarketValue>2250</minJackpotMarketValue>
+        <displayPriority>998</displayPriority>
+    </ArchoGacha.PrizeBannerDef>
+    
+    <!--<ArchoGacha.PrizeBannerDef>
+        <defName>ArchoGacha_Weapon</defName>
+        <label>Weapons Banner</label>
+        <description>Weapons PrizeBanner</description>
+        <prizeBannerClass>ArchoGacha.PrizeBannerClasses.EquipmentPrizeBanner</prizeBannerClass>
+        <spawnCountRange>0~1</spawnCountRange>
+        <consolationCountRange>3~3</consolationCountRange>
+        <includeCategoryDefs>
+            <li>Weapons</li>
+        </includeCategoryDefs>
+        <minTechLevel>Industrial</minTechLevel>
+        <minJackpotMarketValue>2500</minJackpotMarketValue>
+    </ArchoGacha.PrizeBannerDef>-->
+
+    <ArchoGacha.PrizeBannerDef ParentName="GachaTemplate">
+        <defName>ArchoGacha_Armor</defName>
+        <label>Armor Banner</label>
+        <prizeBannerClass>ArchoGacha.PrizeBannerClasses.EquipmentPrizeBanner</prizeBannerClass>
+        <spawnCountRange>1~1</spawnCountRange>
+        <includeCategoryDefs>
+            <li>ApparelArmor</li>
+        </includeCategoryDefs>
+        <minTechLevel>Medieval</minTechLevel>
+        <minJackpotMarketValue>2500</minJackpotMarketValue>
+        <selectionWeight>350</selectionWeight>
+        <displayPriority>997</displayPriority>
+    </ArchoGacha.PrizeBannerDef>
+
+    <ArchoGacha.PrizeBannerDef ParentName="GachaTemplate">
+        <defName>ArchoGacha_BodyParts</defName>
+        <label>Implants Banner</label>
+        <prizeBannerClass>ArchoGacha.PrizeBannerClasses.EquipmentPrizeBanner</prizeBannerClass>
+        <spawnCountRange>0~1</spawnCountRange>
+        <includeCategoryDefs>
+            <li>BodyParts</li>
+        </includeCategoryDefs>
+        <minJackpotMarketValue>1500</minJackpotMarketValue>
+        <valueMultiplier>2.5</valueMultiplier>
+        <selectionWeight>250</selectionWeight>
+        <displayPriority>950</displayPriority>
+    </ArchoGacha.PrizeBannerDef>
+
+    <ArchoGacha.PrizeBannerDef ParentName="GachaTemplate">
+        <defName>ArchoGacha_Art</defName>
+        <label>Art Banner</label>
+        <prizeBannerClass>ArchoGacha.PrizeBannerClasses.EquipmentPrizeBanner</prizeBannerClass>
+        <spawnCountRange>0~1</spawnCountRange>
+        <includeCategoryDefs>
+            <li>BuildingsArt</li>
+        </includeCategoryDefs>
+        <selectionWeight>100</selectionWeight>
+    </ArchoGacha.PrizeBannerDef>
+
+    <ArchoGacha.PrizeBannerDef ParentName="GachaTemplate">
+        <defName>ArchoGacha_Book</defName>
+        <label>Readables Banner</label>
+        <prizeBannerClass>ArchoGacha.PrizeBannerClasses.EquipmentPrizeBanner</prizeBannerClass>
+        <spawnCountRange>0~1</spawnCountRange>
+        <includeCategoryDefs>
+            <li>Books</li>
+            <li>Techprints</li>
+        </includeCategoryDefs>
+        <minJackpotMarketValue>750</minJackpotMarketValue>
+        <valueMultiplier>3</valueMultiplier>
+        <selectionWeight>150</selectionWeight>
+    </ArchoGacha.PrizeBannerDef>
+    
+    <ArchoGacha.PrizeBannerDef ParentName="GachaTemplate">
+        <defName>ArchoGacha_Consumable</defName>
+        <label>Items Banner</label>
+        <prizeBannerClass>ArchoGacha.PrizeBannerClasses.StackablePrizeBanner</prizeBannerClass>
+        <spawnCountRange>0~1</spawnCountRange>
+        <includeCategoryDefs>
+            <li>Manufactured</li>
+            <li>Neurotrainers</li>
+            <li>Artifacts</li>
+            <li>FoodMeals</li>
+        </includeCategoryDefs>
+        <excludedCategoryDefs>
+            <li>Textiles</li>
+        </excludedCategoryDefs>
+        <minJackpotMarketValue>2500</minJackpotMarketValue>
+        <selectionWeight>200</selectionWeight>
+        <displayPriority>1</displayPriority>
+    </ArchoGacha.PrizeBannerDef>
+    
+    <ArchoGacha.PrizeBannerDef ParentName="GachaTemplate">
+        <defName>ArchoGacha_Pawn</defName>
+        <label>Pawn Banner</label>
+        <prizeBannerClass>ArchoGacha.PrizeBannerClasses.PawnPrizeBanner</prizeBannerClass>
+        <spawnCountRange>1~1</spawnCountRange>
+        <valueMultiplier>1</valueMultiplier>
+        <minJackpotMarketValue>5000</minJackpotMarketValue>
+        <selectionWeight>2000</selectionWeight>
+        <displayPriority>999999</displayPriority>
+        <drawSizeFactor>1.7</drawSizeFactor>
+    </ArchoGacha.PrizeBannerDef>
+
+<!--     TODO: nice to haves -->
+    <!--
+    <ArchoGacha.PrizeBannerDef>
+        <defName>ArchoGacha_Animal</defName>
+    </ArchoGacha.PrizeBannerDef>
+    <ArchoGacha.PrizeBannerDef>
+        <defName>ArchoGacha_Incident</defName>
+    </ArchoGacha.PrizeBannerDef>-->
+</Defs>

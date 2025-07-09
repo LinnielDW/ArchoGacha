@@ -11,7 +11,7 @@ public class StackablePrizeBanner : PrizeBanner
     {
         var req = new ThingSetMakerParams
         {
-            countRange = IntRange.one,
+            countRange = IntRange.One,
             filter = PrizeFilter,
             validator = ReqValidator,
         };

@@ -21,7 +21,7 @@ public static class GachaDebug
     {
         Current.Game.GetComponent<GameComponent_GachaTracker>().GenerateActiveBanners();
     }
-    
+
     [DebugAction("ArchoGacha", name = "Pull jackpot on random active banner",
         allowedGameStates = AllowedGameStates.Playing,
         displayPriority = 9999)]
@@ -31,7 +31,8 @@ public static class GachaDebug
         var banner = comp.activeBanners.RandomElement();
         var prize = comp.SelectJackpot(banner);
         comp.DeliverPrize(prize);
-    }    
+    }
+
     [DebugAction("ArchoGacha", name = "Pull consolation on random active banner",
         allowedGameStates = AllowedGameStates.Playing,
         displayPriority = 9999)]
@@ -42,7 +43,7 @@ public static class GachaDebug
         var prize = PrizePickerUtil.SelectConsolation(banner);
         comp.DeliverPrize(prize);
     }
-    
+
     [DebugAction("ArchoGacha", name = "Simulate pull on random active banner",
         allowedGameStates = AllowedGameStates.Playing,
         displayPriority = 9999)]
@@ -52,7 +53,7 @@ public static class GachaDebug
         var prize = comp.DecidePrize(comp.activeBanners.RandomElement());
         comp.DeliverPrize(prize);
     }
-    
+
     [DebugAction("ArchoGacha", name = "(x10) Simulate pull on random active banner",
         allowedGameStates = AllowedGameStates.Playing,
         displayPriority = 9999)]
